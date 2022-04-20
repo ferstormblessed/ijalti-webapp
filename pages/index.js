@@ -13,7 +13,7 @@ export default function Home() {
 
       <main>
         <h1 className='text-xl'>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          testeo de deploys
         </h1>
 
         <p>
