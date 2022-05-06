@@ -27,13 +27,11 @@ const userNavigation = [
   { name: "Sign out", href: "#" },
 ];
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
+  function classNames(...classes: any) {
+    return classes.filter(Boolean).join(" ");
+  }
   return (
     <>
       {/*
@@ -191,9 +189,7 @@ export default function Dashboard() {
               <MenuAlt2Icon className="h-6 w-6" aria-hidden="true" />
             </button>
             <div className="flex-1 px-4 flex justify-between">
-              <div className="flex-1 flex">
-               
-              </div>
+              <div className="flex-1 flex"></div>
               <div className="ml-4 flex items-center md:ml-6">
                 <button
                   type="button"
@@ -253,7 +249,7 @@ export default function Dashboard() {
                 {/* Replace with your content */}
                 <div className="py-4">
                   <div className="border-4 border-dashed border-gray-200 rounded-lg p-2">
-                    <UserForm/>
+                    <UserForm />
                   </div>
                 </div>
 
