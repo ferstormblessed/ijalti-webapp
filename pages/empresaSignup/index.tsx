@@ -1,13 +1,14 @@
+import CorpForm from "../../components/corpForm";
 import Dashboard from "../../components/dashboard";
-import UserForm from "../../components/userForm";
-const DashboardScreen = () => {
+
+const EmpresaSignup = () => {
     return (
       <div>
         <Dashboard>
-          <UserForm/>
+           <CorpForm/>
         </Dashboard>
       </div>
     );
   };
   
-  export default DashboardScreen;
+  export default EmpresaSignup;
