@@ -14,6 +14,10 @@ import {
 } from "@heroicons/react/outline";
 import { SearchIcon } from "@heroicons/react/solid";
 
+interface IDashboardProps {
+  children?: React.ReactNode;
+}
+
 const navigation = [
   { name: "Orientación profesional", href: "#", icon: HomeIcon, current: true },
   { name: "Busqueda de usuario", href: "#", icon: UsersIcon, current: false },
@@ -27,7 +31,7 @@ const userNavigation = [
   { name: "Sign out", href: "#" },
 ];
 
-export default function Dashboard() {
+export default function Dashboard(props: IDashboardProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   function classNames(...classes: any) {
     return classes.filter(Boolean).join(" ");
@@ -249,7 +253,7 @@ export default function Dashboard() {
                 {/* Replace with your content */}
                 <div className="py-4">
                   <div className="border-4 border-dashed border-gray-200 rounded-lg p-2">
-                    <UserForm />
+                    {props.children}
                   </div>
                 </div>
 
