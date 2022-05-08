@@ -14,8 +14,9 @@
   }
   ```
 */
+import Link from "next/link";
 import { LockClosedIcon } from "@heroicons/react/solid";
-import Logo from "./IJALTI.png"
+import Logo from "./IJALTI.png";
 export default function LoginScreen() {
   return (
     <>
@@ -108,18 +109,20 @@ export default function LoginScreen() {
             </div>
 
             <div>
-              <button
-                type="submit"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-buttonprimary hover:bg-buttonsecondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary"
-              >
-                <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                  <LockClosedIcon
-                    className="h-5 w-5 text-buttonsecondary group-hover:text-buttonprimary"
-                    aria-hidden="true"
-                  />
-                </span>
-                Iniciar sesión
-              </button>
+              <Link href="/dashboard">
+                <button
+                  type="submit"
+                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-buttonprimary hover:bg-buttonsecondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary"
+                >
+                  <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+                    <LockClosedIcon
+                      className="h-5 w-5 text-buttonsecondary group-hover:text-buttonprimary"
+                      aria-hidden="true"
+                    />
+                  </span>
+                  Iniciar sesión
+                </button>
+              </Link>
             </div>
           </form>
         </div>
