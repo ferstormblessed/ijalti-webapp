@@ -8,6 +8,7 @@ import {
   FolderIcon,
   HomeIcon,
   InboxIcon,
+  SearchCircleIcon,
   MenuAlt2Icon,
   UsersIcon,
   XIcon,
@@ -22,7 +23,8 @@ const navigation = [
   { name: "Orientación profesional", href: "#", icon: HomeIcon, current: true },
   { name: "Busqueda de usuario", href: "#", icon: UsersIcon, current: false },
   { name: "Busqueda de trabajo", href: "#", icon: FolderIcon, current: false },
-  { name: "Perfil de usuario", href: "#", icon: CalendarIcon, current: false },
+  { name: "Perfil de usuario", href: "/dashboard", icon: CalendarIcon, current: false },
+  { name: "Perfil de empresa", href: "/empresaSignup", icon: SearchCircleIcon, current: false },
   { name: "Configuracion", href: "#", icon: InboxIcon, current: false },
 ];
 const userNavigation = [
