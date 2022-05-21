@@ -1,3 +1,4 @@
+import axios from "axios";
 /*
   This example requires Tailwind CSS v2.0+ 
   
@@ -14,9 +15,24 @@
   }
   ```
 */
-export default function UserForm() {
+
+
+
+export  default function UserForm() {
+  const handleSubmit= async (e:any) =>{
+            e.preventDefault();
+            
+            const res= await axios.post("/api/clientes",{
+              idUsuario:"SABC660", 
+              nombre:"Carlos",
+              email:"carlos@gmail.com",
+              password:"password"
+            })
+            console.log(res);
+  };
+
   return (
-    <form className="space-y-8 divide-y divide-gray-200">
+    <form onSubmit={handleSubmit} className="space-y-8 divide-y divide-gray-200">
       <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
         <div>
           <div>
@@ -27,7 +43,7 @@ export default function UserForm() {
               Esta información sera compartida con el contratista e IJALTI
             </p>
           </div>
-
+         
           <div className="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
               <label
@@ -461,7 +477,7 @@ export default function UserForm() {
                           <input
                             id="push-everything"
                             name="push-notifications"
-                            type="radio"
+                            type="checkbox"
                             className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
                           />
                           <label
@@ -491,7 +507,7 @@ export default function UserForm() {
                           <input
                             id="push-everything"
                             name="push-notifications"
-                            type="radio"
+                            type="checkbox"
                             className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
                           />
                           <label
@@ -511,6 +527,7 @@ export default function UserForm() {
 
       <div className="pt-5">
         <div className="flex justify-end">
+          
           <button
             type="button"
             className="bg-buttonsecondary py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-buttonprimary hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -526,5 +543,7 @@ export default function UserForm() {
         </div>
       </div>
     </form>
+
+
   );
 }
