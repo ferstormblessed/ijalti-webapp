@@ -41,7 +41,10 @@ ENGINE = InnoDB;
 -- Table `ijalti`.`UsuarioEmpleado`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ijalti`.`UsuarioEmpleado` (
-  `idUsuarioEmp` VARCHAR(13) NOT NULL,
+  `idUsuarioEmp` VARCHAR(13),
+  `first_name` VARCHAR(30) NULL,
+  `last_name` VARCHAR(30) NULL,
+  `email` VARCHAR(30) NULL,
   `uniEgreso` VARCHAR(45) NULL,
   `CV` VARCHAR(45) NULL,
   `aniosExperiencia` INT NULL,
@@ -54,7 +57,12 @@ CREATE TABLE IF NOT EXISTS `ijalti`.`UsuarioEmpleado` (
   `idEspecialidad` INT NOT NULL,
   `nivelExperiencia_idNivelExp` INT NOT NULL,
   `Usuario_idUsuario` VARCHAR(13) NOT NULL,
-  PRIMARY KEY (`idUsuarioEmp`, `nivelExperiencia_idNivelExp`, `Usuario_idUsuario`),
+  PRIMARY KEY (`idUsuarioEmp`, `nivelExperiencia_idNivelExp`, `Usuario_idUsuario`))
+ENGINE = InnoDB;
+
+
+
+
   INDEX `fk_UsuarioEmpleado_Direccion1_idx` (`idDireccionEmpleado` ASC) VISIBLE,
   INDEX `fk_UsuarioEmpleado_nivelExperiencia1_idx` (`nivelExperiencia_idNivelExp` ASC) VISIBLE,
   INDEX `fk_UsuarioEmpleado_Usuario1_idx` (`Usuario_idUsuario` ASC) VISIBLE,

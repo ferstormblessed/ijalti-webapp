@@ -5,15 +5,43 @@ export default async function handler(req:any,res:any){
     switch(req.method)
     {
         case "GET":
-            return res.status(200).json("Obteniendo la info de los clientes")
+            return await getUsuarios(req,res);
         case "POST":
-            const {idUsuario,nombre,email,password}=req.body
-            const [result]=await pool.query("INSERT INTO usuario SET ?",{
-                idUsuario,
-                nombre,
-                email,
-                password
-            });//Esto inserta un dato dentro de la tabla
-            return res.status(200).json({idUsuario,nombre,email,password});
+            return await registrarUsuario(req,res);
+
     }
+}
+
+//GET
+const getUsuarios=async(req:any,res:any)=>{
+    const [result]=await pool.query("SELECT*FROM usuario")
+    console.log(result);
+    return res.status(200).json(result)
+}
+
+//POST
+const registrarUsuario=async(req:any,res:any)=>
+{
+    const {idUsuarioEmp,first_name,last_name,email,uniEgreso,CV,aniosExperiencia,idDireccionEmpleado,
+        sexo,estadoCivil,CURP,visa_vigente,pasaporte_vigente,idEspecialidad,nivelExperiencia_idNivelExp,Usuario_idUsuario}=req.body
+            const [result]=await pool.query("INSERT INTO usuarioempleado SET ?",{
+                idUsuarioEmp,
+                first_name,
+                last_name,
+                email,
+                uniEgreso,
+                CV,
+                aniosExperiencia,
+                idDireccionEmpleado,
+                sexo,
+                estadoCivil,
+                CURP,
+                visa_vigente,
+                pasaporte_vigente,
+                idEspecialidad,
+                nivelExperiencia_idNivelExp,
+                Usuario_idUsuario
+            });//Esto inserta un dato dentro de la tabla
+            return res.status(200).json({idUsuarioEmp,first_name,last_name,email,uniEgreso,CV,aniosExperiencia,idDireccionEmpleado,
+        sexo,estadoCivil,CURP,visa_vigente,pasaporte_vigente,idEspecialidad,nivelExperiencia_idNivelExp,Usuario_idUsuario});
 }
