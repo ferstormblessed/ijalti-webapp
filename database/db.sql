@@ -41,7 +41,6 @@ ENGINE = InnoDB;
 -- Table `ijalti`.`UsuarioEmpleado`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ijalti`.`UsuarioEmpleado` (
-  `idUsuarioEmp` VARCHAR(13),
   `first_name` VARCHAR(30) NULL,
   `last_name` VARCHAR(30) NULL,
   `email` VARCHAR(30) NULL,
@@ -51,13 +50,12 @@ CREATE TABLE IF NOT EXISTS `ijalti`.`UsuarioEmpleado` (
   `idDireccionEmpleado` INT NOT NULL,
   `sexo` VARCHAR(45) NULL,
   `estadoCivil` VARCHAR(45) NULL,
-  `CURP` VARCHAR(45) NULL,
+  `CURP` VARCHAR(45) NOT NULL,
   `visa_vigente` TINYINT NULL,
   `pasaporte_vigente` TINYINT NULL,
   `idEspecialidad` INT NOT NULL,
   `nivelExperiencia_idNivelExp` INT NOT NULL,
-  `Usuario_idUsuario` VARCHAR(13) NOT NULL,
-  PRIMARY KEY (`idUsuarioEmp`, `nivelExperiencia_idNivelExp`, `Usuario_idUsuario`))
+  PRIMARY KEY (`CURP`, `nivelExperiencia_idNivelExp`))
 ENGINE = InnoDB;
 
 

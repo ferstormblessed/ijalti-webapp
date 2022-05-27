@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
+import { useSession, signIn, signOut, getSession, SessionProvider } from "next-auth/react"
+import { Router, useRouter } from "next/router";
 
 /*
   This example requires Tailwind CSS v2.0+ 
@@ -18,14 +20,25 @@ import { useState } from "react";
   ```
 */
 
+function UserForm() {
 
 
-export  default function UserForm() {
+  const router=useRouter()
+  const{data:session,status}=useSession()
+  if(status!=="loading"&& status==="authenticated")
+  {
+    console.log(session?.user?.email)
+  }
+  if(status==="unauthenticated")
+  {
+    console.log("No hay usuario")
+    router.push("/")
+  }
+
 
       /*Este es el estado inicila , todo los valores se setean a cero
     y desde la funcion "handleChange se pasan los valores a este objeto"*/ 
    const[usuarioempleado,setUsuarioempleado]=useState({
-                idUsuarioEmp:"",
                 first_name:"",
                 last_name:"",
                 email:"",
@@ -40,7 +53,6 @@ export  default function UserForm() {
                 pasaporte_vigente:0,
                 idEspecialidad:0,
                 nivelExperiencia_idNivelExp:0,
-                Usuario_idUsuario:""
     })
 
   const handleSubmit= async (e:any) =>{
@@ -554,6 +566,7 @@ export  default function UserForm() {
         <div className="flex justify-end">
           
           <button
+            onClick={()=>signOut()}
             type="button"
             className="bg-buttonsecondary py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-buttonprimary hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
@@ -567,8 +580,13 @@ export  default function UserForm() {
           </button>
         </div>
       </div>
+      <div>
+      </div>
     </form>
 
 
   );
 }
+
+
+export default  UserForm
