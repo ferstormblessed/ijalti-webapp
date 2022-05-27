@@ -1,4 +1,8 @@
 import axios from "axios";
+import { useState } from "react";
+import { useSession, signIn, signOut, getSession, SessionProvider } from "next-auth/react"
+import { Router, useRouter } from "next/router";
+
 /*
   This example requires Tailwind CSS v2.0+ 
   
@@ -16,20 +20,53 @@ import axios from "axios";
   ```
 */
 
+function UserForm() {
 
 
-export  default function UserForm() {
+  const router=useRouter()
+  const{data:session,status}=useSession()
+  if(status!=="loading"&& status==="authenticated")
+  {
+    console.log(session?.user?.email)
+  }
+  if(status==="unauthenticated")
+  {
+    console.log("No hay usuario")
+    router.push("/")
+  }
+
+
+      /*Este es el estado inicila , todo los valores se setean a cero
+    y desde la funcion "handleChange se pasan los valores a este objeto"*/ 
+   const[usuarioempleado,setUsuarioempleado]=useState({
+                first_name:"",
+                last_name:"",
+                email:"",
+                uniEgreso:"",
+                CV:"Mi cv",
+                aniosExperiencia:0,
+                idDireccionEmpleado:0,
+                sexo:0,
+                estadoCivil:"",
+                CURP:"",
+                visa_vigente:0,
+                pasaporte_vigente:0,
+                idEspecialidad:0,
+                nivelExperiencia_idNivelExp:0,
+    })
+
   const handleSubmit= async (e:any) =>{
             e.preventDefault();
-            
-            const res= await axios.post("/api/clientes",{
-              idUsuario:"SABC660", 
-              nombre:"Carlos",
-              email:"carlos@gmail.com",
-              password:"password"
-            })
+            const res= await axios.post("/api/clientes",usuarioempleado);
             console.log(res);
   };
+
+  /*Esta funcion va a recibir informacion del input que se está typeando
+    y desde ese inuput extraemos el e.target.name y el e.target.value*/
+    const handleChange=({target:{name,value}}:{target:{name:any,value:any}})=>{
+
+        setUsuarioempleado({...usuarioempleado,[name]:value});
+    }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8 divide-y divide-gray-200">
@@ -55,11 +92,11 @@ export  default function UserForm() {
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <input
                   type="text"
-                  name="first-name"
-                  id="first-name"
+                  name="first_name"
+                  id="first_name"
                   autoComplete="given-name"
                   className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                />
+               onChange={handleChange}/>
               </div>
             </div>
 
@@ -73,11 +110,11 @@ export  default function UserForm() {
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <input
                   type="text"
-                  name="last-name"
-                  id="last-name"
+                  name="last_name"
+                  id="last_name"
                   autoComplete="family-name"
                   className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                />
+                onChange={handleChange}/>
               </div>
             </div>
 
@@ -118,7 +155,7 @@ export  default function UserForm() {
                   type="email"
                   autoComplete="email"
                   className="block bg-buttonsecondary max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
-                />
+               onChange={handleChange}/>
               </div>
             </div>
 
@@ -132,11 +169,11 @@ export  default function UserForm() {
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <input
                   type="text"
-                  name="first-name"
-                  id="first-name"
+                  name="CURP"
+                  id="CURP"
                   autoComplete="given-name"
                   className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                />
+                onChange={handleChange}/>
               </div>
             </div>
 
@@ -149,11 +186,11 @@ export  default function UserForm() {
               </label>
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <select
-                  id="country"
-                  name="country"
+                  id="estadoCivil"
+                  name="estadoCivil"
                   autoComplete="country-name"
                   className="text-primary bg-buttonsecondary max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                >
+                onChange={handleChange}>
                   <option>Elegir</option>
                   <option>Solterx</option>
                   <option>Casadx</option>
@@ -195,11 +232,11 @@ export  default function UserForm() {
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <input
                   type="text"
-                  name="street-address"
-                  id="street-address"
+                  name="idDireccionEmpleado"
+                  id="idDireccionEmpleado"
                   autoComplete="street-address"
                   className="block bg-buttonsecondary max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
-                />
+                onChange={handleChange}/>
               </div>
             </div>
 
@@ -261,7 +298,7 @@ export  default function UserForm() {
         <div className="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
           <div>
             <h3 className="text-lg leading-6 font-medium text-primary">
-              Informarción laboral
+              Información laboral
             </h3>
             <p className="mt-1 max-w-2xl text-sm text-secondary">
               Con esta información sera compartida con la empresa a la que
@@ -296,11 +333,11 @@ export  default function UserForm() {
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <input
                   type="text"
-                  name="first-name"
-                  id="first-name"
+                  name="idEspecialidad"
+                  id="idEspecialidad"
                   autoComplete="given-name"
                   className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                />
+                onChange={handleChange}/>
               </div>
             </div>
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
@@ -313,11 +350,11 @@ export  default function UserForm() {
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <input
                   type="text"
-                  name="first-name"
-                  id="first-name"
+                  name="uniEgreso"
+                  id="uniEgreso"
                   autoComplete="given-name"
                   className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                />
+                onChange={handleChange}/>
               </div>
             </div>
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
@@ -330,11 +367,11 @@ export  default function UserForm() {
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <input
                   type="text"
-                  name="first-name"
-                  id="first-name"
+                  name="nivelExperiencia_idNivelExp"
+                  id="nivelExperiencia_idNivelExp"
                   autoComplete="given-name"
                   className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                />
+                onChange={handleChange}/>
               </div>
             </div>
           </div>
@@ -475,11 +512,11 @@ export  default function UserForm() {
                       <div className="mt-4 space-y-4">
                         <div className="flex items-center">
                           <input
-                            id="push-everything"
-                            name="push-notifications"
+                            id="n"
+                            name="n"
                             type="checkbox"
                             className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-                          />
+                           />
                           <label
                             htmlFor="visa"
                             className="ml-3 block text-sm font-medium text-primary"
@@ -505,8 +542,8 @@ export  default function UserForm() {
                       <div className="mt-4 space-y-4">
                         <div className="flex items-center">
                           <input
-                            id="push-everything"
-                            name="push-notifications"
+                            id="n"
+                            name="n"
                             type="checkbox"
                             className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
                           />
@@ -529,6 +566,7 @@ export  default function UserForm() {
         <div className="flex justify-end">
           
           <button
+            onClick={()=>signOut()}
             type="button"
             className="bg-buttonsecondary py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-buttonprimary hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
@@ -542,8 +580,13 @@ export  default function UserForm() {
           </button>
         </div>
       </div>
+      <div>
+      </div>
     </form>
 
 
   );
 }
+
+
+export default  UserForm

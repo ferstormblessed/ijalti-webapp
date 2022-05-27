@@ -17,6 +17,7 @@
 import Link from "next/link";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import Logo from "./IJALTI.png";
+import { signIn } from "next-auth/react";
 export default function LoginScreen() {
   return (
     <>
@@ -41,13 +42,22 @@ export default function LoginScreen() {
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600">
               Or{" "}
-              <a
-                href="www.google.com"
-                className="font-medium text-secondary hover:text-primary"
-              >
-                registrate
-              </a>
+
+
+
+              
+                <button
+                  onClick={()=>signIn()}
+                  className="font-medium text-secondary hover:text-primary"
+                >
+                  registrate
+                </button>
+
+
+
             </p>
+
+
           </div>
           <form className="mt-8 space-y-6" action="#" method="POST">
             <input type="hidden" name="remember" defaultValue="true" />
@@ -130,3 +140,4 @@ export default function LoginScreen() {
     </>
   );
 }
+

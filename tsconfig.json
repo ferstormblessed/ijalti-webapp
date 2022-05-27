@@ -16,6 +16,6 @@
     "incremental": true
     
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/hello.tsx", "config/db.jsx", "components/userForm.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/hello.tsx", "config/db.jsx", "components/userForm.tsx", "pages/index.tsx"],
   "exclude": ["node_modules"]
 }
