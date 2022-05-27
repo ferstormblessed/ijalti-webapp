@@ -45,14 +45,13 @@ export default function LoginScreen() {
 
 
 
-              
+              <Link href="/api/auth/signin">
                 <button
-                  onClick={()=>signIn()}
                   className="font-medium text-secondary hover:text-primary"
                 >
                   registrate
                 </button>
-
+              </Link>
 
 
             </p>
