@@ -1,10 +1,8 @@
 import {pool} from '../../../config/db';//Aqui me traigo mi base de datos
-import { Router, useRouter } from "next/router";
 
 
 export default async function handler(req,res)
 {
-    const router=useRouter();
     //return res.status(200).json("Obteniendo info del usuario: "+req.query.id);
     switch(req.method)
     {   

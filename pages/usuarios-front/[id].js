@@ -1,14 +1,14 @@
 import axios from "axios";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 //import { getServerSideProps } from "../listarUsuarios";
 
-function productView({usuario})
+function ProductView({usuario})
 {
     const router=useRouter()
     const handleDelete=async(CURP)=>
         {
             //console.log(CURP);
-            const res=await axios.delete('/api/clientes/'+CURP)
+            await axios.delete('/api/clientes/'+CURP)
             router.push("/listarUsuarios")
         };
 
@@ -42,4 +42,4 @@ export const getServerSideProps=async(context)=>{
     }
 
 }
-export default productView;
+export default ProductView;
