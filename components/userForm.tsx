@@ -29,11 +29,13 @@ function UserForm() {
   {
     console.log(session?.user?.email)
   }
+  /*
   if(status==="unauthenticated")
   {
     console.log("No hay usuario")
     router.push("/")
   }
+  */
 
 
       /*Este es el estado inicila , todo los valores se setean a cero
@@ -54,6 +56,12 @@ function UserForm() {
                 idEspecialidad:0,
                 nivelExperiencia_idNivelExp:0,
     })
+
+  const handleDelete=async()=>
+    {
+        await axios.delete('/api/clientes')
+        //router.push('/')//Esto te redirecciona a tu pagina principal
+    };
 
   const handleSubmit= async (e:any) =>{
             e.preventDefault();
@@ -564,7 +572,15 @@ function UserForm() {
 
       <div className="pt-5">
         <div className="flex justify-end">
-          
+          <button
+            onClick={()=>handleDelete()}
+            type="button"
+            className="mr-4 py-2 px-4 bg-red-600 text-white rounded shadow-sm hover:bg-red-500"
+          >
+            Borrar Info
+          </button>
+
+
           <button
             onClick={()=>signOut()}
             type="button"
@@ -572,12 +588,17 @@ function UserForm() {
           >
             Cancelar
           </button>
+
+
           <button
             type="submit"
             className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-buttonsecondary bg-buttonprimary hover:bg-buttonsecondary hover:text-buttonprimary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Registrarse
           </button>
+
+
+
         </div>
       </div>
       <div>
