@@ -6,18 +6,21 @@ export default async function handler(req:any,res:any){
     {
         case "GET":
             return await getUsuarios(req,res);
+            //return await getUsuario(req,res);
         case "POST":
             return await registrarUsuario(req,res);
 
     }
 }
 
+
 //GET
 const getUsuarios=async(req:any,res:any)=>{
-    const [result]=await pool.query("SELECT*FROM usuario")
+    const [result]=await pool.query("SELECT*FROM usuarioempleado")
     console.log(result);
     return res.status(200).json(result)
 }
+
 
 //POST
 const registrarUsuario=async(req:any,res:any)=>

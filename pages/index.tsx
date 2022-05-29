@@ -27,7 +27,7 @@ function Home({session}:any)
       sus atributos en pantalla del front end */}
       {/*
       {products.map(product=>(
-        <div key={products.id}>
+        <div key={product.id}>
           <h1>{product.name}</h1>
           <p>{product.description}</p>
           <p>{product.price}</p>
@@ -50,7 +50,7 @@ export const getServerSideProps=async (context)=>{
 
   return {
     props:{
-      clientes,//Esto es un arreglo de objetos , estos objetos son mis cliente
+      products,//Esto es un arreglo de objetos , estos objetos son mis cliente
     },
   };
 };
