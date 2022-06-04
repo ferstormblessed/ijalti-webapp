@@ -1,10 +1,14 @@
+import Dashboard from "../components/dashboard";
 import ProfileUser from "../components/profile";
 
 
 const Profile = () => {
   return (
     <div>
-        <ProfileUser/>
+      <Dashboard>
+        <ProfileUser />
+      </Dashboard>
+        
     </div>
   );
 };
