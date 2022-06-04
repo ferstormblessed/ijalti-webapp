@@ -25,24 +25,24 @@ const getUsuarios=async(req:any,res:any)=>{
 //POST
 const registrarUsuario=async(req:any,res:any)=>
 {
-    const {first_name,last_name,email,uniEgreso,CV,aniosExperiencia,idDireccionEmpleado,
-        sexo,estadoCivil,CURP,visa_vigente,pasaporte_vigente,idEspecialidad,nivelExperiencia_idNivelExp}=req.body
+    const {nombre,apellidoP,apellidoM,email,password,CV,aniosExperiencia,
+        sexo,estadoCivil,CURP,RFC,visa_vigente,pasaporte_vigente}=req.body
             const [result]=await pool.query("INSERT INTO usuarioempleado SET ?",{
-                first_name,
-                last_name,
+                nombre,
+                apellidoP,
+                apellidoM,
                 email,
-                uniEgreso,
+                password,
                 CV,
                 aniosExperiencia,
-                idDireccionEmpleado,
                 sexo,
                 estadoCivil,
                 CURP,
+                RFC,
                 visa_vigente,
-                pasaporte_vigente,
-                idEspecialidad,
-                nivelExperiencia_idNivelExp,
+                pasaporte_vigente
             });//Esto inserta un dato dentro de la tabla
-            return res.status(200).json({first_name,last_name,email,uniEgreso,CV,aniosExperiencia,idDireccionEmpleado,
-        sexo,estadoCivil,CURP,visa_vigente,pasaporte_vigente,idEspecialidad,nivelExperiencia_idNivelExp});
+            return res.status(200).json({nombre,apellidoP,apellidoM,email,password,CV,aniosExperiencia,
+        sexo,estadoCivil,CURP,RFC,visa_vigente,pasaporte_vigente});
+
 }

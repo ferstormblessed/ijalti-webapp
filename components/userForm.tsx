@@ -37,24 +37,26 @@ function UserForm() {
   }
   */
 
+  
 
       /*Este es el estado inicila , todo los valores se setean a cero
     y desde la funcion "handleChange se pasan los valores a este objeto"*/ 
+
+    
    const[usuarioempleado,setUsuarioempleado]=useState({
-                first_name:"",
-                last_name:"",
+                nombre:"",
+                apellidoP:"",
+                apellidoM:"",
                 email:"",
-                uniEgreso:"",
+                password:"",
                 CV:"Mi cv",
                 aniosExperiencia:0,
-                idDireccionEmpleado:0,
                 sexo:0,
                 estadoCivil:"",
                 CURP:"",
-                visa_vigente:0,
-                pasaporte_vigente:0,
-                idEspecialidad:0,
-                nivelExperiencia_idNivelExp:0,
+                RFC:"",
+                visa_vigente:"",
+                pasaporte_vigente:""
     })
 
   const handleDelete=async()=>
@@ -95,13 +97,13 @@ function UserForm() {
                 htmlFor="first-name"
                 className="block text-sm font-medium text-primary sm:mt-px sm:pt-2"
               >
-                First name
+                Nombre
               </label>
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <input
                   type="text"
-                  name="first_name"
-                  id="first_name"
+                  name="nombre"
+                  id="nombre"
                   autoComplete="given-name"
                   className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                onChange={handleChange}/>
@@ -113,13 +115,31 @@ function UserForm() {
                 htmlFor="last-name"
                 className="block text-sm font-medium text-primary sm:mt-px sm:pt-2"
               >
-                Last name
+                Apellido Paterno
               </label>
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <input
                   type="text"
-                  name="last_name"
-                  id="last_name"
+                  name="apellidoP"
+                  id="apellidoP"
+                  autoComplete="family-name"
+                  className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                onChange={handleChange}/>
+              </div>
+            </div>
+
+            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+              <label
+                htmlFor="last-name"
+                className="block text-sm font-medium text-primary sm:mt-px sm:pt-2"
+              >
+                Apellido Materno
+              </label>
+              <div className="mt-1 sm:mt-0 sm:col-span-2">
+                <input
+                  type="text"
+                  name="apellidoM"
+                  id="apellidoM"
                   autoComplete="family-name"
                   className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                 onChange={handleChange}/>
@@ -131,7 +151,7 @@ function UserForm() {
                 htmlFor="country"
                 className="block text-sm font-medium text-primary sm:mt-px sm:pt-2"
               >
-                Género
+                Sexo
               </label>
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <select
@@ -154,7 +174,7 @@ function UserForm() {
                 htmlFor="email"
                 className="block text-sm font-medium text-primary sm:mt-px sm:pt-2"
               >
-                Email address
+                Correo
               </label>
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <input
@@ -162,6 +182,24 @@ function UserForm() {
                   name="email"
                   type="email"
                   autoComplete="email"
+                  className="block bg-buttonsecondary max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
+               onChange={handleChange}/>
+              </div>
+            </div>
+
+            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-primary sm:mt-px sm:pt-2"
+              >
+                Contraseña
+              </label>
+              <div className="mt-1 sm:mt-0 sm:col-span-2">
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autoComplete="password"
                   className="block bg-buttonsecondary max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
                onChange={handleChange}/>
               </div>
@@ -187,6 +225,24 @@ function UserForm() {
 
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
               <label
+                htmlFor="pastexperience"
+                className="block text-sm font-medium text-primary sm:mt-px sm:pt-2"
+              >
+                RFC
+              </label>
+              <div className="mt-1 sm:mt-0 sm:col-span-2">
+                <input
+                  type="text"
+                  name="RFC"
+                  id="RFC"
+                  autoComplete="given-name"
+                  className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                onChange={handleChange}/>
+              </div>
+            </div>
+
+            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+              <label
                 htmlFor="country"
                 className="block text-sm font-medium text-primary sm:mt-px sm:pt-2"
               >
@@ -196,7 +252,7 @@ function UserForm() {
                 <select
                   id="estadoCivil"
                   name="estadoCivil"
-                  autoComplete="country-name"
+                  autoComplete="estadoCivil"
                   className="text-primary bg-buttonsecondary max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                 onChange={handleChange}>
                   <option>Elegir</option>
@@ -244,7 +300,7 @@ function UserForm() {
                   id="idDireccionEmpleado"
                   autoComplete="street-address"
                   className="block bg-buttonsecondary max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
-                onChange={handleChange}/>
+                />
               </div>
             </div>
 
@@ -345,26 +401,10 @@ function UserForm() {
                   id="idEspecialidad"
                   autoComplete="given-name"
                   className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                onChange={handleChange}/>
+                />
               </div>
             </div>
-            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-              <label
-                htmlFor="university"
-                className="block  text-sm font-medium text-primary sm:mt-px sm:pt-2"
-              >
-                Universidad de egreso
-              </label>
-              <div className="mt-1 sm:mt-0 sm:col-span-2">
-                <input
-                  type="text"
-                  name="uniEgreso"
-                  id="uniEgreso"
-                  autoComplete="given-name"
-                  className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                onChange={handleChange}/>
-              </div>
-            </div>
+
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
               <label
                 htmlFor="pastexperience"
@@ -379,7 +419,7 @@ function UserForm() {
                   id="nivelExperiencia_idNivelExp"
                   autoComplete="given-name"
                   className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                onChange={handleChange}/>
+                />
               </div>
             </div>
           </div>
@@ -520,11 +560,11 @@ function UserForm() {
                       <div className="mt-4 space-y-4">
                         <div className="flex items-center">
                           <input
-                            id="n"
-                            name="n"
-                            type="checkbox"
+                            id="visa_vigente"
+                            name="visa_vigente"
+                            type="date"
                             className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-                           />
+                           onChange={handleChange}/>
                           <label
                             htmlFor="visa"
                             className="ml-3 block text-sm font-medium text-primary"
@@ -550,11 +590,11 @@ function UserForm() {
                       <div className="mt-4 space-y-4">
                         <div className="flex items-center">
                           <input
-                            id="n"
-                            name="n"
-                            type="checkbox"
+                            id="pasaporte_vigente"
+                            name="pasaporte_vigente"
+                            type="date"
                             className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-                          />
+                          onChange={handleChange}/>
                           <label
                             htmlFor="visa"
                             className="ml-3 block text-sm font-medium text-primary"
