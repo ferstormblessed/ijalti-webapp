@@ -21,9 +21,9 @@ interface IDashboardProps {
 
 const navigation = [
   { name: "Orientación profesional", href: "#", icon: HomeIcon, current: true },
-  { name: "Busqueda de usuario", href: "#", icon: UsersIcon, current: false },
+  { name: "Busqueda de usuario", href: "/busquedaUsuario", icon: UsersIcon, current: false },
   { name: "Busqueda de trabajo", href: "busquedaEmpleo", icon: FolderIcon, current: false },
-  { name: "Perfil de usuario", href: "/dashboard", icon: CalendarIcon, current: false },
+  { name: "Perfil de usuario", href: "/profile", icon: CalendarIcon, current: false },
   { name: "Configuracion", href: "#", icon: InboxIcon, current: false },
 ];
 const userNavigation = [
