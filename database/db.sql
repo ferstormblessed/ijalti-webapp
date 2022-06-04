@@ -1,21 +1,24 @@
-CREATE DATABASE ijalti;
--- -----------------------------------------------------
--- Table `ijalti`.`Usuario`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ijalti`.`Usuario` (
-  `idUsuario` VARCHAR(13) NOT NULL,
-  `nombre` VARCHAR(45) NULL,
-  `email` VARCHAR(45) NULL,
-  `password` VARCHAR(45) NULL,
-  PRIMARY KEY (`idUsuario`))
-ENGINE = InnoDB;
+-- MySQL Workbench Forward Engineering
 
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Table `ijalti`.`Direccion`
+-- Schema mydb
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ijalti`.`Direccion` (
-  `idDireccion` INT NOT NULL,
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+USE `mydb` ;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Direccion`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Direccion` (
+  `idDireccion` INT NOT NULL AUTO_INCREMENT,
   `calle` VARCHAR(20) NULL,
   `numExterior` INT NULL,
   `cp` INT NULL,
@@ -27,66 +30,31 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ijalti`.`nivelExperiencia`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ijalti`.`nivelExperiencia` (
-  `idNivelExp` INT NOT NULL,
-  `idHabilidades` VARCHAR(45) NOT NULL,
-  `idTecnologia` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idNivelExp`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `ijalti`.`UsuarioEmpleado`
+-- Table `mydb`.`UsuarioEmpleado`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ijalti`.`UsuarioEmpleado` (
-  `first_name` VARCHAR(30) NULL,
-  `last_name` VARCHAR(30) NULL,
-  `email` VARCHAR(30) NULL,
-  `uniEgreso` VARCHAR(45) NULL,
+  `CURP` VARCHAR(18) NOT NULL,
+  `nombre` VARCHAR(45) NULL,
+  `apellidoP` VARCHAR(20) NULL,
+  `apellidoM` VARCHAR(20) NULL,
+  `email` VARCHAR(45) NULL,
+  `password` VARCHAR(45) NULL,
   `CV` VARCHAR(45) NULL,
   `aniosExperiencia` INT NULL,
-  `idDireccionEmpleado` INT NOT NULL,
   `sexo` VARCHAR(45) NULL,
   `estadoCivil` VARCHAR(45) NULL,
-  `CURP` VARCHAR(45) NOT NULL,
-  `visa_vigente` TINYINT NULL,
-  `pasaporte_vigente` TINYINT NULL,
-  `idEspecialidad` INT NOT NULL,
-  `nivelExperiencia_idNivelExp` INT NOT NULL,
-  PRIMARY KEY (`CURP`, `nivelExperiencia_idNivelExp`))
-ENGINE = InnoDB;
-
-
-
-
-  INDEX `fk_UsuarioEmpleado_Direccion1_idx` (`idDireccionEmpleado` ASC) VISIBLE,
-  INDEX `fk_UsuarioEmpleado_nivelExperiencia1_idx` (`nivelExperiencia_idNivelExp` ASC) VISIBLE,
-  INDEX `fk_UsuarioEmpleado_Usuario1_idx` (`Usuario_idUsuario` ASC) VISIBLE,
-  CONSTRAINT `fk_UsuarioEmpleado_Direccion1`
-    FOREIGN KEY (`idDireccionEmpleado`)
-    REFERENCES `ijalti`.`Direccion` (`idDireccion`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_UsuarioEmpleado_nivelExperiencia1`
-    FOREIGN KEY (`nivelExperiencia_idNivelExp`)
-    REFERENCES `ijalti`.`nivelExperiencia` (`idNivelExp`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_UsuarioEmpleado_Usuario1`
-    FOREIGN KEY (`Usuario_idUsuario`)
-    REFERENCES `ijalti`.`Usuario` (`idUsuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  `RFC` VARCHAR(13) NULL,
+  `visa_vigente` DATE NULL,
+  `pasaporte_vigente` DATE NULL,
+  PRIMARY KEY (`CURP`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ijalti`.`Empresa`
+-- Table `mydb`.`Empresa`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ijalti`.`Empresa` (
-  `idEmpresa` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `mydb`.`Empresa` (
+  `idEmpresa` INT NOT NULL AUTO_INCREMENT,
   `nombreEmpresa` VARCHAR(45) NULL,
   `idDireccionEmpresa` INT NOT NULL,
   `RazonSocial` VARCHAR(45) NULL,
@@ -97,176 +65,147 @@ CREATE TABLE IF NOT EXISTS `ijalti`.`Empresa` (
   INDEX `fk_Empresa_Direccion1_idx` (`idDireccionEmpresa` ASC) VISIBLE,
   CONSTRAINT `fk_Empresa_Direccion1`
     FOREIGN KEY (`idDireccionEmpresa`)
-    REFERENCES `ijalti`.`Direccion` (`idDireccion`)
+    REFERENCES `mydb`.`Direccion` (`idDireccion`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ijalti`.`Aplicacion`
+-- Table `mydb`.`UsuarioEmpresa`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ijalti`.`Aplicacion` (
-  `statusAplicacion` TINYINT NULL,
-  `fechaSolicitud` DATE NULL,
-  `UsuarioEmpleado_idUsuarioEmp` VARCHAR(13) NOT NULL,
-  `UsuarioEmpleado_nivelExperiencia_idNivelExp` INT NOT NULL,
-  `UsuarioEmpleado_Usuario_idUsuario` VARCHAR(13) NOT NULL,
-  PRIMARY KEY (`UsuarioEmpleado_idUsuarioEmp`, `UsuarioEmpleado_nivelExperiencia_idNivelExp`, `UsuarioEmpleado_Usuario_idUsuario`),
-  INDEX `fk_Aplicacion_UsuarioEmpleado1_idx` (`UsuarioEmpleado_idUsuarioEmp` ASC, `UsuarioEmpleado_nivelExperiencia_idNivelExp` ASC, `UsuarioEmpleado_Usuario_idUsuario` ASC) VISIBLE,
-  CONSTRAINT `fk_Aplicacion_UsuarioEmpleado1`
-    FOREIGN KEY (`UsuarioEmpleado_idUsuarioEmp` , `UsuarioEmpleado_nivelExperiencia_idNivelExp` , `UsuarioEmpleado_Usuario_idUsuario`)
-    REFERENCES `ijalti`.`UsuarioEmpleado` (`idUsuarioEmp` , `nivelExperiencia_idNivelExp` , `Usuario_idUsuario`)
+CREATE TABLE IF NOT EXISTS `mydb`.`UsuarioEmpresa` (
+  `idUsuarioEmpresa` VARCHAR(18) NOT NULL,
+  `Empresa_idEmpresa` INT NOT NULL,
+  `nombre` VARCHAR(20) NULL,
+  `apellidoP` VARCHAR(20) NULL,
+  `apellidoM` VARCHAR(20) NULL,
+  `email` VARCHAR(40) NULL,
+  `password` VARCHAR(45) NULL,
+  PRIMARY KEY (`idUsuarioEmpresa`, `Empresa_idEmpresa`),
+  INDEX `fk_UsuarioEmpresa_Empresa2_idx` (`Empresa_idEmpresa` ASC) VISIBLE,
+  CONSTRAINT `fk_UsuarioEmpresa_Empresa2`
+    FOREIGN KEY (`Empresa_idEmpresa`)
+    REFERENCES `mydb`.`Empresa` (`idEmpresa`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ijalti`.`Puesto`
+-- Table `mydb`.`Puesto`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ijalti`.`Puesto` (
-  `idPuesto` INT NOT NULL,
-  `idEmpresaPuesto` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `mydb`.`Puesto` (
+  `idPuesto` INT NOT NULL AUTO_INCREMENT,
+  `idUsuarioEmpresaCreador` VARCHAR(18) NOT NULL,
+  `idEmpresa` INT NOT NULL,
+  `idDireccionPuesto` INT NOT NULL,
   `nombrePuesto` VARCHAR(45) NULL,
   `modalidadTrabajo` VARCHAR(45) NULL,
   `tipoHorario` VARCHAR(45) NULL,
   `jornadaDeTrabajo` INT NULL,
   `areaConocimiento` VARCHAR(45) NULL,
-  `idDireccionPuesto` INT NOT NULL,
-  `nivelExperiencia_idNivelExp` INT NOT NULL,
-  `idIdioma` INT NOT NULL,
-  `Aplicacion_UsuarioEmpleado_idUsuarioEmp` VARCHAR(13) NOT NULL,
-  `Aplicacion_UsuarioEmpleado_nivelExperiencia_idNivelExp` INT NOT NULL,
-  `Aplicacion_UsuarioEmpleado_Usuario_idUsuario` VARCHAR(13) NOT NULL,
-  PRIMARY KEY (`idPuesto`, `idEmpresaPuesto`, `nivelExperiencia_idNivelExp`, `Aplicacion_UsuarioEmpleado_idUsuarioEmp`, `Aplicacion_UsuarioEmpleado_nivelExperiencia_idNivelExp`, `Aplicacion_UsuarioEmpleado_Usuario_idUsuario`),
+  PRIMARY KEY (`idPuesto`),
   INDEX `fk_Puesto_Direccion1_idx` (`idDireccionPuesto` ASC) VISIBLE,
-  INDEX `fk_Puesto_Empresa1_idx` (`idEmpresaPuesto` ASC) VISIBLE,
-  INDEX `fk_Puesto_nivelExperiencia1_idx` (`nivelExperiencia_idNivelExp` ASC) VISIBLE,
-  INDEX `fk_Puesto_Aplicacion1_idx` (`Aplicacion_UsuarioEmpleado_idUsuarioEmp` ASC, `Aplicacion_UsuarioEmpleado_nivelExperiencia_idNivelExp` ASC, `Aplicacion_UsuarioEmpleado_Usuario_idUsuario` ASC) VISIBLE,
+  INDEX `fk_Puesto_UsuarioEmpresa1_idx` (`idUsuarioEmpresaCreador` ASC, `idEmpresa` ASC) VISIBLE,
   CONSTRAINT `fk_Puesto_Direccion1`
     FOREIGN KEY (`idDireccionPuesto`)
-    REFERENCES `ijalti`.`Direccion` (`idDireccion`)
+    REFERENCES `mydb`.`Direccion` (`idDireccion`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Puesto_Empresa1`
-    FOREIGN KEY (`idEmpresaPuesto`)
-    REFERENCES `ijalti`.`Empresa` (`idEmpresa`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Puesto_nivelExperiencia1`
-    FOREIGN KEY (`nivelExperiencia_idNivelExp`)
-    REFERENCES `ijalti`.`nivelExperiencia` (`idNivelExp`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Puesto_Aplicacion1`
-    FOREIGN KEY (`Aplicacion_UsuarioEmpleado_idUsuarioEmp` , `Aplicacion_UsuarioEmpleado_nivelExperiencia_idNivelExp` , `Aplicacion_UsuarioEmpleado_Usuario_idUsuario`)
-    REFERENCES `ijalti`.`Aplicacion` (`UsuarioEmpleado_idUsuarioEmp` , `UsuarioEmpleado_nivelExperiencia_idNivelExp` , `UsuarioEmpleado_Usuario_idUsuario`)
+  CONSTRAINT `fk_Puesto_UsuarioEmpresa1`
+    FOREIGN KEY (`idUsuarioEmpresaCreador` , `idEmpresa`)
+    REFERENCES `mydb`.`UsuarioEmpresa` (`idUsuarioEmpresa` , `Empresa_idEmpresa`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ijalti`.`UsuarioEmpersa`
+-- Table `mydb`.`Idioma`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ijalti`.`UsuarioEmpersa` (
-  `Empresa_idEmpresa` INT NOT NULL,
-  `Puesto_id_Puesto` INT NOT NULL,
-  `Puesto_idEmpresaPuesto` INT NOT NULL,
-  `sexo` VARCHAR(45) NULL,
-  `CURP` VARCHAR(45) NULL,
-  `nivelJerarquico` INT NULL,
-  `Usuario_idUsuario` VARCHAR(13) NOT NULL,
-  PRIMARY KEY (`Empresa_idEmpresa`, `Usuario_idUsuario`),
-  INDEX `fk_UsuarioEmpresa_Empresa1_idx` (`Empresa_idEmpresa` ASC) VISIBLE,
-  INDEX `fk_UsuarioEmpresa_Puesto1_idx` (`Puesto_id_Puesto` ASC, `Puesto_idEmpresaPuesto` ASC) VISIBLE,
-  INDEX `fk_UsuarioEmpersa_Usuario1_idx` (`Usuario_idUsuario` ASC) VISIBLE,
-  CONSTRAINT `fk_UsuarioEmpresa_Empresa1`
-    FOREIGN KEY (`Empresa_idEmpresa`)
-    REFERENCES `ijalti`.`Empresa` (`idEmpresa`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_UsuarioEmpresa_Puesto1`
-    FOREIGN KEY (`Puesto_id_Puesto` , `Puesto_idEmpresaPuesto`)
-    REFERENCES `ijalti`.`Puesto` (`idPuesto` , `idEmpresaPuesto`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_UsuarioEmpersa_Usuario1`
-    FOREIGN KEY (`Usuario_idUsuario`)
-    REFERENCES `ijalti`.`Usuario` (`idUsuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `ijalti`.`UsuarioAdmin`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ijalti`.`UsuarioAdmin` (
-  `admin` TINYINT NULL,
-  `Usuario_idUsuario` VARCHAR(13) NOT NULL,
-  PRIMARY KEY (`Usuario_idUsuario`),
-  CONSTRAINT `fk_UsuarioAdmin_Usuario1`
-    FOREIGN KEY (`Usuario_idUsuario`)
-    REFERENCES `ijalti`.`Usuario` (`idUsuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `ijalti`.`Idioma`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ijalti`.`Idioma` (
-  `idIdioma` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `mydb`.`Idioma` (
+  `idIdioma` INT NOT NULL AUTO_INCREMENT,
+  `idPuesto` INT NOT NULL,
+  `idUsuarioEmp` VARCHAR(18) NOT NULL,
   `lengua` VARCHAR(30) NULL,
-  `Puesto_idPuesto` INT NOT NULL,
-  `Puesto_idEmpresaPuesto` INT NOT NULL,
-  `Puesto_nivelExperiencia_idNivelExp` INT NOT NULL,
-  `Puesto_Aplicacion_UsuarioEmpleado_idUsuarioEmp` VARCHAR(13) NOT NULL,
-  `Puesto_Aplicacion_UsuarioEmpleado_nivelExperiencia_idNivelExp` INT NOT NULL,
-  `Puesto_Aplicacion_UsuarioEmpleado_Usuario_idUsuario` VARCHAR(13) NOT NULL,
-  PRIMARY KEY (`idIdioma`, `Puesto_idPuesto`, `Puesto_idEmpresaPuesto`, `Puesto_nivelExperiencia_idNivelExp`, `Puesto_Aplicacion_UsuarioEmpleado_idUsuarioEmp`, `Puesto_Aplicacion_UsuarioEmpleado_nivelExperiencia_idNivelExp`, `Puesto_Aplicacion_UsuarioEmpleado_Usuario_idUsuario`),
-  INDEX `fk_Idioma_Puesto1_idx` (`Puesto_idPuesto` ASC, `Puesto_idEmpresaPuesto` ASC, `Puesto_nivelExperiencia_idNivelExp` ASC, `Puesto_Aplicacion_UsuarioEmpleado_idUsuarioEmp` ASC, `Puesto_Aplicacion_UsuarioEmpleado_nivelExperiencia_idNivelExp` ASC, `Puesto_Aplicacion_UsuarioEmpleado_Usuario_idUsuario` ASC) VISIBLE,
+  PRIMARY KEY (`idIdioma`, `idPuesto`, `idUsuarioEmp`),
+  INDEX `fk_Idioma_Puesto1_idx` (`idPuesto` ASC) VISIBLE,
+  INDEX `fk_Idioma_UsuarioEmpleado1_idx` (`idUsuarioEmp` ASC) VISIBLE,
   CONSTRAINT `fk_Idioma_Puesto1`
-    FOREIGN KEY (`Puesto_idPuesto` , `Puesto_idEmpresaPuesto` , `Puesto_nivelExperiencia_idNivelExp` , `Puesto_Aplicacion_UsuarioEmpleado_idUsuarioEmp` , `Puesto_Aplicacion_UsuarioEmpleado_nivelExperiencia_idNivelExp` , `Puesto_Aplicacion_UsuarioEmpleado_Usuario_idUsuario`)
-    REFERENCES `ijalti`.`Puesto` (`idPuesto` , `idEmpresaPuesto` , `nivelExperiencia_idNivelExp` , `Aplicacion_UsuarioEmpleado_idUsuarioEmp` , `Aplicacion_UsuarioEmpleado_nivelExperiencia_idNivelExp` , `Aplicacion_UsuarioEmpleado_Usuario_idUsuario`)
+    FOREIGN KEY (`idPuesto`)
+    REFERENCES `mydb`.`Puesto` (`idPuesto`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Idioma_UsuarioEmpleado1`
+    FOREIGN KEY (`idUsuarioEmp`)
+    REFERENCES `mydb`.`UsuarioEmpleado` (`idUsuarioEmp`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ijalti`.`Tecnologias`
+-- Table `mydb`.`Aplicacion`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ijalti`.`Tecnologias` (
-  `idTecnologia` INT NOT NULL,
-  `plataforma` VARCHAR(45) NULL,
-  `nivelExp_idNivelExp` INT NOT NULL,
-  `lenguajeProgramacion` VARCHAR(45) NULL,
-  PRIMARY KEY (`idTecnologia`, `nivelExp_idNivelExp`),
-  INDEX `fk_Tecnologia_nivelExp1_idx` (`nivelExp_idNivelExp` ASC) VISIBLE,
-  CONSTRAINT `fk_Tecnologia_nivelExp1`
-    FOREIGN KEY (`nivelExp_idNivelExp`)
-    REFERENCES `ijalti`.`nivelExperiencia` (`idNivelExp`)
+CREATE TABLE IF NOT EXISTS `mydb`.`Aplicacion` (
+  `idUsuarioAplicante` VARCHAR(18) NOT NULL,
+  `idPuestoAplicado` INT NOT NULL,
+  `estatusAplicacion` TINYINT NULL,
+  `fechaSolicitud` DATE NULL,
+  PRIMARY KEY (`idUsuarioAplicante`, `idPuestoAplicado`),
+  INDEX `fk_UsuarioEmpleado_has_Puesto_Puesto1_idx` (`idPuestoAplicado` ASC) VISIBLE,
+  INDEX `fk_UsuarioEmpleado_has_Puesto_UsuarioEmpleado1_idx` (`idUsuarioAplicante` ASC) VISIBLE,
+  CONSTRAINT `fk_UsuarioEmpleado_has_Puesto_UsuarioEmpleado1`
+    FOREIGN KEY (`idUsuarioAplicante`)
+    REFERENCES `mydb`.`UsuarioEmpleado` (`idUsuarioEmp`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_UsuarioEmpleado_has_Puesto_Puesto1`
+    FOREIGN KEY (`idPuestoAplicado`)
+    REFERENCES `mydb`.`Puesto` (`idPuesto`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ijalti`.`Habilidades`
+-- Table `mydb`.`InfoAcademica`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ijalti`.`Habilidades` (
-  `idHabilidades` INT NOT NULL,
-  `habilidades` VARCHAR(45) NULL,
-  `nivelExp_idNivelExp` INT NOT NULL,
-  PRIMARY KEY (`idHabilidades`, `nivelExp_idNivelExp`),
-  INDEX `fk_Habilidades_nivelExp1_idx` (`nivelExp_idNivelExp` ASC) VISIBLE,
-  CONSTRAINT `fk_Habilidades_nivelExp1`
-    FOREIGN KEY (`nivelExp_idNivelExp`)
-    REFERENCES `ijalti`.`nivelExperiencia` (`idNivelExp`)
+CREATE TABLE IF NOT EXISTS `mydb`.`InfoAcademica` (
+  `idExperiencia` INT NOT NULL AUTO_INCREMENT,
+  `idUsuarioEmp` VARCHAR(18) NOT NULL,
+  `tituloProfesion` VARCHAR(45) NULL,
+  `areaEspecialidad` VARCHAR(45) NULL,
+  `UniEgreso` VARCHAR(45) NULL,
+  PRIMARY KEY (`idExperiencia`, `idUsuarioEmp`),
+  INDEX `fk_InfoAcademica_UsuarioEmpleado1_idx` (`idUsuarioEmp` ASC) VISIBLE,
+  CONSTRAINT `fk_InfoAcademica_UsuarioEmpleado1`
+    FOREIGN KEY (`idUsuarioEmp`)
+    REFERENCES `mydb`.`UsuarioEmpleado` (`idUsuarioEmp`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`LenguajeProgramacion`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`LenguajeProgramacion` (
+  `idLenguajeProgramacion` INT NOT NULL AUTO_INCREMENT,
+  `idUsuarioEmp` VARCHAR(18) NOT NULL,
+  `nombreLenguaje` VARCHAR(40) NULL,
+  `aniosDePractica` INT NULL,
+  PRIMARY KEY (`idLenguajeProgramacion`, `idUsuarioEmp`),
+  INDEX `fk_LenguajeProgramacion_UsuarioEmpleado1_idx` (`idUsuarioEmp` ASC) VISIBLE,
+  CONSTRAINT `fk_LenguajeProgramacion_UsuarioEmpleado1`
+    FOREIGN KEY (`idUsuarioEmp`)
+    REFERENCES `mydb`.`UsuarioEmpleado` (`idUsuarioEmp`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
