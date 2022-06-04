@@ -24,7 +24,6 @@ const navigation = [
   { name: "Busqueda de usuario", href: "/busquedaUsuario", icon: UsersIcon, current: false },
   { name: "Busqueda de trabajo", href: "busquedaEmpleo", icon: FolderIcon, current: false },
   { name: "Perfil de usuario", href: "/profile", icon: CalendarIcon, current: false },
-  { name: "Configuracion", href: "#", icon: InboxIcon, current: false },
 ];
 const userNavigation = [
   { name: "Your Profile", href: "#" },
