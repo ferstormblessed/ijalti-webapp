@@ -79,17 +79,17 @@ const tecnologias = [
   { id: 9, name: "Tecnologia#9" },
   { id: 10, name: "Tecnologia#10" },
 ];
-const experiencias = [
-  { id: 1, name: "Experiencia#1" },
-  { id: 2, name: "Experiencia#2" },
-  { id: 3, name: "Experiencia#3" },
-  { id: 4, name: "Experiencia#4" },
-  { id: 5, name: "Experiencia#5" },
-  { id: 6, name: "Experiencia#6" },
-  { id: 7, name: "Experiencia#7" },
-  { id: 8, name: "Experiencia#8" },
-  { id: 9, name: "Experiencia#9" },
-  { id: 10, name: "Experiencia#10" },
+const Horarios = [
+  { id: 1, name: "Horario#1" },
+  { id: 2, name: "Horario#2" },
+  { id: 3, name: "Horario#3" },
+  { id: 4, name: "Horario#4" },
+  { id: 5, name: "Horario#5" },
+  { id: 6, name: "Horario#6" },
+  { id: 7, name: "Horario#7" },
+  { id: 8, name: "Horario#8" },
+  { id: 9, name: "Horario#9" },
+  { id: 10, name: "Horario#10" },
 ];
 
 function classNames(...classes: any) {
@@ -99,14 +99,16 @@ function classNames(...classes: any) {
 export default function InputFiltro() {
   const [puesto, setPuesto] = useState(puestos[0]);
   const [modalidad, setModalidad] = useState(modalidades[0]);
-  const [areaConocimiento, setAreaConocimiento] = useState(
-    areasConocimiento[3]
-  );
+
   const [jornada, setJornada] = useState(jornadas[0]);
+  const [horario, setHorario] = useState(Horarios[0]);
+
   const [idioma, setIdioma] = useState(idiomas[0]);
-  const [ubicacion, setUbicacion] = useState(ubicaciones[0]);
-  const [tecnologia, setTecnologia] = useState(tecnologias[0]);
-  const [experiencia, setExperiencia] = useState(experiencias[0]);
+  const [direccion, setDireccion] = useState(ubicaciones[0]);
+
+  const [areaConocimiento, setAreaConocimiento] = useState(
+    areasConocimiento[0]
+  );
 
   return (
     <div>
@@ -184,7 +186,7 @@ export default function InputFiltro() {
         {({ open }) => (
           <>
             <Listbox.Label className="block text-sm font-medium text-gray-700">
-              Modalidad de Trabajo
+              Modalidad
             </Listbox.Label>
             <div className="mt-1 relative">
               <Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -225,6 +227,146 @@ export default function InputFiltro() {
                             )}
                           >
                             {modalidad.name}
+                          </span>
+
+                          {selected ? (
+                            <span
+                              className={classNames(
+                                active ? "text-white" : "text-indigo-600",
+                                "absolute inset-y-0 right-0 flex items-center pr-4"
+                              )}
+                            >
+                              <CheckIcon
+                                className="h-5 w-5"
+                                aria-hidden="true"
+                              />
+                            </span>
+                          ) : null}
+                        </>
+                      )}
+                    </Listbox.Option>
+                  ))}
+                </Listbox.Options>
+              </Transition>
+            </div>
+          </>
+        )}
+      </Listbox>
+      <Listbox value={horario} onChange={setHorario}>
+        {({ open }) => (
+          <>
+            <Listbox.Label className="block text-sm font-medium text-gray-700">
+              Horarios
+            </Listbox.Label>
+            <div className="mt-1 relative">
+              <Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <span className="block truncate">{horario.name}</span>
+                <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                  <SelectorIcon
+                    className="h-5 w-5 text-gray-400"
+                    aria-hidden="true"
+                  />
+                </span>
+              </Listbox.Button>
+
+              <Transition
+                show={open}
+                as={Fragment}
+                leave="transition ease-in duration-100"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
+              >
+                <Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+                  {Horarios.map((horario) => (
+                    <Listbox.Option
+                      key={horario.id}
+                      className={({ active }) =>
+                        classNames(
+                          active ? "text-white bg-indigo-600" : "text-gray-900",
+                          "cursor-default select-none relative py-2 pl-3 pr-9"
+                        )
+                      }
+                      value={horario}
+                    >
+                      {({ selected, active }) => (
+                        <>
+                          <span
+                            className={classNames(
+                              selected ? "font-semibold" : "font-normal",
+                              "block truncate"
+                            )}
+                          >
+                            {horario.name}
+                          </span>
+
+                          {selected ? (
+                            <span
+                              className={classNames(
+                                active ? "text-white" : "text-indigo-600",
+                                "absolute inset-y-0 right-0 flex items-center pr-4"
+                              )}
+                            >
+                              <CheckIcon
+                                className="h-5 w-5"
+                                aria-hidden="true"
+                              />
+                            </span>
+                          ) : null}
+                        </>
+                      )}
+                    </Listbox.Option>
+                  ))}
+                </Listbox.Options>
+              </Transition>
+            </div>
+          </>
+        )}
+      </Listbox>
+      <Listbox value={jornada} onChange={setPuesto}>
+        {({ open }) => (
+          <>
+            <Listbox.Label className="block text-sm font-medium text-gray-700">
+              Jornada de trabajo
+            </Listbox.Label>
+            <div className="mt-1 relative">
+              <Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <span className="block truncate">{jornada.name}</span>
+                <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                  <SelectorIcon
+                    className="h-5 w-5 text-gray-400"
+                    aria-hidden="true"
+                  />
+                </span>
+              </Listbox.Button>
+
+              <Transition
+                show={open}
+                as={Fragment}
+                leave="transition ease-in duration-100"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
+              >
+                <Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+                  {jornadas.map((jornada) => (
+                    <Listbox.Option
+                      key={jornada.id}
+                      className={({ active }) =>
+                        classNames(
+                          active ? "text-white bg-indigo-600" : "text-gray-900",
+                          "cursor-default select-none relative py-2 pl-3 pr-9"
+                        )
+                      }
+                      value={jornada}
+                    >
+                      {({ selected, active }) => (
+                        <>
+                          <span
+                            className={classNames(
+                              selected ? "font-semibold" : "font-normal",
+                              "block truncate"
+                            )}
+                          >
+                            {jornada.name}
                           </span>
 
                           {selected ? (
@@ -295,356 +437,6 @@ export default function InputFiltro() {
                             )}
                           >
                             {areaConocimiento.name}
-                          </span>
-
-                          {selected ? (
-                            <span
-                              className={classNames(
-                                active ? "text-white" : "text-indigo-600",
-                                "absolute inset-y-0 right-0 flex items-center pr-4"
-                              )}
-                            >
-                              <CheckIcon
-                                className="h-5 w-5"
-                                aria-hidden="true"
-                              />
-                            </span>
-                          ) : null}
-                        </>
-                      )}
-                    </Listbox.Option>
-                  ))}
-                </Listbox.Options>
-              </Transition>
-            </div>
-          </>
-        )}
-      </Listbox>
-      <Listbox value={jornada} onChange={setJornada}>
-        {({ open }) => (
-          <>
-            <Listbox.Label className="block text-sm font-medium text-gray-700">
-              Jornada de Trabajo
-            </Listbox.Label>
-            <div className="mt-1 relative">
-              <Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                <span className="block truncate">{jornada.name}</span>
-                <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                  <SelectorIcon
-                    className="h-5 w-5 text-gray-400"
-                    aria-hidden="true"
-                  />
-                </span>
-              </Listbox.Button>
-
-              <Transition
-                show={open}
-                as={Fragment}
-                leave="transition ease-in duration-100"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-              >
-                <Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-                  {jornadas.map((jornada) => (
-                    <Listbox.Option
-                      key={jornada.id}
-                      className={({ active }) =>
-                        classNames(
-                          active ? "text-white bg-indigo-600" : "text-gray-900",
-                          "cursor-default select-none relative py-2 pl-3 pr-9"
-                        )
-                      }
-                      value={jornada}
-                    >
-                      {({ selected, active }) => (
-                        <>
-                          <span
-                            className={classNames(
-                              selected ? "font-semibold" : "font-normal",
-                              "block truncate"
-                            )}
-                          >
-                            {jornada.name}
-                          </span>
-
-                          {selected ? (
-                            <span
-                              className={classNames(
-                                active ? "text-white" : "text-indigo-600",
-                                "absolute inset-y-0 right-0 flex items-center pr-4"
-                              )}
-                            >
-                              <CheckIcon
-                                className="h-5 w-5"
-                                aria-hidden="true"
-                              />
-                            </span>
-                          ) : null}
-                        </>
-                      )}
-                    </Listbox.Option>
-                  ))}
-                </Listbox.Options>
-              </Transition>
-            </div>
-          </>
-        )}
-      </Listbox>
-      <Listbox value={idioma} onChange={setIdioma}>
-        {({ open }) => (
-          <>
-            <Listbox.Label className="block text-sm font-medium text-gray-700">
-              Idiomas Requeridos
-            </Listbox.Label>
-            <div className="mt-1 relative">
-              <Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                <span className="block truncate">{idioma.name}</span>
-                <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                  <SelectorIcon
-                    className="h-5 w-5 text-gray-400"
-                    aria-hidden="true"
-                  />
-                </span>
-              </Listbox.Button>
-
-              <Transition
-                show={open}
-                as={Fragment}
-                leave="transition ease-in duration-100"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-              >
-                <Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-                  {idiomas.map((idioma) => (
-                    <Listbox.Option
-                      key={idioma.id}
-                      className={({ active }) =>
-                        classNames(
-                          active ? "text-white bg-indigo-600" : "text-gray-900",
-                          "cursor-default select-none relative py-2 pl-3 pr-9"
-                        )
-                      }
-                      value={idioma}
-                    >
-                      {({ selected, active }) => (
-                        <>
-                          <span
-                            className={classNames(
-                              selected ? "font-semibold" : "font-normal",
-                              "block truncate"
-                            )}
-                          >
-                            {idioma.name}
-                          </span>
-
-                          {selected ? (
-                            <span
-                              className={classNames(
-                                active ? "text-white" : "text-indigo-600",
-                                "absolute inset-y-0 right-0 flex items-center pr-4"
-                              )}
-                            >
-                              <CheckIcon
-                                className="h-5 w-5"
-                                aria-hidden="true"
-                              />
-                            </span>
-                          ) : null}
-                        </>
-                      )}
-                    </Listbox.Option>
-                  ))}
-                </Listbox.Options>
-              </Transition>
-            </div>
-          </>
-        )}
-      </Listbox>
-      <Listbox value={ubicacion} onChange={setUbicacion}>
-        {({ open }) => (
-          <>
-            <Listbox.Label className="block text-sm font-medium text-gray-700">
-              Ubicación donde del empleo
-            </Listbox.Label>
-            <div className="mt-1 relative">
-              <Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                <span className="block truncate">{ubicacion.name}</span>
-                <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                  <SelectorIcon
-                    className="h-5 w-5 text-gray-400"
-                    aria-hidden="true"
-                  />
-                </span>
-              </Listbox.Button>
-
-              <Transition
-                show={open}
-                as={Fragment}
-                leave="transition ease-in duration-100"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-              >
-                <Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-                  {ubicaciones.map((ubicacion) => (
-                    <Listbox.Option
-                      key={ubicacion.id}
-                      className={({ active }) =>
-                        classNames(
-                          active ? "text-white bg-indigo-600" : "text-gray-900",
-                          "cursor-default select-none relative py-2 pl-3 pr-9"
-                        )
-                      }
-                      value={ubicacion}
-                    >
-                      {({ selected, active }) => (
-                        <>
-                          <span
-                            className={classNames(
-                              selected ? "font-semibold" : "font-normal",
-                              "block truncate"
-                            )}
-                          >
-                            {ubicacion.name}
-                          </span>
-
-                          {selected ? (
-                            <span
-                              className={classNames(
-                                active ? "text-white" : "text-indigo-600",
-                                "absolute inset-y-0 right-0 flex items-center pr-4"
-                              )}
-                            >
-                              <CheckIcon
-                                className="h-5 w-5"
-                                aria-hidden="true"
-                              />
-                            </span>
-                          ) : null}
-                        </>
-                      )}
-                    </Listbox.Option>
-                  ))}
-                </Listbox.Options>
-              </Transition>
-            </div>
-          </>
-        )}
-      </Listbox>
-      <Listbox value={tecnologia} onChange={setTecnologia}>
-        {({ open }) => (
-          <>
-            <Listbox.Label className="block text-sm font-medium text-gray-700">
-              Tecnologías necesarias
-            </Listbox.Label>
-            <div className="mt-1 relative">
-              <Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                <span className="block truncate">{tecnologia.name}</span>
-                <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                  <SelectorIcon
-                    className="h-5 w-5 text-gray-400"
-                    aria-hidden="true"
-                  />
-                </span>
-              </Listbox.Button>
-
-              <Transition
-                show={open}
-                as={Fragment}
-                leave="transition ease-in duration-100"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-              >
-                <Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-                  {tecnologias.map((tecnologia) => (
-                    <Listbox.Option
-                      key={tecnologia.id}
-                      className={({ active }) =>
-                        classNames(
-                          active ? "text-white bg-indigo-600" : "text-gray-900",
-                          "cursor-default select-none relative py-2 pl-3 pr-9"
-                        )
-                      }
-                      value={tecnologia}
-                    >
-                      {({ selected, active }) => (
-                        <>
-                          <span
-                            className={classNames(
-                              selected ? "font-semibold" : "font-normal",
-                              "block truncate"
-                            )}
-                          >
-                            {tecnologia.name}
-                          </span>
-
-                          {selected ? (
-                            <span
-                              className={classNames(
-                                active ? "text-white" : "text-indigo-600",
-                                "absolute inset-y-0 right-0 flex items-center pr-4"
-                              )}
-                            >
-                              <CheckIcon
-                                className="h-5 w-5"
-                                aria-hidden="true"
-                              />
-                            </span>
-                          ) : null}
-                        </>
-                      )}
-                    </Listbox.Option>
-                  ))}
-                </Listbox.Options>
-              </Transition>
-            </div>
-          </>
-        )}
-      </Listbox>
-      <Listbox value={experiencia} onChange={setExperiencia}>
-        {({ open }) => (
-          <>
-            <Listbox.Label className="block text-sm font-medium text-gray-700">
-              Nivel de experiencia por tecnología
-            </Listbox.Label>
-            <div className="mt-1 relative">
-              <Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                <span className="block truncate">{experiencia.name}</span>
-                <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                  <SelectorIcon
-                    className="h-5 w-5 text-gray-400"
-                    aria-hidden="true"
-                  />
-                </span>
-              </Listbox.Button>
-
-              <Transition
-                show={open}
-                as={Fragment}
-                leave="transition ease-in duration-100"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-              >
-                <Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-                  {experiencias.map((experiencia) => (
-                    <Listbox.Option
-                      key={experiencia.id}
-                      className={({ active }) =>
-                        classNames(
-                          active ? "text-white bg-indigo-600" : "text-gray-900",
-                          "cursor-default select-none relative py-2 pl-3 pr-9"
-                        )
-                      }
-                      value={experiencia}
-                    >
-                      {({ selected, active }) => (
-                        <>
-                          <span
-                            className={classNames(
-                              selected ? "font-semibold" : "font-normal",
-                              "block truncate"
-                            )}
-                          >
-                            {experiencia.name}
                           </span>
 
                           {selected ? (
