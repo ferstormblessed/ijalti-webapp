@@ -1,6 +1,4 @@
-import axios from "axios";
-import Link from "next/link";
-function ProfileUser({usuarios}:any) {
+export default function ProfileUser() {
     return(
         <div className="container mx-auto my-5 p-5">
         <div className="md:flex no-wrap md:-mx-2 ">
@@ -20,9 +18,7 @@ function ProfileUser({usuarios}:any) {
                 Owner at Her Company Inc.
               </h3>
               <p className="text-sm text-gray-500 hover:text-gray-600 leading-6">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Reprehenderit, eligendi dolorum sequi illum qui unde aspernatur non
-                deserunt
+                Aqui va toda la informacion de about del usuario
               </p>
               <ul className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                 <li className="flex items-center py-3">
@@ -121,20 +117,20 @@ function ProfileUser({usuarios}:any) {
                     />
                   </svg>
                 </span>
-                <span className="tracking-wide">About</span>
+                <span className="tracking-wide">Informacion basica</span>
               </div>
               <div className="text-gray-700">
                 <div className="grid md:grid-cols-2 text-sm">
                   <div className="grid grid-cols-2">
-                    <div className="px-4 py-2 font-semibold">First Name</div>
+                    <div className="px-4 py-2 font-semibold">Nombre</div>
                     <div className="px-4 py-2">Jane</div>
                   </div>
                   <div className="grid grid-cols-2">
-                    <div className="px-4 py-2 font-semibold">Last Name</div>
+                    <div className="px-4 py-2 font-semibold">Apellido</div>
                     <div className="px-4 py-2">Doe</div>
                   </div>
                   <div className="grid grid-cols-2">
-                    <div className="px-4 py-2 font-semibold">Gender</div>
+                    <div className="px-4 py-2 font-semibold">Sexo</div>
                     <div className="px-4 py-2">Female</div>
                   </div>
                   <div className="grid grid-cols-2">
@@ -142,15 +138,15 @@ function ProfileUser({usuarios}:any) {
                     <div className="px-4 py-2">+11 998001001</div>
                   </div>
                   <div className="grid grid-cols-2">
-                    <div className="px-4 py-2 font-semibold">Current Address</div>
+                    <div className="px-4 py-2 font-semibold">Direccion</div>
                     <div className="px-4 py-2">Beech Creek, PA, Pennsylvania</div>
                   </div>
                   <div className="grid grid-cols-2">
-                    <div className="px-4 py-2 font-semibold">Permanant Address</div>
-                    <div className="px-4 py-2">Arlington Heights, IL, Illinois</div>
+                    <div className="px-4 py-2 font-semibold">RFC</div>
+                    <div className="px-4 py-2">ASDA123N3N</div>
                   </div>
                   <div className="grid grid-cols-2">
-                    <div className="px-4 py-2 font-semibold">Email.</div>
+                    <div className="px-4 py-2 font-semibold">Correo</div>
                     <div className="px-4 py-2">
                       <a className="text-blue-800" href="mailto:jane@example.com">
                         jane@example.com
@@ -158,8 +154,8 @@ function ProfileUser({usuarios}:any) {
                     </div>
                   </div>
                   <div className="grid grid-cols-2">
-                    <div className="px-4 py-2 font-semibold">Birthday</div>
-                    <div className="px-4 py-2">Feb 06, 1998</div>
+                    <div className="px-4 py-2 font-semibold">CURP</div>
+                    <div className="px-4 py-2">ASDAHJ120043M</div>
                   </div>
                 </div>
               </div>
@@ -188,7 +184,7 @@ function ProfileUser({usuarios}:any) {
                         />
                       </svg>
                     </span>
-                    <span className="tracking-wide">Experience</span>
+                    <span className="tracking-wide">Experiencia laboral</span>
                   </div>
                   <ul className="list-inside space-y-2">
                     <li>
@@ -230,17 +226,14 @@ function ProfileUser({usuarios}:any) {
                         />
                       </svg>
                     </span>
-                    <span className="tracking-wide">Education</span>
+                    <span className="tracking-wide">Curriculum</span>
                   </div>
                   <ul className="list-inside space-y-2">
                     <li>
-                      <div className="text-teal-600">Masters Degree in Oxford</div>
-                      <div className="text-gray-500 text-xs">March 2020 - Now</div>
+                      <div className="text-teal-600">Jane Doe CV</div>
+                      <div className="text-gray-500 text-xs">last updated: 30/02/2022</div>
                     </li>
-                    <li>
-                      <div className="text-teal-600">Bachelors Degreen in LPU</div>
-                      <div className="text-gray-500 text-xs">March 2020 - Now</div>
-                    </li>
+
                   </ul>
                 </div>
               </div>
@@ -249,17 +242,5 @@ function ProfileUser({usuarios}:any) {
         </div>
       </div>
     )
-};
-
-export const getServerSideProps=async (context:any)=>{
-  const{data:usuarios}=await axios.get("http://localhost:3000/api/clientes");//Endpoint
  
-
-  return {
-    props:{
-      usuarios,//Esto es un arreglo de objetos , estos objetos son mis cliente
-    },
-  };
-};
-
-export default ProfileUser;
+}
