@@ -5,20 +5,22 @@ function Listar({usuarios})
     return(
         <div>
             <h1>Lista de usuarios: </h1>
-            <div className="py-3 px-3 my-2 mx-2 rounded-lg shadow bg-gray-200 hover:bg-gray-300">
+            
                 {usuarios.map(usuarioempleado=>(
                     <Link href={`/usuarios-front/${usuarioempleado.CURP}`}key={usuarioempleado.CURP}>
+                      <div className="py-3 px-3 my-2 mx-2 rounded-lg shadow bg-gray-200 hover:bg-gray-300">
                         <a>
                             <div>
-                            <h1>{usuarioempleado.first_name}</h1>
-                            <p>{usuarioempleado.last_name}</p>
+                            <h1>{usuarioempleado.CURP}</h1>
+                            <p>{usuarioempleado.nombre}</p>
                             <p>{usuarioempleado.sexo}</p>
                             </div>
                         </a>
+                      </div>
                     </Link>
                 ))}
             </div>    
-        </div>
+
   );
 };
 

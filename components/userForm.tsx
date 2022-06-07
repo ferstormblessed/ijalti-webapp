@@ -58,24 +58,27 @@ function UserForm() {
                 visa_vigente:"",
                 pasaporte_vigente:""
     })
-
-  const handleDelete=async()=>
-    {
-        await axios.delete('/api/clientes')
-        //router.push('/')//Esto te redirecciona a tu pagina principal
-    };
-
+const[lenguajeprogramacion,setLenguajeprogramacion]=useState({
+                nombreLenguaje:"",
+                aniosPractica:0
+    })
+    
   const handleSubmit= async (e:any) =>{
             e.preventDefault();
             const res= await axios.post("/api/clientes",usuarioempleado);
+            const resLenguaje= await axios.post("/api/clientes",lenguajeprogramacion);
             console.log(res);
+            console.log(resLenguaje);
   };
 
   /*Esta funcion va a recibir informacion del input que se está typeando
     y desde ese inuput extraemos el e.target.name y el e.target.value*/
     const handleChange=({target:{name,value}}:{target:{name:any,value:any}})=>{
-
         setUsuarioempleado({...usuarioempleado,[name]:value});
+    }
+
+    const handleChangeLenguaje=({target:{name,value}}:{target:{name:any,value:any}})=>{
+        setLenguajeprogramacion({...lenguajeprogramacion,[name]:value});
     }
 
   return (
@@ -219,7 +222,8 @@ function UserForm() {
                   id="CURP"
                   autoComplete="given-name"
                   className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                onChange={handleChange}/>
+                  
+               onChange={handleChange}/>
               </div>
             </div>
 
@@ -415,13 +419,32 @@ function UserForm() {
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <input
                   type="text"
-                  name="nivelExperiencia_idNivelExp"
-                  id="nivelExperiencia_idNivelExp"
+                  name="aniosPractica"
+                  id="aniosPractica"
                   autoComplete="given-name"
                   className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                />
+                onChange={handleChangeLenguaje}/>
               </div>
             </div>
+
+            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+              <label
+                htmlFor="pastexperience"
+                className="block text-sm font-medium text-primary sm:mt-px sm:pt-2"
+              >
+                Nombre del Lenguaje de programacion
+              </label>
+              <div className="mt-1 sm:mt-0 sm:col-span-2">
+                <input
+                  type="text"
+                  name="nombreLenguaje"
+                  id="nombreLenguaje"
+                  autoComplete="given-name"
+                  className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                onChange={handleChangeLenguaje}/>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -612,14 +635,6 @@ function UserForm() {
 
       <div className="pt-5">
         <div className="flex justify-end">
-          <button
-            onClick={()=>handleDelete()}
-            type="button"
-            className="mr-4 py-2 px-4 bg-red-600 text-white rounded shadow-sm hover:bg-red-500"
-          >
-            Borrar Info
-          </button>
-
 
           <button
             onClick={()=>signOut()}

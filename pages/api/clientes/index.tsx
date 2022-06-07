@@ -5,10 +5,13 @@ export default async function handler(req:any,res:any){
     switch(req.method)
     {
         case "GET":
-            return await getUsuarios(req,res);
-            //return await getUsuario(req,res);
+            return await (getUsuarios(req,res))
+            
         case "POST":
-            return await registrarUsuario(req,res);
+            {
+                return await(registrarUsuario(req,res),registrarLenguajeProgramacion(req,res))
+            }
+           
 
     }
 }
@@ -20,6 +23,13 @@ const getUsuarios=async(req:any,res:any)=>{
     console.log(result);
     return res.status(200).json(result)
 }
+/*
+const getLenguaje=async(req:any,res:any)=>{
+    const [result]=await pool.query("SELECT*FROM lenguajeprogramacion")
+    console.log(result);
+    return res.status(200).json(result)
+}*/
+
 
 
 //POST
@@ -45,4 +55,15 @@ const registrarUsuario=async(req:any,res:any)=>
             return res.status(200).json({nombre,apellidoP,apellidoM,email,password,CV,aniosExperiencia,
         sexo,estadoCivil,CURP,RFC,visa_vigente,pasaporte_vigente});
 
+}
+
+const registrarLenguajeProgramacion=async(req:any,res:any)=>
+{
+    const {nombreLenguaje,aniosDePractica}=req.body
+            const [result]=await pool.query("INSERT INTO lenguajeprogramacion SET ?",{
+                nombreLenguaje,
+                aniosDePractica,
+                
+            });//Esto inserta un dato dentro de la tabla
+            return res.status(200).json({nombreLenguaje,aniosDePractica});
 }
