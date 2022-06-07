@@ -17,9 +17,9 @@ function ProductView({usuario})
     return(
         <div>
             <h1>{usuario.CURP}</h1>
-            <h1>{usuario.first_name}</h1>
-            <h1>{usuario.last_name}</h1>
-            <h1>{usuario.sexo}</h1>
+            <h1>{usuario.nombre}</h1>
+            <h1>{usuario.apellidoP}</h1>
+            <h1>{usuario.apellidoM}</h1>
             <button
                 onClick={()=>handleDelete(usuario.CURP)}
                 type="button"

@@ -1,4 +1,6 @@
-export default function ProfileUser() {
+import axios from "axios";
+import Link from "next/link";
+function ProfileUser({usuarios}:any) {
     return(
         <div className="container mx-auto my-5 p-5">
         <div className="md:flex no-wrap md:-mx-2 ">
@@ -247,5 +249,17 @@ export default function ProfileUser() {
         </div>
       </div>
     )
+};
+
+export const getServerSideProps=async (context:any)=>{
+  const{data:usuarios}=await axios.get("http://localhost:3000/api/clientes");//Endpoint
  
-}
+
+  return {
+    props:{
+      usuarios,//Esto es un arreglo de objetos , estos objetos son mis cliente
+    },
+  };
+};
+
+export default ProfileUser;
