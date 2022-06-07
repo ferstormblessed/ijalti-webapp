@@ -58,8 +58,9 @@ CREATE TABLE InfoAcademica(
     areaEspecialidad VARCHAR(30),
     UniEgreso VARCHAR(40)
     PRIMARY KEY (idExperiencia),
-    FOREIGN KEY (CURP) REFERENCES UsuarioEmpleado(CURP)
+    
 );
+FOREIGN KEY (CURP) REFERENCES UsuarioEmpleado(CURP)
 
 CREATE TABLE Puesto(
     idPuesto INT AUTO_INCREMENT, /*autoinc*/
