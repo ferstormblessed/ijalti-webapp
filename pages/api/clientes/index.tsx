@@ -9,7 +9,19 @@ export default async function handler(req:any,res:any){
             
         case "POST":
             {
-                return await(registrarUsuario(req,res),registrarLenguajeProgramacion(req,res))
+                if(req.query.tipo==="usuario")
+                {
+                    console.log(req.query.tipo);
+                    return await (registrarUsuario(req,res))
+                }
+                else if(req.query.tipo==="lenguaje")
+                {
+                    return await (registrarLenguajeProgramacion(req,res))
+                }
+                else if(req.query.tipo==="info")
+                {
+                    return await (registrarInfoAcademica(req,res))
+                }   
             }
            
 
@@ -23,20 +35,20 @@ const getUsuarios=async(req:any,res:any)=>{
     console.log(result);
     return res.status(200).json(result)
 }
-/*
+
 const getLenguaje=async(req:any,res:any)=>{
     const [result]=await pool.query("SELECT*FROM lenguajeprogramacion")
     console.log(result);
     return res.status(200).json(result)
-}*/
+}
 
 
 
 //POST
 const registrarUsuario=async(req:any,res:any)=>
 {
-    const {nombre,apellidoP,apellidoM,email,password,CV,aniosExperiencia,
-        sexo,estadoCivil,CURP,RFC,visa_vigente,pasaporte_vigente}=req.body
+    const {nombre,apellidoP,apellidoM,email,password,CV,
+        sexo,estadoCivil,CURP,RFC,visaVigente,pasaporteVigente}=req.body
             const [result]=await pool.query("INSERT INTO usuarioempleado SET ?",{
                 nombre,
                 apellidoP,
@@ -44,26 +56,37 @@ const registrarUsuario=async(req:any,res:any)=>
                 email,
                 password,
                 CV,
-                aniosExperiencia,
                 sexo,
                 estadoCivil,
                 CURP,
                 RFC,
-                visa_vigente,
-                pasaporte_vigente
+                visaVigente,
+                pasaporteVigente
             });//Esto inserta un dato dentro de la tabla
-            return res.status(200).json({nombre,apellidoP,apellidoM,email,password,CV,aniosExperiencia,
-        sexo,estadoCivil,CURP,RFC,visa_vigente,pasaporte_vigente});
-
+            return res.status(200).json({nombre,apellidoP,apellidoM,email,password,CV,
+        sexo,estadoCivil,CURP,RFC,visaVigente,pasaporteVigente});
 }
+
 
 const registrarLenguajeProgramacion=async(req:any,res:any)=>
 {
-    const {nombreLenguaje,aniosDePractica}=req.body
+    const {nombreLenguaje,aniosDePractica,CURP}=req.body
             const [result]=await pool.query("INSERT INTO lenguajeprogramacion SET ?",{
                 nombreLenguaje,
                 aniosDePractica,
-                
+                CURP
             });//Esto inserta un dato dentro de la tabla
-            return res.status(200).json({nombreLenguaje,aniosDePractica});
+            return res.status(200).json({nombreLenguaje,aniosDePractica,CURP});
+}
+
+const registrarInfoAcademica=async(req:any,res:any)=>
+{
+    const {tituloProfesion,areaEspecialidad,Uniegreso,CURP}=req.body
+            const [result]=await pool.query("INSERT INTO infoacademica SET ?",{
+                tituloProfesion,
+                areaEspecialidad,
+                Uniegreso,
+                CURP
+            });//Esto inserta un dato dentro de la tabla
+            return res.status(200).json({tituloProfesion,areaEspecialidad,Uniegreso,CURP});
 }

@@ -25,8 +25,10 @@ export default async function handler(req,res)
 const getCurpUsuario=async(req,res)=>
 {
     const{CURP}=req.query;
-    //const[result]=await pool.query('SELECT*FROM usuarioempleado WHERE CURP = "SABC660121"');
-    const[result]=await pool.query('SELECT*FROM usuarioempleado WHERE CURP = ?',[CURP])
+    //console.log(req);
+    const[result]=await pool.query('SELECT*FROM usuarioempleado WHERE CURP = "SABC660121"');
+    console.log(CURP);
+   // const[result]=await pool.query('SELECT*FROM usuarioempleado WHERE CURP = "'+CURP+'"');
     return res.status(200).json(result[0]);
 }
 
@@ -34,7 +36,7 @@ const getCurpUsuario=async(req,res)=>
 const deleteUsuario=async(req,res)=>
 {
     const{CURP}=req.query;
-    //const[result]=await pool.query('DELETE FROM usuarioempleado WHERE CURP = "SABC660121"');
-    const[result]=await pool.query('DELETE FROM usuarioempleado WHERE CURP = ?',[CURP]);
+    const[result]=await pool.query('DELETE FROM usuarioempleado WHERE CURP = "SABC660121"');
+    //const[result]=await pool.query('DELETE FROM usuarioempleado WHERE CURP = ?',[CURP]);
     return res.status(200).json("Usuario eliminado");
 }

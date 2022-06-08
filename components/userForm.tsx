@@ -50,37 +50,63 @@ function UserForm() {
                 email:"",
                 password:"",
                 CV:"Mi cv",
-                aniosExperiencia:0,
                 sexo:0,
                 estadoCivil:"",
                 CURP:"",
                 RFC:"",
-                visa_vigente:"",
-                pasaporte_vigente:""
+                visaVigente:"",
+                pasaporteVigente:""
     })
+
 const[lenguajeprogramacion,setLenguajeprogramacion]=useState({
                 nombreLenguaje:"",
-                aniosPractica:0
+                aniosPractica:0,
+                CURP:usuarioempleado.CURP
     })
+
+const[infoacademica,setinfoacademica]=useState({
+  tituloProfesion:"",
+  areaEspecialidad:"",
+  Uniegreso:"",
+  CURP:usuarioempleado.CURP
+})
     
   const handleSubmit= async (e:any) =>{
+
             e.preventDefault();
-            const res= await axios.post("/api/clientes",usuarioempleado);
-            const resLenguaje= await axios.post("/api/clientes",lenguajeprogramacion);
+            const res= await axios.post("/api/clientes?tipo=usuario",usuarioempleado);
+            
+            const resLenguaje= await axios.post("/api/clientes?tipo=lenguaje",lenguajeprogramacion);
+            const resInfoAcademica= await axios.post("/api/clientes?tipo=info",infoacademica);
+            
+            const Curp2=res.data.CURP;
+            console.log(Curp2);
             console.log(res);
+            /*
             console.log(resLenguaje);
+            console.log(resInfoAcademica)
+            */
   };
 
   /*Esta funcion va a recibir informacion del input que se está typeando
     y desde ese inuput extraemos el e.target.name y el e.target.value*/
     const handleChange=({target:{name,value}}:{target:{name:any,value:any}})=>{
         setUsuarioempleado({...usuarioempleado,[name]:value});
-    }
-
-    const handleChangeLenguaje=({target:{name,value}}:{target:{name:any,value:any}})=>{
         setLenguajeprogramacion({...lenguajeprogramacion,[name]:value});
+        setinfoacademica({...infoacademica,[name]:value});
     }
 
+    /*
+    const handleChange=({target:{name,value}}:{target:{name:any,value:any}})=>{
+        setLenguajeprogramacion({...lenguajeprogramacion,[name]:value});
+        
+    }
+
+    const handleChange=({target:{name,value}}:{target:{name:any,value:any}})=>{
+      setinfoacademica({...infoacademica,[name]:value});
+      
+  }
+  */
   return (
     <form onSubmit={handleSubmit} className="space-y-8 divide-y divide-gray-200">
       <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
@@ -158,16 +184,17 @@ const[lenguajeprogramacion,setLenguajeprogramacion]=useState({
               </label>
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <select
-                  id="country"
-                  name="country"
+                  id="sexo"
+                  name="sexo"
                   autoComplete="country-name"
                   className="text-primary bg-buttonsecondary max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                >
-                  <option>Elegir</option>
-                  <option>Masculino</option>
-                  <option>Femenino</option>
-                  <option>Otro</option>
-                  <option>Prefiero no especificar</option>
+                  onChange={handleChange}
+                  >
+                    <option>Elegir</option>
+                    <option>Masculino</option>
+                    <option>Femenino</option>
+                    <option>Otro</option>
+                    <option>Prefiero no especificar</option>
                 </select>
               </div>
             </div>
@@ -384,28 +411,46 @@ const[lenguajeprogramacion,setLenguajeprogramacion]=useState({
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <input
                   type="text"
-                  name="first-name"
-                  id="first-name"
+                  name="tituloProfesion"
+                  id="tituloProfesion"
                   autoComplete="given-name"
                   className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                />
+                  onChange={handleChange}/>
               </div>
             </div>
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
               <label
                 htmlFor="especiality"
                 className="block text-sm font-medium text-primary sm:mt-px sm:pt-2"
-              >
+                >
                 Área de especialidad
               </label>
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <input
                   type="text"
-                  name="idEspecialidad"
-                  id="idEspecialidad"
+                  name="areaEspecialidad"
+                  id="areaEspecialidad"
                   autoComplete="given-name"
                   className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                />
+                  onChange={handleChange}/>
+              </div>
+            </div>
+
+            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+              <label
+                htmlFor="especiality"
+                className="block text-sm font-medium text-primary sm:mt-px sm:pt-2"
+                >
+                Universidad de egreso
+              </label>
+              <div className="mt-1 sm:mt-0 sm:col-span-2">
+                <input
+                  type="text"
+                  name="Uniegreso"
+                  id="Uniegreso"
+                  autoComplete="given-name"
+                  className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                  onChange={handleChange}/>
               </div>
             </div>
 
@@ -423,7 +468,7 @@ const[lenguajeprogramacion,setLenguajeprogramacion]=useState({
                   id="aniosPractica"
                   autoComplete="given-name"
                   className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                onChange={handleChangeLenguaje}/>
+                onChange={handleChange}/>
               </div>
             </div>
 
@@ -441,7 +486,7 @@ const[lenguajeprogramacion,setLenguajeprogramacion]=useState({
                   id="nombreLenguaje"
                   autoComplete="given-name"
                   className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                onChange={handleChangeLenguaje}/>
+                onChange={handleChange}/>
               </div>
             </div>
 
@@ -583,8 +628,8 @@ const[lenguajeprogramacion,setLenguajeprogramacion]=useState({
                       <div className="mt-4 space-y-4">
                         <div className="flex items-center">
                           <input
-                            id="visa_vigente"
-                            name="visa_vigente"
+                            id="visaVigente"
+                            name="visaVigente"
                             type="date"
                             className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
                            onChange={handleChange}/>
@@ -613,8 +658,8 @@ const[lenguajeprogramacion,setLenguajeprogramacion]=useState({
                       <div className="mt-4 space-y-4">
                         <div className="flex items-center">
                           <input
-                            id="pasaporte_vigente"
-                            name="pasaporte_vigente"
+                            id="pasaporteVigente"
+                            name="pasaporteVigente"
                             type="date"
                             className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
                           onChange={handleChange}/>

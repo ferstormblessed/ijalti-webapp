@@ -32,8 +32,8 @@ function ProductView({usuario})
 export const getServerSideProps=async(context)=>{
     /*Hacemos una consulta a nuestro backedn y traemos datos */
     //Hacemos una peticion  a api clientes(Nuestro backend)  
-    const {data:usuario} =await axios.get('http://localhost:3000/api/clientes/'+context.query.CURP)
-    
+    const {data:usuario} =await axios.get('http://localhost:3000/api/clientes/'+ context.query.CURP)
+    console.log("CURP: ",context.query.CURP);
 
     return{
         props:{

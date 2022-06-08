@@ -1,4 +1,7 @@
-export default function ProfileUser() {
+import axios from "axios";
+import Link from "next/link";
+
+function ProfileUser({usuarios}:any) {
     return(
         <div className="container mx-auto my-5 p-5">
         <div className="md:flex no-wrap md:-mx-2 ">
@@ -12,7 +15,6 @@ export default function ProfileUser() {
                 />
               </div>
               <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">
-                Jane Doe
               </h1>
               <h3 className="text-gray-600 font-lg text-semibold leading-6">
                 Owner at Her Company Inc.
@@ -119,11 +121,12 @@ export default function ProfileUser() {
                 </span>
                 <span className="tracking-wide">Informacion basica</span>
               </div>
+            {usuarios.map((usuarioempleado: any)=>(
               <div className="text-gray-700">
                 <div className="grid md:grid-cols-2 text-sm">
                   <div className="grid grid-cols-2">
                     <div className="px-4 py-2 font-semibold">Nombre</div>
-                    <div className="px-4 py-2">Jane</div>
+                    <div className="px-4 py-2">{usuarioempleado.nombre}</div>
                   </div>
                   <div className="grid grid-cols-2">
                     <div className="px-4 py-2 font-semibold">Apellido</div>
@@ -153,12 +156,15 @@ export default function ProfileUser() {
                       </a>
                     </div>
                   </div>
+
                   <div className="grid grid-cols-2">
                     <div className="px-4 py-2 font-semibold">CURP</div>
                     <div className="px-4 py-2">ASDAHJ120043M</div>
+
                   </div>
                 </div>
               </div>
+            ))}
               <button className="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4">
                 Show Full Information
               </button>
@@ -244,3 +250,16 @@ export default function ProfileUser() {
     )
  
 }
+
+export const getServerSideProps=async (context:any)=>{
+  const{data:usuarios}=await axios.get("http://localhost:3000/api/clientes");//Endpoint
+ 
+  return {
+    props:{
+      usuarios,//Esto es un arreglo de objetos , estos objetos son mis cliente
+    },
+  };
+};
+
+export default ProfileUser
+

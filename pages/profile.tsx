@@ -1,5 +1,5 @@
 import Dashboard from "../components/dashboard";
-import ProfileUser from "../components/profile";
+import ProfileUser from "../components/[profile]";
 
 
 const Profile = () => {

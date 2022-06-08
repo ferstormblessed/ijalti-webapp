@@ -29,15 +29,14 @@ CREATE TABLE UsuarioEmpleado(
     apellidoP VARCHAR(40),
     apellidoM VARCHAR(40),
     email VARCHAR(40),
-    passwordUserEmpleado VARCHAR(45),
+    password VARCHAR(45),
     CV VARCHAR(45),
-    aniosExperiencia INT,
     sexo VARCHAR(40),
     estadoCivil VARCHAR(20),
     RFC VARCHAR(13),
     visaVigente DATE,
     pasaporteVigente DATE,
-    PRIMARY KEY (CURP),
+    PRIMARY KEY (CURP)
 );
 idDireccionEmpleado INT,
 FOREIGN KEY (idDireccionEmpleado) REFERENCES Direccion(idDireccion)
@@ -53,14 +52,14 @@ CREATE TABLE LenguajeProgramacion(
 
 CREATE TABLE InfoAcademica(
     idExperiencia INT AUTO_INCREMENT, /*autoinc*/
-    idUsuarioEmp VARCHAR(18),
+    CURP VARCHAR(18),
     tituloProfesion VARCHAR(30),
     areaEspecialidad VARCHAR(30),
-    UniEgreso VARCHAR(40)
-    PRIMARY KEY (idExperiencia),
-    
+    UniEgreso VARCHAR(40),
+    PRIMARY KEY (idExperiencia), 
+    FOREIGN KEY (CURP) REFERENCES UsuarioEmpleado(CURP)
 );
-FOREIGN KEY (CURP) REFERENCES UsuarioEmpleado(CURP)
+
 
 CREATE TABLE Puesto(
     idPuesto INT AUTO_INCREMENT, /*autoinc*/
