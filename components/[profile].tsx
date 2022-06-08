@@ -121,12 +121,12 @@ function ProfileUser({usuarios}:any) {
                 </span>
                 <span className="tracking-wide">Informacion basica</span>
               </div>
-            {usuarios.map((usuarioempleado: any)=>(
+           {/* {usuarios.map((usuarioempleado: any)=>(*/}
               <div className="text-gray-700">
                 <div className="grid md:grid-cols-2 text-sm">
                   <div className="grid grid-cols-2">
                     <div className="px-4 py-2 font-semibold">Nombre</div>
-                    <div className="px-4 py-2">{usuarioempleado.nombre}</div>
+                    <div className="px-4 py-2">Jane</div>
                   </div>
                   <div className="grid grid-cols-2">
                     <div className="px-4 py-2 font-semibold">Apellido</div>
@@ -164,7 +164,7 @@ function ProfileUser({usuarios}:any) {
                   </div>
                 </div>
               </div>
-            ))}
+           
               <button className="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4">
                 Show Full Information
               </button>
