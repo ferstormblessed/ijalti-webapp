@@ -42,7 +42,16 @@ function UserForm() {
       /*Este es el estado inicila , todo los valores se setean a cero
     y desde la funcion "handleChange se pasan los valores a este objeto"*/ 
 
-    
+  const[direccion,setDireccion]=useState({
+  pais:"",
+  ciudad:"",
+  estado:"",
+  calle:"",
+  cp:"",
+  numExterior:0
+})
+
+
    const[usuarioempleado,setUsuarioempleado]=useState({
                 nombre:"",
                 apellidoP:"",
@@ -55,12 +64,13 @@ function UserForm() {
                 CURP:"",
                 RFC:"",
                 visaVigente:"",
-                pasaporteVigente:""
+                pasaporteVigente:"",
+                numExterior:direccion.numExterior
     })
 
 const[lenguajeprogramacion,setLenguajeprogramacion]=useState({
                 nombreLenguaje:"",
-                aniosPractica:0,
+                aniosDePractica:0,
                 CURP:usuarioempleado.CURP
     })
 
@@ -70,30 +80,31 @@ const[infoacademica,setinfoacademica]=useState({
   Uniegreso:"",
   CURP:usuarioempleado.CURP
 })
-    
+
+
+
   const handleSubmit= async (e:any) =>{
 
             e.preventDefault();
+            const resDireccion= await axios.post("/api/clientes?tipo=direccion",direccion);
             const res= await axios.post("/api/clientes?tipo=usuario",usuarioempleado);
-            
             const resLenguaje= await axios.post("/api/clientes?tipo=lenguaje",lenguajeprogramacion);
             const resInfoAcademica= await axios.post("/api/clientes?tipo=info",infoacademica);
             
             const Curp2=res.data.CURP;
             console.log(Curp2);
             console.log(res);
-            /*
-            console.log(resLenguaje);
-            console.log(resInfoAcademica)
-            */
+
   };
 
   /*Esta funcion va a recibir informacion del input que se está typeando
     y desde ese inuput extraemos el e.target.name y el e.target.value*/
     const handleChange=({target:{name,value}}:{target:{name:any,value:any}})=>{
+        setDireccion({...direccion,[name]:value});
         setUsuarioempleado({...usuarioempleado,[name]:value});
         setLenguajeprogramacion({...lenguajeprogramacion,[name]:value});
         setinfoacademica({...infoacademica,[name]:value});
+        
     }
 
     /*
@@ -301,14 +312,15 @@ const[infoacademica,setinfoacademica]=useState({
                 htmlFor="country"
                 className="block text-sm font-medium text-primary sm:mt-px sm:pt-2"
               >
-                Country
+                Pais
               </label>
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <select
-                  id="country"
-                  name="country"
+                  id="pais"
+                  name="pais"
                   autoComplete="country-name"
                   className="text-primary bg-buttonsecondary max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                  onChange={handleChange}
                 >
                   <option>Mexico</option>
                   <option>United States</option>
@@ -322,16 +334,16 @@ const[infoacademica,setinfoacademica]=useState({
                 htmlFor="street-address"
                 className="block text-sm font-medium text-primary sm:mt-px sm:pt-2"
               >
-                Street address
+                Ciudad
               </label>
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <input
                   type="text"
-                  name="idDireccionEmpleado"
-                  id="idDireccionEmpleado"
+                  name="ciudad"
+                  id="ciudad"
                   autoComplete="street-address"
                   className="block bg-buttonsecondary max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
-                />
+               onChange={handleChange}/>
               </div>
             </div>
 
@@ -340,16 +352,16 @@ const[infoacademica,setinfoacademica]=useState({
                 htmlFor="city"
                 className="block text-sm font-medium text-primary sm:mt-px sm:pt-2"
               >
-                City
+                Estado
               </label>
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <input
                   type="text"
-                  name="city"
-                  id="city"
+                  name="estado"
+                  id="estado"
                   autoComplete="address-level2"
                   className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                />
+                onChange={handleChange}/>
               </div>
             </div>
 
@@ -358,16 +370,16 @@ const[infoacademica,setinfoacademica]=useState({
                 htmlFor="region"
                 className="block text-sm font-medium text-primary sm:mt-px sm:pt-2"
               >
-                State / Province
+                Calle
               </label>
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <input
                   type="text"
-                  name="region"
-                  id="region"
+                  name="calle"
+                  id="calle"
                   autoComplete="address-level1"
                   className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                />
+                onChange={handleChange}/>
               </div>
             </div>
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
@@ -375,18 +387,37 @@ const[infoacademica,setinfoacademica]=useState({
                 htmlFor="postal-code"
                 className="block text-sm font-medium text-primary sm:mt-px sm:pt-2"
               >
-                ZIP / Postal code
+                Codigo Postal
               </label>
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <input
                   type="text"
-                  name="postal-code"
-                  id="postal-code"
+                  name="cp"
+                  id="cp"
                   autoComplete="postal-code"
                   className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                />
+                onChange={handleChange}/>
               </div>
             </div>
+
+            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+              <label
+                htmlFor="postal-code"
+                className="block text-sm font-medium text-primary sm:mt-px sm:pt-2"
+              >
+                Numero Exterior
+              </label>
+              <div className="mt-1 sm:mt-0 sm:col-span-2">
+                <input
+                  type="text"
+                  name="numExterior"
+                  id="numExterior"
+                  autoComplete="postal-code"
+                  className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                onChange={handleChange}/>
+              </div>
+            </div>
+            
           </div>
         </div>
 
@@ -464,8 +495,8 @@ const[infoacademica,setinfoacademica]=useState({
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <input
                   type="text"
-                  name="aniosPractica"
-                  id="aniosPractica"
+                  name="aniosDePractica"
+                  id="aniosDePractica"
                   autoComplete="given-name"
                   className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                 onChange={handleChange}/>

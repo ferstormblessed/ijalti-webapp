@@ -13,14 +13,13 @@ CREATE TABLE Idioma(
 );
 
 CREATE TABLE Direccion(
-    idDireccion INT AUTO_INCREMENT, /*autoinc*/
-    calle VARCHAR(20),
-    numExterior INT,
-    cp INT,
+    pais VARCHAR(20),
     ciudad VARCHAR(20),
     estado VARCHAR(40),
-    municipio VARCHAR(40),
-    PRIMARY KEY (idDireccion)
+    calle VARCHAR(20),
+    cp INT,
+    numExterior INT,
+    PRIMARY KEY (numExterior)
 );
 
 CREATE TABLE UsuarioEmpleado(
@@ -36,10 +35,11 @@ CREATE TABLE UsuarioEmpleado(
     RFC VARCHAR(13),
     visaVigente DATE,
     pasaporteVigente DATE,
-    PRIMARY KEY (CURP)
+    numExterior INT,
+    PRIMARY KEY (CURP),
+    FOREIGN KEY (numExterior) REFERENCES Direccion(numExterior)
 );
-idDireccionEmpleado INT,
-FOREIGN KEY (idDireccionEmpleado) REFERENCES Direccion(idDireccion)
+
 
 CREATE TABLE LenguajeProgramacion(
     idLenguajeProgramacion INT AUTO_INCREMENT, /*autoinc*/
