@@ -3,23 +3,6 @@ import { useState } from "react";
 import { useSession, signIn, signOut, getSession, SessionProvider } from "next-auth/react"
 import { Router, useRouter } from "next/router";
 
-/*
-  This example requires Tailwind CSS v2.0+ 
-  
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-
 function UserForm() {
 
 
