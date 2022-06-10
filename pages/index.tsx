@@ -19,22 +19,11 @@ function Home({session}:any)
     <div className="grid h-screen bg-background">
 
       <LoginScreen />
-      {/*Nombre:{session.user.name}*/}
-      
-    {/*Listar lo que tienes en tu base de datos*/}
-      {/*Con ayuda de map , voy a recorrer todo el arreglo de productos 
-      y para cada producto que tenga voy a hacer un h1 y voy a desplegar
-      sus atributos en pantalla del front end */}
-      {/*
-      {products.map(product=>(
-        <div key={product.id}>
-          <h1>{product.name}</h1>
-          <p>{product.description}</p>
-          <p>{product.price}</p>
-        </div>
-      ))}
-
-      */}
+      <Link href="loginEmpresas">
+      <button>
+        Inicio de sesion de empresas
+        </button>
+        </Link>
 
     </div>
   );

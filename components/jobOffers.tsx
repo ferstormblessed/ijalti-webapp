@@ -56,6 +56,15 @@ const positions = [
     closeDate: '2020-01-14',
     closeDateFull: 'January 14, 2020',
   },
+  {
+    id: 7,
+    title: 'Estoy Haciendo una prueba',
+    type: 'Flexible',
+    location: 'Remote',
+    department: 'Design',
+    closeDate: '2020-01-14',
+    closeDateFull: 'January 14, 2020',
+  },
 ]
 
 export default function JobOffers() {

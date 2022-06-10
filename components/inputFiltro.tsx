@@ -4,10 +4,10 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 
 const puestos = [
-  { id: 1, name: "Tienda#1" },
-  { id: 2, name: "Tienda#2" },
-  { id: 3, name: "Tienda#3" },
-  { id: 4, name: "Tienda#4" },
+  { id: 1, name: "Design" },
+  { id: 2, name: "Engineering" },
+  { id: 3, name: "Marketing" },
+  { id: 4, name: "Cyber Security" },
   { id: 5, name: "Tienda#5" },
   { id: 6, name: "Tienda#6" },
   { id: 7, name: "Tienda#7" },
@@ -16,23 +16,15 @@ const puestos = [
   { id: 10, name: "Tienda#10" },
 ];
 const modalidades = [
-  { id: 1, name: "Modalidad#1" },
-  { id: 2, name: "Modalidad#2" },
-  { id: 3, name: "Modalidad#3" },
-  { id: 4, name: "Modalidad#4" },
-  { id: 5, name: "Modalidad#5" },
-  { id: 6, name: "Modalidad#6" },
-  { id: 7, name: "Modalidad#7" },
-  { id: 8, name: "Modalidad#8" },
-  { id: 9, name: "Modalidad#9" },
-  { id: 10, name: "Modalidad#10" },
+  { id: 1, name: "Remoto" },
+  { id: 2, name: "Presencial" },
 ];
 const areasConocimiento = [
-  { id: 1, name: "AreaDeConocimiento#1" },
-  { id: 2, name: "AreaDeConocimiento#2" },
-  { id: 3, name: "AreaDeConocimiento#3" },
-  { id: 4, name: "AreaDeConocimiento#4" },
-  { id: 5, name: "AreaDeConocimiento#5" },
+  { id: 1, name: "Back End Developer" },
+  { id: 2, name: "Front End Developer" },
+  { id: 3, name: "User Interface Designer" },
+  { id: 4, name: "Database Developer" },
+  { id: 5, name: "Project Manager" },
   { id: 6, name: "AreaDeConocimiento#6" },
   { id: 7, name: "AreaDeConocimiento#7" },
   { id: 8, name: "AreaDeConocimiento#8" },
@@ -44,16 +36,11 @@ const jornadas = [
   { id: 2, name: "Vespertina" },
 ];
 const idiomas = [
-  { id: 1, name: "Idioma#1" },
-  { id: 2, name: "Idioma#2" },
-  { id: 3, name: "Idioma#3" },
-  { id: 4, name: "Idioma#4" },
-  { id: 5, name: "Idioma#5" },
-  { id: 6, name: "Idioma#6" },
-  { id: 7, name: "Idioma#7" },
-  { id: 8, name: "Idioma#8" },
-  { id: 9, name: "Idioma#9" },
-  { id: 10, name: "Idioma#10" },
+  { id: 1, name: "Español" },
+  { id: 2, name: "English" },
+  { id: 3, name: "Deutsch" },
+  { id: 4, name: "Italiano" },
+  { id: 5, name: "Français" },
 ];
 const ubicaciones = [
   { id: 1, name: "Ubicacion#1" },
@@ -67,29 +54,9 @@ const ubicaciones = [
   { id: 9, name: "Ubicacion#9" },
   { id: 10, name: "Ubicacion#10" },
 ];
-const tecnologias = [
-  { id: 1, name: "Tecnologia#1" },
-  { id: 2, name: "Tecnologia#2" },
-  { id: 3, name: "Tecnologia#3" },
-  { id: 4, name: "Tecnologia#4" },
-  { id: 5, name: "Tecnologia#5" },
-  { id: 6, name: "Tecnologia#6" },
-  { id: 7, name: "Tecnologia#7" },
-  { id: 8, name: "Tecnologia#8" },
-  { id: 9, name: "Tecnologia#9" },
-  { id: 10, name: "Tecnologia#10" },
-];
 const Horarios = [
-  { id: 1, name: "Horario#1" },
-  { id: 2, name: "Horario#2" },
-  { id: 3, name: "Horario#3" },
-  { id: 4, name: "Horario#4" },
-  { id: 5, name: "Horario#5" },
-  { id: 6, name: "Horario#6" },
-  { id: 7, name: "Horario#7" },
-  { id: 8, name: "Horario#8" },
-  { id: 9, name: "Horario#9" },
-  { id: 10, name: "Horario#10" },
+  { id: 1, name: "Fijo" },
+  { id: 2, name: "Flexible" },
 ];
 
 function classNames(...classes: any) {
@@ -437,6 +404,76 @@ export default function InputFiltro() {
                             )}
                           >
                             {areaConocimiento.name}
+                          </span>
+
+                          {selected ? (
+                            <span
+                              className={classNames(
+                                active ? "text-white" : "text-indigo-600",
+                                "absolute inset-y-0 right-0 flex items-center pr-4"
+                              )}
+                            >
+                              <CheckIcon
+                                className="h-5 w-5"
+                                aria-hidden="true"
+                              />
+                            </span>
+                          ) : null}
+                        </>
+                      )}
+                    </Listbox.Option>
+                  ))}
+                </Listbox.Options>
+              </Transition>
+            </div>
+          </>
+        )}
+      </Listbox>
+      <Listbox value={idioma} onChange={setIdioma}>
+        {({ open }) => (
+          <>
+            <Listbox.Label className="block text-sm font-medium text-gray-700">
+              Idiomas
+            </Listbox.Label>
+            <div className="mt-1 relative">
+              <Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <span className="block truncate">{idioma.name}</span>
+                <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                  <SelectorIcon
+                    className="h-5 w-5 text-gray-400"
+                    aria-hidden="true"
+                  />
+                </span>
+              </Listbox.Button>
+
+              <Transition
+                show={open}
+                as={Fragment}
+                leave="transition ease-in duration-100"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
+              >
+                <Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+                  {idiomas.map((idioma) => (
+                    <Listbox.Option
+                      key={idioma.id}
+                      className={({ active }) =>
+                        classNames(
+                          active ? "text-white bg-indigo-600" : "text-gray-900",
+                          "cursor-default select-none relative py-2 pl-3 pr-9"
+                        )
+                      }
+                      value={idioma}
+                    >
+                      {({ selected, active }) => (
+                        <>
+                          <span
+                            className={classNames(
+                              selected ? "font-semibold" : "font-normal",
+                              "block truncate"
+                            )}
+                          >
+                            {idioma.name}
                           </span>
 
                           {selected ? (
