@@ -30,6 +30,7 @@ CREATE TABLE UsuarioEmpleado(
     email VARCHAR(40),
     password VARCHAR(45),
     CV VARCHAR(45),
+    imageData longblob,
     sexo VARCHAR(40),
     estadoCivil VARCHAR(20),
     RFC VARCHAR(13),

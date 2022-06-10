@@ -16,7 +16,7 @@ function LoginScreen() {
 
   const handleSubmit= async (e:any) =>{
             e.preventDefault();
-            await axios.get('http://localhost:3000/api/clientes/login');
+            await axios.post('http://localhost:3000/api/clientes/login',login);
   };
 
 

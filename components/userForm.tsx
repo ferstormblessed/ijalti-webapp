@@ -3,8 +3,11 @@ import { useState } from "react";
 import { useSession, signIn, signOut, getSession, SessionProvider } from "next-auth/react"
 import { Router, useRouter } from "next/router";
 
-function UserForm() {
 
+
+import * as Imagen from './imagen';
+
+function UserForm() {
 
   const router=useRouter()
   const{data:session,status}=useSession()
@@ -42,6 +45,7 @@ function UserForm() {
                 email:"",
                 password:"",
                 CV:"Mi cv",
+                imageData:"Mi foto",
                 sexo:0,
                 estadoCivil:"",
                 CURP:"",
@@ -103,6 +107,7 @@ const[infoacademica,setinfoacademica]=useState({
   */
   return (
     <form onSubmit={handleSubmit} className="space-y-8 divide-y divide-gray-200">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/javascript-canvas-to-blob/3.4.0/js/canvas-to-blob.min.js"></script>
       <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
         <div>
           <div>
@@ -588,8 +593,8 @@ const[infoacademica,setinfoacademica]=useState({
                         >
                           <span>Upload a file</span>
                           <input
-                            id="file-upload"
-                            name="file-upload"
+                            id="imageData"
+                            name="imageData"
                             type="file"
                             className="sr-only"
                           />
@@ -710,9 +715,7 @@ const[infoacademica,setinfoacademica]=useState({
           >
             Registrarse
           </button>
-
-
-
+          
         </div>
       </div>
       <div>
