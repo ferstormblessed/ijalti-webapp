@@ -4,9 +4,14 @@ import Logo from "./IJALTI.png";
 import { signIn } from "next-auth/react";
 import axios from "axios";
 import { useState } from "react";
+import { Router, useRouter } from "next/router";
 
 
 function LoginScreen() {
+  
+const router=useRouter()
+
+
 
   const[login,setLogin]=useState({
     password:"",
@@ -16,7 +21,14 @@ function LoginScreen() {
 
   const handleSubmit= async (e:any) =>{
             e.preventDefault();
-            await axios.post('http://localhost:3000/api/clientes/login',login);
+            const result=await axios.post('http://localhost:3000/api/clientes/login',login);
+            console.log(result);
+            if(result!=undefined)
+            {
+              
+              //<Link href={`profile/${result}`}key={result}></Link>
+              //router.push("/profile")
+            }
   };
 
 
@@ -119,7 +131,6 @@ function LoginScreen() {
               </div>
 
               <div>
-                <Link href="/dashboard">
                   <button
                     type="submit"
                     className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-buttonprimary hover:bg-buttonsecondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary"
@@ -132,7 +143,6 @@ function LoginScreen() {
                     </span>
                     Iniciar sesión
                   </button>
-                </Link>
               </div>
             </form>
           </div>
@@ -141,4 +151,22 @@ function LoginScreen() {
   );
 }
 
+/*
+export const getServerSideProps=async (context:any)=>{
+  const router=useRouter()
+  //const{data:session,status}=useSession()
+
+  if(status!=="loading"&& status==="authenticated")
+  {
+    console.log(session?.user?.email)
+  }
+  /*
+  if(status==="unauthenticated")
+  {
+    console.log("No hay usuario")
+    router.push("/")
+  }
+  
+};
+*/
 export default LoginScreen

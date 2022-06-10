@@ -1,4 +1,3 @@
-import { data } from "autoprefixer";
 import {pool} from "../../../config/db.jsx"
 export default async function handler(req,res){
     /*Consultamos la base de datos y devolvemos un objeto al ususario*/
@@ -13,12 +12,13 @@ export default async function handler(req,res){
 
 const Verifica=async(req,res)=>
 {
-    const {data:login}=req.body
-    console.log(login.email);
-    console.log(login.password);
+    console.log(typeof req);
     
-            const [result]=await pool.query('SELECT CURP FROM usuarioempleado WHERE email="'+login.data+'" and usuarioempleado.password="'+login.password+'"');
-            console,log("result: ",result);
-            return res.status(200).json({email,password});
+    const mail=req.body.email
+    const pass=req.body.password
+    console.log("req.body.mail:",mail);
+    console.log("req.body.password:",pass);
+    const [result]=await pool.query('SELECT CURP FROM usuarioempleado WHERE email="'+mail+'" and usuarioempleado.password="'+pass+'"');
+    console.log("result: ",result);
+    return res.status(200).json({result});
 }
-

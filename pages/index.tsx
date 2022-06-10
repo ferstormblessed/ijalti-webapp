@@ -19,6 +19,7 @@ function Home({session}:any)
     <div className="grid h-screen bg-background">
 
       <LoginScreen />
+
       <Link href="loginEmpresas">
       <button>
         Inicio de sesion de empresas

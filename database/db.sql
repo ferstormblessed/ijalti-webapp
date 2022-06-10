@@ -2,15 +2,6 @@ DROP DATABASE IF EXISTS ijalti;
 CREATE DATABASE ijalti;
 USE ijalti;
 
-CREATE TABLE Idioma(
-    idIdioma INT AUTO_INCREMENT, /*autoinc*/
-    idPuesto INT,
-    CURP VARCHAR(18),
-    lengua VARCHAR(30)
-    PRIMARY KEY (idIdioma),
-    FOREIGN KEY (CURP) REFERENCES UsuarioEmpleado(CURP),
-    FOREIGN KEY (idPuesto) REFERENCES Puesto(idPuesto)
-);
 
 CREATE TABLE Direccion(
     pais VARCHAR(20),
@@ -62,32 +53,11 @@ CREATE TABLE InfoAcademica(
 );
 
 
-CREATE TABLE Puesto(
-    idPuesto INT AUTO_INCREMENT, /*autoinc*/
-    idUsuarioEmpresaCreador VARCHAR(18),
-    idEmpresa INT,
-    idDireccionPuesto INT,
-    nombrePuesto VARCHAR(40),
-    modalidadTrabajo VARCHAR(40),
-    tipoHorario VARCHAR(40),
-    jornadaDeTrabajo INT,
-    areaConocimiento VARCHAR(40)
-    PRIMARY KEY (idPuesto),
-    FOREIGN KEY (idUsuarioEmpresaCreador) REFERENCES UsuarioEmpresa(idUsuarioEmpresa),
-    FOREIGN KEY (idEmpresa) REFERENCES Empresa(idEmpresa),
-    FOREIGN KEY (idDireccionPuesto) REFERENCES Direccion(idDireccion)
-);
 
-CREATE TABLE Aplicacion(
-    idUsuarioAplicante VARCHAR(18),
-    idPuestoAplicado INT,
-    estatusAplicacion BOOLEAN,
-    fechaSolicitud DATE
-    PRIMARY KEY (idUsuarioAplicante),
-    PRIMARY KEY (idPuestoAplicado),
-    FOREIGN KEY (idUsuarioAplicante) REFERENCES UsuarioEmpleado(CURP),
-    FOREIGN KEY (idPuestoAplicado) REFERENCES Puesto(idPuesto)
-);
+
+
+
+
 
 CREATE TABLE Empresa(
     idEmpresa INT AUTO_INCREMENT, /*autoinc*/
@@ -111,4 +81,54 @@ CREATE TABLE UsuarioEmpresa(
     PRIMARY KEY (idUsuarioEmpresa),
     PRIMARY KEY (idEmpresa),
     FOREIGN KEY (idEmpresa) REFERENCES Empresa(idEmpresa)
+);
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE Puesto(
+    idPuesto INT AUTO_INCREMENT, /*autoinc*/
+    idUsuarioEmpresaCreador VARCHAR(18),
+    idEmpresa INT,
+    idDireccionPuesto INT,
+    nombrePuesto VARCHAR(40),
+    modalidadTrabajo VARCHAR(40),
+    tipoHorario VARCHAR(40),
+    jornadaDeTrabajo INT,
+    areaConocimiento VARCHAR(40)
+    PRIMARY KEY (idPuesto),
+    FOREIGN KEY (idUsuarioEmpresaCreador) REFERENCES UsuarioEmpresa(idUsuarioEmpresa),
+    FOREIGN KEY (idEmpresa) REFERENCES Empresa(idEmpresa),
+    FOREIGN KEY (idDireccionPuesto) REFERENCES Direccion(idDireccion)
+);
+
+
+
+CREATE TABLE Idioma(
+    idIdioma INT AUTO_INCREMENT, /*autoinc*/
+    idPuesto INT,
+    CURP VARCHAR(18),
+    lengua VARCHAR(30)
+    PRIMARY KEY (idIdioma),
+    FOREIGN KEY (CURP) REFERENCES UsuarioEmpleado(CURP),
+    FOREIGN KEY (idPuesto) REFERENCES Puesto(idPuesto)
+);
+
+
+CREATE TABLE Aplicacion(
+    idUsuarioAplicante VARCHAR(18),
+    idPuestoAplicado INT,
+    estatusAplicacion BOOLEAN,
+    fechaSolicitud DATE
+    PRIMARY KEY (idUsuarioAplicante),
+    PRIMARY KEY (idPuestoAplicado),
+    FOREIGN KEY (idUsuarioAplicante) REFERENCES UsuarioEmpleado(CURP),
+    FOREIGN KEY (idPuestoAplicado) REFERENCES Puesto(idPuesto)
 );
