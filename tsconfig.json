@@ -16,6 +16,6 @@
     "incremental": true
     
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/hello.tsx", "config/db.jsx", "components/userForm.js", "pages/index.tsx", "pages/api/clientes/index.js", "components/[profile].js", "components/[profile].js", "components/profile.js", "components/profile.js", "components/layouts/login.js", "pages/profile/[profile].js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/hello.tsx", "config/db.jsx", "components/userForm.js", "pages/index.tsx", "pages/api/clientes/index.js", "components/[profile].js", "components/[profile].js", "components/profile.js", "components/profile.js", "components/layouts/login.tsx", "pages/profile/[profile].js"],
   "exclude": ["node_modules"]
 }

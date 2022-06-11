@@ -38,72 +38,12 @@ function ProfileUser({usuarioPersonal}:any) {
                 </li>
               </ul>
             </div>
-    
             <div className="my-4"></div>
-    
             <div className="bg-white p-3 hover:shadow">
-              <div className="flex items-center space-x-3 font-semibold text-gray-900 text-xl leading-8">
-                <span className="text-green-500">
-                  <svg
-                    className="h-5 fill-current"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-
-                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                    />
-                  </svg>
-                </span>
-                <span>Similar Profiles</span>
-              </div>
               <div className="grid grid-cols-3">
-                <div className="text-center my-2">
-                  <img
-                    className="h-16 w-16 rounded-full mx-auto"
-                    src="https://cdn.australianageingagenda.com.au/wp-content/uploads/2015/06/28085920/Phil-Beckett-2-e1435107243361.jpg"
-                    alt=""
-                  />
-                  <a href="#" className="text-main-color">
-                    Kojstantin
-                  </a>
-                </div>
-                <div className="text-center my-2">
-                  <img
-                    className="h-16 w-16 rounded-full mx-auto"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
-                  />
-                  <a href="#" className="text-main-color">
-                    James
-                  </a>
-                </div>
-                <div className="text-center my-2">
-                  <img
-                    className="h-16 w-16 rounded-full mx-auto"
-                    src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-112.jpg"
-                    alt=""
-                  />
-                  <a href="#" className="text-main-color">
-                    Natie
-                  </a>
-                </div>
-                <div className="text-center my-2">
-                  <img
-                    className="h-16 w-16 rounded-full mx-auto"
-                    src="https://bucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com/public/images/f04b52da-12f2-449f-b90c-5e4d5e2b1469_361x361.png"
-                    alt=""
-                  />
-                  <a href="#" className="text-main-color">
-                    Casey
-                  </a>
-                </div>
               </div>
             </div>
           </div>
-    
           <div className="w-full md:w-9/12 mx-2 h-64">
             <div className="bg-white p-3 shadow-sm rounded-sm">
               <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
@@ -124,6 +64,19 @@ function ProfileUser({usuarioPersonal}:any) {
               </div>
               <div className="text-gray-700">
                 <div className="grid md:grid-cols-2 text-sm">
+
+                  <div className="grid grid-cols-2">
+                    <div className="px-4 py-2 font-semibold">Profesion</div>
+                    <div className="px-4 py-2">{usuarioPersonal.tituloProfesion}</div>
+                  </div>
+                  <div className="grid grid-cols-2">
+                    <div className="px-4 py-2 font-semibold">Area de especialidad</div>
+                    <div className="px-4 py-2">{usuarioPersonal.areaEspecialidad}</div>
+                  </div>
+                   <div className="grid grid-cols-2">
+                    <div className="px-4 py-2 font-semibold">Universidad de egreso</div>
+                    <div className="px-4 py-2">{usuarioPersonal.UniEgreso}</div>
+                  </div>
                   <div className="grid grid-cols-2">
                     <div className="px-4 py-2 font-semibold">Nombre</div>
                     <div className="px-4 py-2">{usuarioPersonal.nombre}</div>
@@ -164,10 +117,6 @@ function ProfileUser({usuarioPersonal}:any) {
                   </div>
                 </div>
               </div>
-           
-              <button className="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4">
-                Show Full Information
-              </button>
             </div>
     
             <div className="my-4"></div>
@@ -253,7 +202,7 @@ function ProfileUser({usuarioPersonal}:any) {
 
 export const getServerSideProps=async (context:any)=>{
   console.log("context.query.id(Componente): ",context.query.profile);
-  const {data:usuarioPersonal} =await axios.get('http://localhost:3000/api/clientes/'+ context.query.profile+"?tipo?=personal")
+  const {data:usuarioPersonal} =await axios.get('http://localhost:3000/api/clientes/'+ context.query.profile)
  
   return {
     props:{

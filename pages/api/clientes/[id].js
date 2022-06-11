@@ -27,7 +27,9 @@ const getCurpUsuario=async(req,res)=>
     const CURP=req.query.id
     //const[result]=await pool.query('SELECT*FROM usuarioempleado WHERE CURP = "SABC660121"');
     //console.log(CURP);
-    const[result]=await pool.query('SELECT*FROM usuarioempleado WHERE CURP = "'+CURP+'"');
+    //const[result]=await pool.query('SELECT*FROM usuarioempleado WHERE CURP = "'+CURP+'"');
+    //const[result]=await pool.query('SELECT *FROM usuarioempleado INNER JOIN infoacademica WHERE usuarioempleado.CURP="'+CURP+'"');
+    const[result]=await pool.query('SELECT *FROM ((usuarioempleado INNER JOIN infoacademica on usuarioempleado.CURP="'+CURP+'") INNER JOIN lenguajeprogramacion on usuarioempleado.CURP="'+CURP+'")');
     return res.status(200).json(result[0]);
 }
 
