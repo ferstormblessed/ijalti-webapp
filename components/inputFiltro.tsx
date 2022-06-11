@@ -3,60 +3,45 @@ import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 
+
 const puestos = [
-  { id: 1, name: "Design" },
-  { id: 2, name: "Engineering" },
-  { id: 3, name: "Marketing" },
-  { id: 4, name: "Cyber Security" },
-  { id: 5, name: "Tienda#5" },
-  { id: 6, name: "Tienda#6" },
-  { id: 7, name: "Tienda#7" },
-  { id: 8, name: "Tienda#8" },
-  { id: 9, name: "Tienda#9" },
-  { id: 10, name: "Tienda#10" },
+  { id: 1, name: "Puesto"},
+  { id: 2, name: "Design" },
+  { id: 3, name: "Engineering" },
+  { id: 4, name: "Marketing" },
+  { id: 5, name: "Cyber Seguridad" },
 ];
 const modalidades = [
-  { id: 1, name: "Remoto" },
-  { id: 2, name: "Presencial" },
+  { id: 1, name: "Modalidad" },
+  { id: 2, name: "Remoto" },
+  { id: 3, name: "Presencial" },
 ];
 const areasConocimiento = [
-  { id: 1, name: "Back End Developer" },
-  { id: 2, name: "Front End Developer" },
-  { id: 3, name: "User Interface Designer" },
-  { id: 4, name: "Database Developer" },
-  { id: 5, name: "Project Manager" },
-  { id: 6, name: "AreaDeConocimiento#6" },
-  { id: 7, name: "AreaDeConocimiento#7" },
-  { id: 8, name: "AreaDeConocimiento#8" },
-  { id: 9, name: "AreaDeConocimiento#9" },
-  { id: 10, name: "AreaDeConocimiento10#" },
+  { id: 1, name: "Area de conocimiento" },
+  { id: 2, name: "Back End Developer" },
+  { id: 3, name: "Front End Developer" },
+  { id: 4, name: "User Interface Designer" },
+  { id: 5, name: "Database Developer" },
+  { id: 6, name: "Project Manager" }
 ];
 const jornadas = [
-  { id: 1, name: "Matutina" },
-  { id: 2, name: "Vespertina" },
+  { id: 1, name: "Jornada" },
+  { id: 2, name: "Matutina" },
+  { id: 3, name: "Vespertina" },
 ];
 const idiomas = [
-  { id: 1, name: "Español" },
-  { id: 2, name: "English" },
-  { id: 3, name: "Deutsch" },
-  { id: 4, name: "Italiano" },
-  { id: 5, name: "Français" },
+  { id: 1, name: "Idioma" },
+  { id: 2, name: "Español" },
+  { id: 3, name: "English" },
+  { id: 4, name: "Deutsch" },
+  { id: 5, name: "Italiano" },
+  { id: 6, name: "Français" },
 ];
-const ubicaciones = [
-  { id: 1, name: "Ubicacion#1" },
-  { id: 2, name: "Ubicacion#2" },
-  { id: 3, name: "Ubicacion#3" },
-  { id: 4, name: "Ubicacion#4" },
-  { id: 5, name: "Ubicacion#5" },
-  { id: 6, name: "Ubicacion#6" },
-  { id: 7, name: "Ubicacion#7" },
-  { id: 8, name: "Ubicacion#8" },
-  { id: 9, name: "Ubicacion#9" },
-  { id: 10, name: "Ubicacion#10" },
-];
+
 const Horarios = [
-  { id: 1, name: "Fijo" },
-  { id: 2, name: "Flexible" },
+  { id: 1, name: "Horario" },
+  { id: 2, name: "Fijo" },
+  { id: 3, name: "Flexible" },
 ];
 
 function classNames(...classes: any) {
@@ -66,16 +51,10 @@ function classNames(...classes: any) {
 export default function InputFiltro() {
   const [puesto, setPuesto] = useState(puestos[0]);
   const [modalidad, setModalidad] = useState(modalidades[0]);
-
   const [jornada, setJornada] = useState(jornadas[0]);
   const [horario, setHorario] = useState(Horarios[0]);
-
   const [idioma, setIdioma] = useState(idiomas[0]);
-  const [direccion, setDireccion] = useState(ubicaciones[0]);
-
-  const [areaConocimiento, setAreaConocimiento] = useState(
-    areasConocimiento[0]
-  );
+  const [areaConocimiento, setAreaConocimiento] = useState(areasConocimiento[0]);
 
   return (
     <div>
@@ -289,7 +268,7 @@ export default function InputFiltro() {
           </>
         )}
       </Listbox>
-      <Listbox value={jornada} onChange={setPuesto}>
+      <Listbox value={jornada} onChange={setJornada}>
         {({ open }) => (
           <>
             <Listbox.Label className="block text-sm font-medium text-gray-700">

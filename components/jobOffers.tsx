@@ -1,73 +1,82 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { CalendarIcon, LocationMarkerIcon, UsersIcon } from '@heroicons/react/solid'
+import { CalendarIcon, LocationMarkerIcon, UsersIcon,ClockIcon} from '@heroicons/react/solid';
+import InputFiltro from "./inputFiltro";
 
 const positions = [
   {
     id: 1,
-    title: 'Back End Developer',
-    type: 'Full-time',
-    location: 'Remote',
-    department: 'Engineering',
-    closeDate: '2020-01-07',
-    closeDateFull: 'January 7, 2020',
+    title: 'Back End Developer',        // puesto
+    type: 'Fijo',                       // horario
+    location: 'Remote',                 // modalidad
+    department: 'Engineering',          // Area de conocimiento                  
+    jornada: 'Matutina',                // jornada
+    idioma: 'English'                    // idioma
   },
   {
     id: 2,
     title: 'Front End Developer',
-    type: 'Full-time',
+    type: 'Flexible',
     location: 'Remote',
     department: 'Engineering',
-    closeDate: '2020-01-07',
-    closeDateFull: 'January 7, 2020',
+    jornada: 'Matutina',              
+    idioma: 'English'
   },
   {
     id: 3,
     title: 'User Interface Designer',
-    type: 'Full-time',
+    type: 'Fijo',
     location: 'Remote',
-    department: 'Design',
-    closeDate: '2020-01-14',
-    closeDateFull: 'January 14, 2020',
+    department: 'Design',               
+    jornada: 'Matutina',                
+    idioma: 'Deutsch' 
   },
   {
     id: 4,
     title: 'User Interface Designer',
-    type: 'Full-time',
+    type: 'Fijo',
     location: 'Remote',
-    department: 'Design',
-    closeDate: '2020-01-14',
-    closeDateFull: 'January 14, 2020',
+    department: 'Design',               
+    jornada: 'Matutina',                
+    idioma: 'Italiano' 
   },
   {
     id: 5,
     title: 'User Interface Designer',
-    type: 'Full-time',
+    type: 'Flexible',
     location: 'Remote',
-    department: 'Design',
-    closeDate: '2020-01-14',
-    closeDateFull: 'January 14, 2020',
+    department: 'Design',                   
+    jornada: 'Matutina',                
+    idioma: 'Français' 
   },
   {
     id: 6,
     title: 'User Interface Designer',
-    type: 'Full-time',
+    type: 'Fijo',
     location: 'Remote',
-    department: 'Design',
-    closeDate: '2020-01-14',
-    closeDateFull: 'January 14, 2020',
+    department: 'Design',              
+    jornada: 'Matutina',                
+    idioma: 'English' 
   },
   {
     id: 7,
     title: 'Estoy Haciendo una prueba',
     type: 'Flexible',
     location: 'Remote',
-    department: 'Design',
-    closeDate: '2020-01-14',
-    closeDateFull: 'January 14, 2020',
+    department: 'Design',                  
+    jornada: 'Vespertina',                
+    idioma: 'Español' 
   },
 ]
 
+const filtro = ()=>{
+  
+}
+
 export default function JobOffers() {
+
+
+  //aqui
+
   return (
     <div className="bg-white shadow overflow-hidden sm:rounded-md">
       <ul role="list" className="divide-y divide-gray-200">
@@ -78,8 +87,11 @@ export default function JobOffers() {
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-medium text-indigo-600 truncate">{position.title}</p>
                   <div className="ml-2 flex-shrink-0 flex">
-                    <p className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                    <p className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
                       {position.type}
+                    </p>
+                    <p className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${position.idioma ==="Français" && 'bg-blue-100 text-blue-800'} ${position.idioma ==="Italiano" && 'bg-green-100 text-green-800'} ${position.idioma ==="Español" && 'bg-yellow-100 text-yellow-800'} ${position.idioma ==="English" && 'bg-purple-100 text-purple-800'} ${position.idioma ==="Deutsch" && 'bg-red-100 text-red-800'}`}>
+                      {position.idioma}
                     </p>
                   </div>
                 </div>
@@ -93,11 +105,9 @@ export default function JobOffers() {
                       <LocationMarkerIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
                       {position.location}
                     </p>
-                  </div>
-                  <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
-                    <CalendarIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
-                    <p>
-                      Closing on <time dateTime={position.closeDate}>{position.closeDateFull}</time>
+                    <p className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
+                      <ClockIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
+                      {position.jornada}
                     </p>
                   </div>
                 </div>
