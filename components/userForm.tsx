@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useSession, signIn, signOut, getSession, SessionProvider } from "next-auth/react"
 import { Router, useRouter } from "next/router";
-
+import Link from "next/link";
 function UserForm() {
 
   const router=useRouter()
@@ -23,7 +23,7 @@ function UserForm() {
 
       /*Este es el estado inicila , todo los valores se setean a cero
     y desde la funcion "handleChange se pasan los valores a este objeto"*/ 
-
+/*
   const[direccion,setDireccion]=useState({
   pais:"",
   ciudad:"",
@@ -32,6 +32,7 @@ function UserForm() {
   cp:"",
   numExterior:0
 })
+*/
 
 
    const[usuarioempleado,setUsuarioempleado]=useState({
@@ -48,12 +49,18 @@ function UserForm() {
                 RFC:"",
                 visaVigente:"",
                 pasaporteVigente:"",
-                numExterior:direccion.numExterior
+                pais:"",
+                ciudad:"",
+                estado:"",
+                calle:"",
+                cp:"",
+                numExterior:0,
+                about:""
     })
 
 const[lenguajeprogramacion,setLenguajeprogramacion]=useState({
                 nombreLenguaje:"",
-                aniosDePractica:0,
+                aniosDePractica:"",
                 CURP:usuarioempleado.CURP
     })
 
@@ -69,11 +76,12 @@ const[infoacademica,setinfoacademica]=useState({
   const handleSubmit= async (e:any) =>{
 
             e.preventDefault();
-            const resDireccion= await axios.post("/api/clientes?tipo=direccion",direccion);
+            //const resDireccion= await axios.post("/api/clientes?tipo=direccion",direccion);
             const res= await axios.post("/api/clientes?tipo=usuario",usuarioempleado);
             const resLenguaje= await axios.post("/api/clientes?tipo=lenguaje",lenguajeprogramacion);
             const resInfoAcademica= await axios.post("/api/clientes?tipo=info",infoacademica);
-            
+            //<Link href="/"></Link>
+            router.push("/")
             const Curp2=res.data.CURP;
             console.log(Curp2);
             console.log(res);
@@ -83,7 +91,7 @@ const[infoacademica,setinfoacademica]=useState({
   /*Esta funcion va a recibir informacion del input que se está typeando
     y desde ese inuput extraemos el e.target.name y el e.target.value*/
     const handleChange=({target:{name,value}}:{target:{name:any,value:any}})=>{
-        setDireccion({...direccion,[name]:value});
+        //setDireccion({...direccion,[name]:value});
         setUsuarioempleado({...usuarioempleado,[name]:value});
         setLenguajeprogramacion({...lenguajeprogramacion,[name]:value});
         setinfoacademica({...infoacademica,[name]:value});
@@ -469,30 +477,14 @@ const[infoacademica,setinfoacademica]=useState({
               </div>
             </div>
 
-            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-              <label
-                htmlFor="pastexperience"
-                className="block text-sm font-medium text-primary sm:mt-px sm:pt-2"
-              >
-                Experiencia laboral
-              </label>
-              <div className="mt-1 sm:mt-0 sm:col-span-2">
-                <input
-                  type="text"
-                  name="aniosDePractica"
-                  id="aniosDePractica"
-                  autoComplete="given-name"
-                  className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                onChange={handleChange}/>
-              </div>
-            </div>
+            
 
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
               <label
                 htmlFor="pastexperience"
                 className="block text-sm font-medium text-primary sm:mt-px sm:pt-2"
               >
-                Nombre del Lenguaje de programacion
+                Tecnologia con experiencia
               </label>
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <input
@@ -502,6 +494,27 @@ const[infoacademica,setinfoacademica]=useState({
                   autoComplete="given-name"
                   className="max-w-lg bg-buttonsecondary block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                 onChange={handleChange}/>
+              </div>
+            </div>
+            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+              <label
+                htmlFor="country"
+                className="block text-sm font-medium text-primary sm:mt-px sm:pt-2"
+              >
+                Nivel de experiencia
+              </label>
+              <div className="mt-1 sm:mt-0 sm:col-span-2">
+                <select
+                  id="aniosDePractica"
+                  name="aniosDePractica"
+                  autoComplete="country-name"
+                  className="text-primary bg-buttonsecondary max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                  onChange={handleChange}
+                >
+                  <option>Principiante</option>
+                  <option>Intermedio</option>
+                  <option>Experto</option>
+                </select>
               </div>
             </div>
 
@@ -619,7 +632,7 @@ const[infoacademica,setinfoacademica]=useState({
                   rows={3}
                   className="max-w-lg bg-buttonsecondary shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md"
                   defaultValue={""}
-                />
+                onChange={handleChange}/>
                 <p className="mt-2 text-sm text-primary">
                   Cuentanos un poco sobre tu experiencia en otros trabajos o tus
                   proyectos
@@ -703,11 +716,10 @@ const[infoacademica,setinfoacademica]=useState({
           >
             Cancelar
           </button>
-
-
           <button
             type="submit"
             className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-buttonsecondary bg-buttonprimary hover:bg-buttonsecondary hover:text-buttonprimary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+
           >
             Registrarse
           </button>

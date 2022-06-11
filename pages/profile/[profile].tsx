@@ -18,23 +18,29 @@ function ProfileUser({usuarioPersonal}:any) {
               <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">
               </h1>
               <h3 className="text-gray-600 font-lg text-semibold leading-6">
-                Owner at Her Company Inc.
+                {usuarioPersonal.tituloProfesion}
               </h3>
               <p className="text-sm text-gray-500 hover:text-gray-600 leading-6">
-                Aqui va toda la informacion de about del usuarioPersonal
+                {usuarioPersonal.about}
               </p>
               <ul className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                 <li className="flex items-center py-3">
-                  <span>Status</span>
+                  <span>Vigencia de Visa:</span>
                   <span className="ml-auto">
                     <span className="bg-green-500 py-1 px-2 rounded text-white text-sm">
-                      Active
+                      {usuarioPersonal.visaVigente}
+                      
                     </span>
                   </span>
                 </li>
                 <li className="flex items-center py-3">
-                  <span>Member since</span>
-                  <span className="ml-auto">Nov 07, 2016</span>
+                  <span>Vigencia de Pasaporte:</span>
+                  <span className="ml-auto">
+                    <span className="bg-green-500 py-1 px-2 rounded text-white text-sm">
+                     {usuarioPersonal.pasaporteVigente}
+                      
+                    </span>
+                  </span>
                 </li>
               </ul>
             </div>
@@ -90,14 +96,6 @@ function ProfileUser({usuarioPersonal}:any) {
                     <div className="px-4 py-2">{usuarioPersonal.sexo}</div>
                   </div>
                   <div className="grid grid-cols-2">
-                    <div className="px-4 py-2 font-semibold">Contact No.</div>
-                    <div className="px-4 py-2">+11 998001001</div>
-                  </div>
-                  <div className="grid grid-cols-2">
-                    <div className="px-4 py-2 font-semibold">Direccion</div>
-                    <div className="px-4 py-2">Beech Creek, PA, Pennsylvania</div>
-                  </div>
-                  <div className="grid grid-cols-2">
                     <div className="px-4 py-2 font-semibold">RFC</div>
                     <div className="px-4 py-2">{usuarioPersonal.RFC}</div>
                   </div>
@@ -139,24 +137,16 @@ function ProfileUser({usuarioPersonal}:any) {
                         />
                       </svg>
                     </span>
-                    <span className="tracking-wide">Experiencia laboral</span>
+                    <span className="tracking-wide">Habilidades</span>
                   </div>
                   <ul className="list-inside space-y-2">
                     <li>
-                      <div className="text-teal-600">Owner at Her Company Inc.</div>
-                      <div className="text-gray-500 text-xs">March 2020 - Now</div>
+                      <div className="text-teal-600">Area de especialidad.</div>
+                      <div className="text-gray-500 text-xs">{usuarioPersonal.areaEspecialidad}</div>
                     </li>
                     <li>
-                      <div className="text-teal-600">Owner at Her Company Inc.</div>
-                      <div className="text-gray-500 text-xs">March 2020 - Now</div>
-                    </li>
-                    <li>
-                      <div className="text-teal-600">Owner at Her Company Inc.</div>
-                      <div className="text-gray-500 text-xs">March 2020 - Now</div>
-                    </li>
-                    <li>
-                      <div className="text-teal-600">Owner at Her Company Inc.</div>
-                      <div className="text-gray-500 text-xs">March 2020 - Now</div>
+                      <div className="text-teal-600">Tecnología con experiencia.</div>
+                      <div className="text-gray-500 text-xs">{usuarioPersonal.nombreLenguaje}{"   |      Nivel: "}{usuarioPersonal.aniosDePractica}</div>
                     </li>
                   </ul>
                 </div>
@@ -181,12 +171,11 @@ function ProfileUser({usuarioPersonal}:any) {
                         />
                       </svg>
                     </span>
-                    <span className="tracking-wide">Curriculum</span>
+                    <span className="tracking-wide">Curriculo</span>
                   </div>
                   <ul className="list-inside space-y-2">
                     <li>
-                      <div className="text-teal-600">Jane Doe CV</div>
-                      <div className="text-gray-500 text-xs">last updated: 30/02/2022</div>
+                      <div className="text-teal-600">{usuarioPersonal.nombre}{" "}{usuarioPersonal.apellidoP}{" "}CV</div>
                     </li>
 
                   </ul>
