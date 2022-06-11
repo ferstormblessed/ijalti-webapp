@@ -2,10 +2,8 @@ import Dashboard from "../../components/dashboard";
 import UserForm from "../../components/userForm";
 const DashboardScreen = () => {
     return (
-      <div>
-        <Dashboard>
+      <div className="p-2">
           <UserForm/>
-        </Dashboard>
       </div>
     );
   };

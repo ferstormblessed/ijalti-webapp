@@ -22,10 +22,12 @@ export default async function handler(req,res){
                 {
                     return await (registrarInfoAcademica(req,res))
                 }
+                /*
                 else if(req.query.tipo==="direccion")
                 {
                     return await (registrarDireccion(req,res))
                 }      
+                */
             }
            
 
@@ -49,6 +51,7 @@ const getLenguaje=async(req,res)=>{
 
 
 //POST
+/*
 const registrarDireccion=async(req,res)=>
 {
     const {pais,ciudad,estado,calle,cp,numExterior}=req.body
@@ -62,12 +65,12 @@ const registrarDireccion=async(req,res)=>
             });//Esto inserta un dato dentro de la tabla
             return res.status(200).json({pais,ciudad,estado,calle,cp,numExterior});
 }
-
+*/
 
 const registrarUsuario=async(req,res)=>
 {
     const {nombre,apellidoP,apellidoM,email,password,CV,imageData,
-        sexo,estadoCivil,CURP,RFC,visaVigente,pasaporteVigente,numExterior}=req.body
+        sexo,estadoCivil,CURP,RFC,visaVigente,pasaporteVigente,pais,ciudad,estado,calle,cp,numExterior,about}=req.body
             const [result]=await pool.query("INSERT INTO usuarioempleado SET ?",{
                 nombre,
                 apellidoP,
@@ -82,10 +85,16 @@ const registrarUsuario=async(req,res)=>
                 RFC,
                 visaVigente,
                 pasaporteVigente,
-                numExterior
+                pais,
+                ciudad,
+                estado,
+                calle,
+                cp,
+                numExterior,
+                about
             });//Esto inserta un dato dentro de la tabla
             return res.status(200).json({nombre,apellidoP,apellidoM,email,password,CV,imageData,
-        sexo,estadoCivil,CURP,RFC,visaVigente,pasaporteVigente,numExterior});
+        sexo,estadoCivil,CURP,RFC,visaVigente,pasaporteVigente,pais,ciudad,estado,calle,cp,numExterior,about});
 }
 
 

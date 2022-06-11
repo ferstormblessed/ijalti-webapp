@@ -23,8 +23,10 @@ const router=useRouter()
             e.preventDefault();
             const result=await axios.post('http://localhost:3000/api/clientes/login',login).catch(e =>console.log(e));
             console.log("typeof!!!!",typeof result);
-            //console.log("length",Object.keys(result).length);
-            if(result!=undefined)
+            console.log(result);
+            //console.log("length",Object.entries(result.data.result).length);
+
+            if(result!=undefined && result.data.result[0]!=undefined)
             {
               //<Link href={`/profile/${result.data[0].CURP}`}key={result.data.result[0].CURP}></Link>
               //<Link href={`/profile/${result.data.result[0].CURP}`}></Link>
@@ -59,7 +61,8 @@ const router=useRouter()
 
 
 
-                <Link href="/api/auth/signin">
+                {/*<Link href="/api/auth/signin">*/}
+                <Link href="/dashboard">
                   <button
                     className="font-medium text-secondary hover:text-primary"
                   >
@@ -106,21 +109,6 @@ const router=useRouter()
               </div>
 
               <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <input
-                    id="remember-me"
-                    name="remember-me"
-                    type="checkbox"
-                    className="h-4 w-4 text-indigo-600 focus:ring-secondary border-gray-300 rounded"
-                  />
-                  <label
-                    htmlFor="remember-me"
-                    className="text-primary ml-2 block text-sm "
-                  >
-                    Recuerdame
-                  </label>
-                </div>
-
                 <div className="text-sm">
                   <a
                     href="#"

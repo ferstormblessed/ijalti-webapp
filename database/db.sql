@@ -3,16 +3,6 @@ CREATE DATABASE ijalti;
 USE ijalti;
 
 
-CREATE TABLE Direccion(
-    pais VARCHAR(20),
-    ciudad VARCHAR(20),
-    estado VARCHAR(40),
-    calle VARCHAR(20),
-    cp INT,
-    numExterior INT,
-    PRIMARY KEY (numExterior)
-);
-
 CREATE TABLE UsuarioEmpleado(
 	CURP VARCHAR(18),
     nombre VARCHAR(40),
@@ -27,9 +17,14 @@ CREATE TABLE UsuarioEmpleado(
     RFC VARCHAR(13),
     visaVigente DATE,
     pasaporteVigente DATE,
+    pais VARCHAR(20),
+    ciudad VARCHAR(20),
+    estado VARCHAR(40),
+    calle VARCHAR(20),
+    cp INT,
     numExterior INT,
-    PRIMARY KEY (CURP),
-    FOREIGN KEY (numExterior) REFERENCES Direccion(numExterior)
+    about VARCHAR(150),
+    PRIMARY KEY (CURP)
 );
 
 
@@ -37,7 +32,7 @@ CREATE TABLE LenguajeProgramacion(
     idLenguajeProgramacion INT AUTO_INCREMENT, /*autoinc*/
     CURP VARCHAR(18),
     nombreLenguaje VARCHAR(40),
-    aniosDePractica INT,
+    aniosDePractica VARCHAR(40),
     PRIMARY KEY (idLenguajeProgramacion),
     FOREIGN KEY (CURP) REFERENCES UsuarioEmpleado(CURP)
 );
