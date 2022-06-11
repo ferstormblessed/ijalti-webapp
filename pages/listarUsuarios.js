@@ -8,6 +8,7 @@ function Listar({usuarios})
             
                 {usuarios.map(usuarioempleado=>(
                     <Link href={`/usuarios-front/${usuarioempleado.CURP}`}key={usuarioempleado.CURP}>
+                      
                       <div className="py-3 px-3 my-2 mx-2 rounded-lg shadow bg-gray-200 hover:bg-gray-300">
                         <a>
                             <div>

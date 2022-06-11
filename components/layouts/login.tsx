@@ -21,13 +21,19 @@ const router=useRouter()
 
   const handleSubmit= async (e:any) =>{
             e.preventDefault();
-            const result=await axios.post('http://localhost:3000/api/clientes/login',login);
-            console.log(result);
+            const result=await axios.post('http://localhost:3000/api/clientes/login',login).catch(e =>console.log(e));
+
+            //console.log(result);
+
             if(result!=undefined)
             {
-              
-              //<Link href={`profile/${result}`}key={result}></Link>
-              //router.push("/profile")
+
+              //console.log(result.data.result[0].CURP);
+              <Link href={`/profile/${result.data[0].CURP}`}key={result.data.result[0].CURP}></Link>
+              //<Link href={`/profile/${result.data.result[0].CURP}`}></Link>
+              //<Link href={"profile"}></Link>
+              //router.push(`profile/${result.data.result[0].CURP}`)
+              //router.push("/")
             }
   };
 

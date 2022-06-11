@@ -252,14 +252,15 @@ function ProfileUser({usuarios}:any) {
 }
 
 export const getServerSideProps=async (context:any)=>{
-  const{data:usuarios}=await axios.get("http://localhost:3000/api/clientes");//Endpoint
+  console.log("CURP: ",context);
+  const{data:usuarios}=await axios.get("http://localhost:3000/api/clientes/"+context.query.profile);//Endpoint
  
   return {
     props:{
       usuarios,//Esto es un arreglo de objetos , estos objetos son mis cliente
-    },
-  };
-};
+    }
+  }
+}
 
 export default ProfileUser
 
