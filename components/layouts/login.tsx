@@ -29,10 +29,10 @@ const router=useRouter()
             {
 
               //console.log(result.data.result[0].CURP);
-              <Link href={`/profile/${result.data[0].CURP}`}key={result.data.result[0].CURP}></Link>
+              //<Link href={`/profile/${result.data[0].CURP}`}key={result.data.result[0].CURP}></Link>
               //<Link href={`/profile/${result.data.result[0].CURP}`}></Link>
               //<Link href={"profile"}></Link>
-              //router.push(`profile/${result.data.result[0].CURP}`)
+              router.push(`profile/${result.data.result[0].CURP}`)
               //router.push("/")
             }
   };

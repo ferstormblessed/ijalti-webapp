@@ -3,10 +3,6 @@ import { useState } from "react";
 import { useSession, signIn, signOut, getSession, SessionProvider } from "next-auth/react"
 import { Router, useRouter } from "next/router";
 
-
-
-import * as Imagen from './imagen';
-
 function UserForm() {
 
   const router=useRouter()

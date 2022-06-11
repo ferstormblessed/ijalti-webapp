@@ -5,12 +5,12 @@ export default async function handler(req,res){
     switch(req.method)
     {
         case "POST":
-            return await Verifica(req,res)
+            return await VerificaUsuario(req,res)
     }
 }
 
-
-const Verifica=async(req,res)=>
+//POST
+const VerificaUsuario=async(req,res)=>
 {
     console.log(typeof req);
     

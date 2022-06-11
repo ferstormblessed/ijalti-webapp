@@ -1,7 +1,7 @@
 import axios from "axios";
 import Link from "next/link";
 
-function ProfileUser({usuarios}:any) {
+function ProfileUser({usuario}:any) {
     return(
         <div className="container mx-auto my-5 p-5">
         <div className="md:flex no-wrap md:-mx-2 ">
@@ -126,7 +126,7 @@ function ProfileUser({usuarios}:any) {
                 <div className="grid md:grid-cols-2 text-sm">
                   <div className="grid grid-cols-2">
                     <div className="px-4 py-2 font-semibold">Nombre</div>
-                    <div className="px-4 py-2">Jane</div>
+                    <div className="px-4 py-2">{usuario.nombre}</div>
                   </div>
                   <div className="grid grid-cols-2">
                     <div className="px-4 py-2 font-semibold">Apellido</div>
@@ -252,12 +252,12 @@ function ProfileUser({usuarios}:any) {
 }
 
 export const getServerSideProps=async (context:any)=>{
-  console.log("CURP: ",context);
-  const{data:usuarios}=await axios.get("http://localhost:3000/api/clientes/"+context.query.profile);//Endpoint
+  console.log("context.query.id(Componente): ",context.query.profile);
+  const {data:usuario} =await axios.get('http://localhost:3000/api/clientes/'+ context.query.profile)
  
   return {
     props:{
-      usuarios,//Esto es un arreglo de objetos , estos objetos son mis cliente
+      usuario,//Esto es un arreglo de objetos , estos objetos son mis cliente
     }
   }
 }
