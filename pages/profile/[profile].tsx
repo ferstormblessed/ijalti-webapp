@@ -2,8 +2,12 @@ import axios from "axios";
 import Link from "next/link";
 import Dashboard from "../../components/dashboard";
 
-function ProfileUser({usuarioPersonal}:any) {
+function ProfileUser({usuarioPersonal,dateVisaPas}:any) {
+console.log(usuarioPersonal);
+console.log(dateVisaPas);
     return(
+      <Dashboard>
+        
         <div className="container mx-auto my-5 p-5">
         <div className="md:flex no-wrap md:-mx-2 ">
           <div className="w-full md:w-3/12 md:mx-2">
@@ -27,8 +31,8 @@ function ProfileUser({usuarioPersonal}:any) {
                 <li className="flex items-center py-3">
                   <span>Vigencia de Visa:</span>
                   <span className="ml-auto">
-                    <span className="bg-green-500 py-1 px-2 rounded text-white text-sm">
-                      {usuarioPersonal.visaVigente}
+                    <span className="truncate bg-green-500 py-1 px-2 rounded text-white text-sm">
+                      {dateVisaPas.fechaUtilVisa}
                       
                     </span>
                   </span>
@@ -36,8 +40,8 @@ function ProfileUser({usuarioPersonal}:any) {
                 <li className="flex items-center py-3">
                   <span>Vigencia de Pasaporte:</span>
                   <span className="ml-auto">
-                    <span className="bg-green-500 py-1 px-2 rounded text-white text-sm">
-                     {usuarioPersonal.pasaporteVigente}
+                    <span className="truncate bg-green-500 py-1 px-2 rounded text-white text-sm">
+                     {dateVisaPas.fechaUtilPasaporte}
                       
                     </span>
                   </span>
@@ -171,7 +175,7 @@ function ProfileUser({usuarioPersonal}:any) {
                         />
                       </svg>
                     </span>
-                    <span className="tracking-wide">Curriculo</span>
+                    <span className="tracking-wide">Curriculum</span>
                   </div>
                   <ul className="list-inside space-y-2">
                     <li>
@@ -185,20 +189,22 @@ function ProfileUser({usuarioPersonal}:any) {
           </div>
         </div>
       </div>
+      </Dashboard>
     )
  
 }
 
 export const getServerSideProps=async (context:any)=>{
   console.log("context.query.id(Componente): ",context.query.profile);
-  const {data:usuarioPersonal} =await axios.get('http://localhost:3000/api/clientes/'+ context.query.profile)
- 
+  const {data:dateVisaPas} =await axios.get('http://localhost:3000/api/clientes/'+ context.query.profile+"?tipo=date")
+  const {data:usuarioPersonal} =await axios.get('http://localhost:3000/api/clientes/'+ context.query.profile+"?tipo=general")
+  
   return {
     props:{
-      usuarioPersonal,//Esto es un arreglo de objetos , estos objetos son mis cliente
+      dateVisaPas,
+      usuarioPersonal//Esto es un arreglo de objetos , estos objetos son mis cliente
     }
   }
 }
 
 export default ProfileUser
-
