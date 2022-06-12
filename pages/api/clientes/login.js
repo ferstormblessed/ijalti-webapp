@@ -1,4 +1,5 @@
 import {pool} from "../../../config/db.jsx"
+import axios from "axios";
 export default async function handler(req,res){
     /*Consultamos la base de datos y devolvemos un objeto al ususario*/
 
@@ -8,6 +9,7 @@ export default async function handler(req,res){
             return await VerificaUsuario(req,res)
     }
 }
+
 
 //POST
 const VerificaUsuario=async(req,res)=>
@@ -20,5 +22,6 @@ const VerificaUsuario=async(req,res)=>
     console.log("req.body.password:",pass);
     const [result]=await pool.query('SELECT CURP FROM usuarioempleado WHERE email="'+mail+'" and usuarioempleado.password="'+pass+'"');
     console.log("result: ",result);
+    //await axios.post('http://localhost:3000/api/clientes/getMailPassword',result);
     return res.status(200).json({result});
 }

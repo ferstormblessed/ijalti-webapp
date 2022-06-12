@@ -1,4 +1,5 @@
 import UserForm from "./userForm";
+import axios from "axios";
 import { Fragment, useState } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import {
@@ -19,10 +20,16 @@ interface IDashboardProps {
   children?: React.ReactNode;
 }
 
-const navigation = [
+/*
+const curp=function getcurp(curp:any)
+{
+  return curp 
+}
+*/
+ const navigation = [
   { name: "Busqueda de usuario", href: "/busquedaUsuario", icon: UsersIcon, current: false },
   { name: "Busqueda de trabajo", href: "busquedaEmpleo", icon: FolderIcon, current: false },
-  { name: "Perfil de usuario", href: "/profile", icon: CalendarIcon, current: false },
+  { name: "Perfil de usuario", href: "/profile/SABC660121", icon: CalendarIcon, current: false },
   { name: "Configuracion", href: "/configuracion", icon: InboxIcon, current: false },
 ];
 const userNavigation = [
@@ -31,7 +38,7 @@ const userNavigation = [
   { name: "Sign out", href: "#" },
 ];
 
-export default function Dashboard(props: IDashboardProps) {
+function Dashboard(props: IDashboardProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   function classNames(...classes: any) {
     return classes.filter(Boolean).join(" ");
@@ -266,3 +273,17 @@ export default function Dashboard(props: IDashboardProps) {
     </>
   );
 }
+/*
+export const getServerSideProps=async (context:any)=>{
+  console.log("context.query.id(Componente): ",context.query.profile);
+  const {data:curp} =await axios.post('http://localhost:3000/api/clientes/login')
+
+  return{
+    props:{
+      curp,//Esto es un arreglo de objetos , estos objetos son mis cliente
+    }
+  }
+}
+*/
+
+export default Dashboard
