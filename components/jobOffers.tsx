@@ -1,6 +1,7 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { CalendarIcon, LocationMarkerIcon, UsersIcon,ClockIcon} from '@heroicons/react/solid';
-import InputFiltro from "./inputFiltro";
+import axios from "axios";
+import Link from "next/link";
+import { CalendarIcon, LocationMarkerIcon, UsersIcon, ClockIcon} from '@heroicons/react/solid';
 
 const positions = [
   {
@@ -68,14 +69,7 @@ const positions = [
   },
 ]
 
-const filtro = ()=>{
-  
-}
-
 export default function JobOffers() {
-
-
-  //aqui
 
   return (
     <div className="bg-white shadow overflow-hidden sm:rounded-md">
@@ -119,3 +113,14 @@ export default function JobOffers() {
     </div>
   )
 }
+
+// export const getServerSideProps = async(context: any) => {
+//   //console.log("context.query.id(Componente): ",context.query.profile);
+//   const {data:usuario} = await axios.get('http://localhost:3000/api/clientes/buscarEmpleo')
+ 
+//   return {
+//     props:{
+//       usuario,//Esto es un arreglo de objetos , estos objetos son mis cliente
+//     }
+//   }
+// }

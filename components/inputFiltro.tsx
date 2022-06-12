@@ -1,8 +1,10 @@
 /* This example requires Tailwind CSS v2.0+ */
+import axios from "axios";
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
-
+import { Router, useRouter } from "next/router";
+import Link from "next/link";
 
 const puestos = [
   { id: 1, name: "Puesto"},
@@ -49,12 +51,37 @@ function classNames(...classes: any) {
 }
 
 export default function InputFiltro() {
+
+  const router = useRouter();
+
+  const handleSubmit = async(e:any) => {
+    e.preventDefault();
+    const resTitle = await axios.post("/api/clientes/buscarEmpleo", puesto);
+    const resType = await axios.post("/api/clientes/buscarEmpleo", modalidad);
+    const resLoc = await axios.post("/api/clientes/buscarEmpleo", jornada);
+    const resDep = await axios.post("/api/clientes/buscarEmpleo", horario);
+    const resJor = await axios.post("/api/clientes/buscarEmpleo", idioma);
+    const resHorario = await axios.post("/api/clientes/buscarEmpleo", areaConocimiento);
+    router.push("/");
+    console.log(puesto);
+  };
+
+  const handleChange = ({target: {name, value}} : {target: {name: any, value: any}}) => {
+    setPuesto({...puesto, [name]: value});
+    setModalidad({...modalidad, [name]: value});
+    setJornada({...jornada, [name]: value});
+    setHorario({...horario, [name]: value});
+    setIdioma({...idioma, [name]: value});
+    setAreaConocimiento({...areaConocimiento, [name]: value});
+  };
+  
   const [puesto, setPuesto] = useState(puestos[0]);
   const [modalidad, setModalidad] = useState(modalidades[0]);
   const [jornada, setJornada] = useState(jornadas[0]);
   const [horario, setHorario] = useState(Horarios[0]);
   const [idioma, setIdioma] = useState(idiomas[0]);
   const [areaConocimiento, setAreaConocimiento] = useState(areasConocimiento[0]);
+
 
   return (
     <div>
@@ -65,7 +92,7 @@ export default function InputFiltro() {
               Puesto
             </Listbox.Label>
             <div className="mt-1 relative">
-              <Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+              <Listbox.Button onSubmit={handleSubmit} className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                 <span className="block truncate">{puesto.name}</span>
                 <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                   <SelectorIcon
@@ -135,7 +162,7 @@ export default function InputFiltro() {
               Modalidad
             </Listbox.Label>
             <div className="mt-1 relative">
-              <Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+              <Listbox.Button onSubmit={handleSubmit} className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                 <span className="block truncate">{modalidad.name}</span>
                 <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                   <SelectorIcon
@@ -205,7 +232,7 @@ export default function InputFiltro() {
               Horarios
             </Listbox.Label>
             <div className="mt-1 relative">
-              <Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+              <Listbox.Button onSubmit={handleSubmit} className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                 <span className="block truncate">{horario.name}</span>
                 <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                   <SelectorIcon
@@ -275,7 +302,7 @@ export default function InputFiltro() {
               Jornada de trabajo
             </Listbox.Label>
             <div className="mt-1 relative">
-              <Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+              <Listbox.Button onSubmit={handleSubmit} className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                 <span className="block truncate">{jornada.name}</span>
                 <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                   <SelectorIcon
@@ -345,7 +372,7 @@ export default function InputFiltro() {
               Área de Conocimiento
             </Listbox.Label>
             <div className="mt-1 relative">
-              <Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+              <Listbox.Button onSubmit={handleSubmit} className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                 <span className="block truncate">{areaConocimiento.name}</span>
                 <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                   <SelectorIcon
@@ -415,7 +442,7 @@ export default function InputFiltro() {
               Idiomas
             </Listbox.Label>
             <div className="mt-1 relative">
-              <Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+              <Listbox.Button onSubmit={handleSubmit} className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                 <span className="block truncate">{idioma.name}</span>
                 <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                   <SelectorIcon
