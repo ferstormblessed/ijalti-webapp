@@ -71,26 +71,13 @@ function InputFiltro(postTrabajos:any) {
   //};
   */
   
+  const filtros = [puesto.name, modalidad.name, jornada.name, horario.name, idioma.name, areaConocimiento.name];
 
   const handleSubmit = async(e:any) => {
     e.preventDefault();
-    const resTitle = await axios.post("/api/clientes/buscarEmpleo?tipo=puesto", puesto);
-    const resType = await axios.post("/api/clientes/buscarEmpleo?tipo=modalidad", modalidad);
-    /*
-    const resLoc = await axios.post("/api/clientes/buscarEmpleo", jornada.name);
-    const resDep = await axios.post("/api/clientes/buscarEmpleo", horario.name);
-    const resJor = await axios.post("/api/clientes/buscarEmpleo", idioma.name);
-    const resHorario = await axios.post("/api/clientes/buscarEmpleo", areaConocimiento.name);
+    const res = await axios.post("/api/clientes/buscarEmpleo", filtros);
 
-    
-    const resLenguaje= await axios.post("/api/clientes?tipo=lenguaje",lenguajeprogramacion);
-    const resInfoAcademica= await axios.post("/api/clientes?tipo=info",infoacademica);
-    */
     console.log("Handle submit");
-    console.log("resTitle: ",resTitle);
-    console.log("resTitle: ",resType);
-    //console.log("resType: ",resType);
-
     //router.push("/");
     console.log(puesto);
   };

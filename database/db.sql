@@ -80,7 +80,7 @@ CREATE TABLE Puesto(
     nombrePuesto VARCHAR(40),
     modalidadTrabajo VARCHAR(40),
     tipoHorario VARCHAR(40),
-    jornadaDeTrabajo INT,
+    jornadaDeTrabajo VARCHAR(40),
     areaConocimiento VARCHAR(40),
     PRIMARY KEY (idPuesto),
     FOREIGN KEY (idUsuarioEmpresaCreador) REFERENCES UsuarioEmpresa(idUsuarioEmpresa),

@@ -69,7 +69,10 @@ const positions = [
   },
 ]
 
-function JobOffers() {
+function JobOffers(postTrabajos:any) {
+
+  //const positions = postTrabajos;
+  console.log(postTrabajos);
 
   return (
     <div className="bg-white shadow overflow-hidden sm:rounded-md">
@@ -114,15 +117,15 @@ function JobOffers() {
   )
 }
 
-// export const getServerSideProps = async(context: any) => {
-//   //console.log("context.query.id(Componente): ",context.query.profile);
-//   const {data:usuario} = await axios.get('http://localhost:3000/api/clientes/buscarEmpleo')
+export const getServerSideProps = async(context: any) => {
+  //console.log("context.query.id(Componente): ",context.query.profile);
+  const {data:postTrabajos} = await axios.get('http://localhost:3000/api/clientes/buscarEmpleo')
  
-//   return {
-//     props:{
-//       usuario,//Esto es un arreglo de objetos , estos objetos son mis cliente
-//     }
-//   }
-// }
+  return {
+    props:{
+      postTrabajos,//Esto es un arreglo de objetos , estos objetos son mis cliente
+    }
+  }
+}
 
 export default JobOffers
