@@ -47,22 +47,14 @@ CREATE TABLE InfoAcademica(
     FOREIGN KEY (CURP) REFERENCES UsuarioEmpleado(CURP)
 );
 
-
-
-
-
-
-
-
 CREATE TABLE Empresa(
     idEmpresa INT AUTO_INCREMENT, /*autoinc*/
     nombreEmpresa VARCHAR(40),
     idDireccionEmpresa INT,
     razonSocial VARCHAR(45),
     CFDI VARCHAR(45),
-    descripcion VARCHAR(40)
-    PRIMARY KEY (idEmpresa),
-    FOREIGN KEY (idDireccionEmpresa) REFERENCES Direccion(idDireccion)
+    descripcion VARCHAR(40),
+    PRIMARY KEY (idEmpresa)
 );
 
 CREATE TABLE UsuarioEmpresa(
@@ -72,21 +64,10 @@ CREATE TABLE UsuarioEmpresa(
     apellidoP VARCHAR(40),
     apellidoM VARCHAR(40),
     email VARCHAR(40),
-    passworUserdEmpresa VARCHAR(45)
+    passworUserdEmpresa VARCHAR(45),
     PRIMARY KEY (idUsuarioEmpresa),
-    PRIMARY KEY (idEmpresa),
     FOREIGN KEY (idEmpresa) REFERENCES Empresa(idEmpresa)
 );
-
-
-
-
-
-
-
-
-
-
 
 CREATE TABLE Puesto(
     idPuesto INT AUTO_INCREMENT, /*autoinc*/
@@ -97,33 +78,28 @@ CREATE TABLE Puesto(
     modalidadTrabajo VARCHAR(40),
     tipoHorario VARCHAR(40),
     jornadaDeTrabajo INT,
-    areaConocimiento VARCHAR(40)
+    areaConocimiento VARCHAR(40),
     PRIMARY KEY (idPuesto),
     FOREIGN KEY (idUsuarioEmpresaCreador) REFERENCES UsuarioEmpresa(idUsuarioEmpresa),
-    FOREIGN KEY (idEmpresa) REFERENCES Empresa(idEmpresa),
-    FOREIGN KEY (idDireccionPuesto) REFERENCES Direccion(idDireccion)
+    FOREIGN KEY (idEmpresa) REFERENCES Empresa(idEmpresa)
 );
-
-
 
 CREATE TABLE Idioma(
     idIdioma INT AUTO_INCREMENT, /*autoinc*/
     idPuesto INT,
     CURP VARCHAR(18),
-    lengua VARCHAR(30)
+    lengua VARCHAR(30),
     PRIMARY KEY (idIdioma),
     FOREIGN KEY (CURP) REFERENCES UsuarioEmpleado(CURP),
     FOREIGN KEY (idPuesto) REFERENCES Puesto(idPuesto)
 );
 
-
 CREATE TABLE Aplicacion(
     idUsuarioAplicante VARCHAR(18),
     idPuestoAplicado INT,
     estatusAplicacion BOOLEAN,
-    fechaSolicitud DATE
+    fechaSolicitud DATE,
     PRIMARY KEY (idUsuarioAplicante),
-    PRIMARY KEY (idPuestoAplicado),
     FOREIGN KEY (idUsuarioAplicante) REFERENCES UsuarioEmpleado(CURP),
     FOREIGN KEY (idPuestoAplicado) REFERENCES Puesto(idPuesto)
 );

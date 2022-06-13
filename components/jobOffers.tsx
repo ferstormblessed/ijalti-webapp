@@ -69,7 +69,7 @@ const positions = [
   },
 ]
 
-export default function JobOffers() {
+function JobOffers() {
 
   return (
     <div className="bg-white shadow overflow-hidden sm:rounded-md">
@@ -124,3 +124,5 @@ export default function JobOffers() {
 //     }
 //   }
 // }
+
+export default JobOffers
