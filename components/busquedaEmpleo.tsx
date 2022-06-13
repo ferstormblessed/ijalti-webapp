@@ -24,13 +24,3 @@ export default function BusquedaEmpleo(postTrabajos: any) {
   );
 }
 
-export const getServerSideProps = async(context: any) => {
-  //console.log("context.query.id(Componente): ",context.query.profile);
-  const {data:postTrabajos} = await axios.get('http://localhost:3000/api/clientes/buscarEmpleo')
- 
-  return {
-    props:{
-      postTrabajos,//Esto es un arreglo de objetos, post de trabajos
-    }
-  }
-}

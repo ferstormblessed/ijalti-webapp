@@ -6,7 +6,7 @@ import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import { Router, useRouter } from "next/router";
 import Link from "next/link";
 
-const puestos = [
+const areasConocimiento = [
   { id: 1, name: "Puesto"},
   { id: 2, name: "Design" },
   { id: 3, name: "Engineering" },
@@ -18,7 +18,7 @@ const modalidades = [
   { id: 2, name: "Remoto" },
   { id: 3, name: "Presencial" },
 ];
-const areasConocimiento = [
+const puestos = [
   { id: 1, name: "Area de conocimiento" },
   { id: 2, name: "Back End Developer" },
   { id: 3, name: "Front End Developer" },
@@ -50,7 +50,7 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function InputFiltro() {
+function InputFiltro(postTrabajos:any) {
 
   const router = useRouter();
 
@@ -60,32 +60,38 @@ export default function InputFiltro() {
   const [horario, setHorario] = useState(Horarios[0]);
   const [idioma, setIdioma] = useState(idiomas[0]);
   const [areaConocimiento, setAreaConocimiento] = useState(areasConocimiento[0]);
-
-  const handleChange = ({target: {name, value}} : {target: {name: any, value: any}}) => {
+/*
+  //const handleChangePuesto = ({target: {name, value}} : {target: {name: any, value: any}}) => {
     setPuesto({...puesto, [name]: value});
     setModalidad({...modalidad, [name]: value});
     setJornada({...jornada, [name]: value});
     setHorario({...horario, [name]: value});
     setIdioma({...idioma, [name]: value});
     setAreaConocimiento({...areaConocimiento, [name]: value});
-    console.log(jornada);
-    console.log(horario);
-  };
+  //};
+  */
+  
 
   const handleSubmit = async(e:any) => {
     e.preventDefault();
-    const resTitle = await axios.post("/api/clientes/buscarEmpleo", puesto);
-    const resType = await axios.post("/api/clientes/buscarEmpleo", modalidad);
-    const resLoc = await axios.post("/api/clientes/buscarEmpleo", jornada);
-    const resDep = await axios.post("/api/clientes/buscarEmpleo", horario);
-    const resJor = await axios.post("/api/clientes/buscarEmpleo", idioma);
-    const resHorario = await axios.post("/api/clientes/buscarEmpleo", areaConocimiento);
-    
-    console.log("Handle submit");
-    console.log(resTitle);
-    console.log(resType);
+    const resTitle = await axios.post("/api/clientes/buscarEmpleo?tipo=puesto", puesto);
+    const resType = await axios.post("/api/clientes/buscarEmpleo?tipo=modalidad", modalidad);
+    /*
+    const resLoc = await axios.post("/api/clientes/buscarEmpleo", jornada.name);
+    const resDep = await axios.post("/api/clientes/buscarEmpleo", horario.name);
+    const resJor = await axios.post("/api/clientes/buscarEmpleo", idioma.name);
+    const resHorario = await axios.post("/api/clientes/buscarEmpleo", areaConocimiento.name);
 
-    router.push("/");
+    
+    const resLenguaje= await axios.post("/api/clientes?tipo=lenguaje",lenguajeprogramacion);
+    const resInfoAcademica= await axios.post("/api/clientes?tipo=info",infoacademica);
+    */
+    console.log("Handle submit");
+    console.log("resTitle: ",resTitle);
+    console.log("resTitle: ",resType);
+    //console.log("resType: ",resType);
+
+    //router.push("/");
     console.log(puesto);
   };
 
@@ -520,3 +526,17 @@ export default function InputFiltro() {
     </form>
   );
 }
+/*
+export const getServerSideProps = async(context: any) => {
+  //console.log("context.query.id(Componente): ",context.query.profile);
+  const {data:postTrabajos} = await axios.get('http://localhost:3000/api/clientes/buscarEmpleo')
+ 
+  return {
+    props:{
+      postTrabajos,//Esto es un arreglo de objetos, post de trabajos
+    }
+  }
+}
+*/
+
+export default InputFiltro

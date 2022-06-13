@@ -90,6 +90,7 @@ const[infoacademica,setinfoacademica]=useState({
 
   /*Esta funcion va a recibir informacion del input que se está typeando
     y desde ese inuput extraemos el e.target.name y el e.target.value*/
+    
     const handleChange=({target:{name,value}}:{target:{name:any,value:any}})=>{
         //setDireccion({...direccion,[name]:value});
         setUsuarioempleado({...usuarioempleado,[name]:value});

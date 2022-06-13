@@ -47,6 +47,8 @@ CREATE TABLE InfoAcademica(
     FOREIGN KEY (CURP) REFERENCES UsuarioEmpleado(CURP)
 );
 
+
+
 CREATE TABLE Empresa(
     idEmpresa INT AUTO_INCREMENT, /*autoinc*/
     nombreEmpresa VARCHAR(40),
@@ -56,6 +58,7 @@ CREATE TABLE Empresa(
     descripcion VARCHAR(40),
     PRIMARY KEY (idEmpresa)
 );
+
 
 CREATE TABLE UsuarioEmpresa(
     idUsuarioEmpresa VARCHAR(18),
