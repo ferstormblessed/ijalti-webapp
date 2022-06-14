@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { LockClosedIcon } from "@heroicons/react/solid";
-import Logo from "./IJALTI.png";
 import { signIn } from "next-auth/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Router, useRouter } from "next/router";
+
 
 
 function LoginScreen() {
@@ -17,6 +17,8 @@ const router=useRouter()
     password:"",
     email:""
 })
+
+
 /*
     const isRecipientOnline = useFriendStatus(login);
 
@@ -26,7 +28,7 @@ const router=useRouter()
     {
       setCredential()
     }
-  })
+  })*
 */
 
   const handleSubmit= async (e:any) =>{
