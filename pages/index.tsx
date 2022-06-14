@@ -4,6 +4,7 @@ import Image from "next/image";
 import LoginScreen from "../components/layouts/login";
 import React, { useState } from "react";
 import Link from "next/link";
+import { OfficeBuildingIcon } from "@heroicons/react/solid";
 import { useSession, signIn, signOut, getSession, SessionProvider } from "next-auth/react"
 import { redirect } from "next/dist/server/api-utils";
 //import { Router, useRouter } from "next/router";
@@ -21,9 +22,20 @@ function Home({session}:any)
       <LoginScreen />
 
       <Link href="loginEmpresas">
-      <button>
+        <div className="text-center">
+        <button
+        className="justify-center py-2 px-1 border border-transparent text-sm font-medium rounded-md text-white bg-violet-700	 hover:bg-buttonsecondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary ]">
+        <div className="grid  justify-items-center">
+          <OfficeBuildingIcon className="w-4 h-4"/>
+        <span
+        className="font-medium">
         Inicio de sesion de empresas
+        </span>
+          </div>
+
         </button>
+          </div>
+
         </Link>
 
     </div>

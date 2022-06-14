@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { LockClosedIcon } from "@heroicons/react/solid";
-import Logo from "./IJALTI.png";
+//import Logo from "./IJALTI.png";
 import { signIn } from "next-auth/react";
 import axios from "axios";
 import { useState } from "react";
