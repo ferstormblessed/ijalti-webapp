@@ -39,7 +39,7 @@ console.log("hrefP: ",hrefP);
 
  const navigation = [
   
-  { name: "Busqueda de trabajo", href: "busquedaEmpleo", icon: SearchIcon, current: false },
+  { name: "Busqueda de trabajo", href: "/busquedaEmpleo", icon: SearchIcon, current: false },
   { name: "Perfil de usuario", href: hrefP , icon: UserIcon, current: false },
   { name: "Configuracion", href: "/configuracion", icon: CogIcon, current: false },
   {name: "Wiki", href: "https://fate-amber-ed1.notion.site/Wiki-26fe5ed90eb44dd3b4b75d05a43dff82" , icon:MenuAlt2Icon, current:false, popOut:true}
