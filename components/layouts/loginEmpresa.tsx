@@ -1,30 +1,53 @@
 import Link from "next/link";
 import { LockClosedIcon } from "@heroicons/react/solid";
-//import Logo from "./IJALTI.png";
 import { signIn } from "next-auth/react";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Router, useRouter } from "next/router";
+import Cookies from 'universal-cookie';
+
 
 
 function LoginEmpresaScreen() {
 
-  const[login,setLogin]=useState({
-    password:"",
-    email:""
-})
+  const router=useRouter()
+  
+  
+  
+    const[loginEmpresa,setLoginEmpresa]=useState({
+      password:"",
+      email:""
+  })
 
 
-  const handleSubmit= async (e:any) =>{
-            e.preventDefault();
-            await axios.get('http://localhost:3000/api/clientes/login');
-  };
+const handleSubmit= async (e:any) =>{
+  e.preventDefault();
+  const result=await axios.post('http://localhost:3000/api/clientes/loginEmpresa',loginEmpresa).catch(e =>console.log(e));
+  const cookies = new Cookies();
+  
+  
+  console.log("typeof!!!!",typeof result);
+  
+  //console.log("length",Object.entries(result.data.result).length);
+
+  if(result!=undefined && result.data.result[0]!=undefined)
+  {
+    console.log("dentro del If:")
+    console.log("Estooy imprimiendo el result:",result.data.result[0].idUsuarioEmpresa);
+    cookies.set("idUsuarioEmpresa",result.data.result[0].idUsuarioEmpresa,{path: "/"});
+    //<Link href={`/profile/${result.data[0].CURP}`}key={result.data.result[0].CURP}></Link>
+    //<Link href={`/profile/${result.data.result[0].CURP}`}></Link>
+    router.push(`profile/${result.data.result[0].idUsuarioEmpresa}`)
+  }
+  
+};
 
 
   /*Esta funcion va a recibir informacion del input que se está typeando
     y desde ese inuput extraemos el e.target.name y el e.target.value*/
     
     const handleChange=({target:{name,value}}:{target:{name:any,value:any}})=>{
-        setLogin({...login,[name]:value});
+      setLoginEmpresa({...loginEmpresa,[name]:value});
     }
     
 
@@ -122,7 +145,7 @@ function LoginEmpresaScreen() {
               </div>
 
               <div>
-                <Link href="/dashboardEmpresa">
+               
                   <button
                     type="submit"
                     className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-buttonprimary hover:bg-buttonsecondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary"
@@ -135,7 +158,7 @@ function LoginEmpresaScreen() {
                     </span>
                     Iniciar sesión como empresa
                   </button>
-                </Link>
+  
               </div>
             </form>
           </div>
