@@ -6,9 +6,10 @@ import { CheckIcon, SelectorIcon, LocationMarkerIcon, UsersIcon, ClockIcon } fro
 import { Router, useRouter } from "next/router";
 import Link from "next/link";
 import {clasePuesto} from "./clasePuesto";
+import JobOffers from "./jobOffers";
 
 const areasConocimiento = [
-  { id: 1, name: "Puesto"},
+  { id: 1, name: "Area de conocimiento" },
   { id: 2, name: "Design" },
   { id: 3, name: "Engineering" },
   { id: 4, name: "Marketing" },
@@ -20,7 +21,7 @@ const modalidades = [
   { id: 3, name: "Presencial" },
 ];
 const puestos = [
-  { id: 1, name: "Area de conocimiento" },
+  { id: 1, name: "Puesto" },
   { id: 2, name: "Back End Developer" },
   { id: 3, name: "Front End Developer" },
   { id: 4, name: "User Interface Designer" },
@@ -49,29 +50,28 @@ const Horarios = [
 
 const positions = [
   {
-    id:0 ,
-    title: '',        // puesto
-    type: '',                       // horario
-    location: '',                 // modalidad
-    department: '',          // Area de conocimiento                  
-    jornada: '',                // jornada
-    idioma: ''                    // idioma
-  },
-]
+    id: 0,
+    nombrePuesto: "",
+    horario: "",
+    modalidade: "",
+    areaConocimiento: "",
+    jornada: ""
+  }
+];
 
-const prueba = [];
+let posts:clasePuesto[] = [];
 
-//J
-//const positionsClass=new clasePuesto(1, "ITC", "Matutino", "Remoto", "Tugfa", "100", "Puras mamadas")
-
+function emptyPosts(){
+  posts = [];
+}
 
 function classNames(...classes: any) {
   return positions.filter(Boolean).join(" ");
 }
 
 function InputFiltro(postTrabajos:any) {
-  
-  const positionsClass = new clasePuesto();
+
+  const [postEmpleo, setPost] = useState([posts]);
   
   const router = useRouter();
 
@@ -93,15 +93,23 @@ function InputFiltro(postTrabajos:any) {
 
     console.log("Res: ",res);
     console.log("Handle submit");
-    
-    positionsClass.setIDPuesto(res.data.idPuesto);
-    positionsClass.setNombrePuesto(res.data.nombrePuesto);
-    positionsClass.setTipoHorario(res.data.tipoHorario);
-    positionsClass.setModalidadTrabajo(res.data.maodalidadTrabajo);
-    positionsClass.setAreaConocimiento(res.data.areaConocimiento);
-    positionsClass.setJornadaTrabajo(res.data.jornadaDeTrabajo);
+    console.log("Res.data", res.data);
 
-    console.log("positionsClass", positionsClass.getTipoHorario());
+    for (let i = 0; i < res.data.length; i++){
+      let positionsClass = new clasePuesto();
+
+      positionsClass.setIDPuesto(res.data[i].idPuesto);
+      positionsClass.setNombrePuesto(res.data[i].nombrePuesto);
+      positionsClass.setTipoHorario(res.data[i].tipoHorario);
+      positionsClass.setModalidadTrabajo(res.data[i].modalidadTrabajo);
+      positionsClass.setAreaConocimiento(res.data[i].areaConocimiento);
+      positionsClass.setJornadaTrabajo(res.data[i].jornadaDeTrabajo);
+
+      posts.push(positionsClass);
+      setPost([...postEmpleo, posts]);
+    }
+
+    console.log("positionsClass", posts);
     //router.push("/");
     //console.log(puesto);
     
@@ -534,6 +542,7 @@ function InputFiltro(postTrabajos:any) {
           </Listbox>
           <button
               type="submit"
+              onClick={emptyPosts}
               className="absolute bottom-2 right-2 inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
             Buscar
@@ -542,22 +551,22 @@ function InputFiltro(postTrabajos:any) {
       </div>
 
 
-    {/*Despliegue de ofertas*/}
+      {/*Despliegue de ofertas*/}
       <div className="lg:w-1/2 p-2">
-
-        <div className="bg-white shadow overflow-hidden sm:rounded-md">
+        <div id="reload" className="bg-white shadow overflow-hidden sm:rounded-md">
           <ul role="list" className="divide-y divide-gray-200">
-              <li key={positionsClass.getIDPuesto()}>
+            {posts.map((position) => (
+              <li key={position.getIDPuesto()}>
                 <a href="#" className="block hover:bg-gray-50">
                   <div className="px-4 py-4 sm:px-6">
                     <div className="flex items-center justify-between">
-                      <p className="text-sm font-medium text-indigo-600 truncate">{positionsClass.getNombrePuesto()}</p>
+                      <p className="text-sm font-medium text-indigo-600 truncate">{position.getNombrePuesto()}</p>
                       <div className="ml-2 flex-shrink-0 flex">
                         <p className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
-                          {positionsClass.getTipoHorario()}
+                          {position.getTipoHorario()}
                         </p>
-                        {/* <p className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${positionsClass.getIdioma() ==="Français" && 'bg-blue-100 text-blue-800'} ${positionsClass.idioma ==="Italiano" && 'bg-green-100 text-green-800'} ${positionsClass.idioma ==="Español" && 'bg-yellow-100 text-yellow-800'} ${positionsClass.idioma ==="English" && 'bg-purple-100 text-purple-800'} ${positionsClass.idioma ==="Deutsch" && 'bg-red-100 text-red-800'}`}>
-                          {positionsClass.getIdioma()}
+                        {/* <p className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${position.idioma ==="Français" && 'bg-blue-100 text-blue-800'} ${position.idioma ==="Italiano" && 'bg-green-100 text-green-800'} ${position.idioma ==="Español" && 'bg-yellow-100 text-yellow-800'} ${position.idioma ==="English" && 'bg-purple-100 text-purple-800'} ${position.idioma ==="Deutsch" && 'bg-red-100 text-red-800'}`}>
+                          {position.idioma}
                         </p> */}
                       </div>
                     </div>
@@ -565,27 +574,26 @@ function InputFiltro(postTrabajos:any) {
                       <div className="sm:flex">
                         <p className="flex items-center text-sm text-gray-500">
                           <UsersIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
-                          {positionsClass.getAreaConocimiento()}
+                          {position.getAreaConocimiento()}
                         </p>
                         <p className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
                           <LocationMarkerIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
-                          {positionsClass.getModalidadTrabajo()}
+                          {position.getModalidadTrabajo()}
                         </p>
                         <p className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
                           <ClockIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
-                          {positionsClass.getJornadaTrabajo()}
+                          {position.getJornadaTrabajo()}
                         </p>
                       </div>
                     </div>
                   </div>
                 </a>
               </li>
+            ))}
           </ul>
         </div>
-        {/* <JobOffers /> */}
       </div>
     </div>
-    
   );
 }
 /*
