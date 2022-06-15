@@ -127,6 +127,7 @@ export default function DashboardEmpresa(props: IDashboardProps) {
                         <a
                           key={item.name}
                           href={item.href}
+                          rel="noreferrer"
                           target={item.popOut == true ? "_blank" : ""}
                           className={classNames(
                             item.current
@@ -175,6 +176,7 @@ export default function DashboardEmpresa(props: IDashboardProps) {
                   <a
                     key={item.name}
                     href={item.href}
+                    rel="noreferrer"
                     target={item.popOut == true ? "_blank" : ""}
                     className={classNames(
                       item.current
