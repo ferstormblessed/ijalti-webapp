@@ -26,36 +26,36 @@ function EmpresaForm() {
     y desde la funcion "handleChange se pasan los valores a este objeto"*/ 
 
   const[direccion,setDireccion]=useState({
-  pais:"",
-  ciudad:"",
-  estado:"",
-  calle:"",
-  cp:"",
-  numExterior:0
-})
+    pais:"",
+    ciudad:"",
+    estado:"",
+    calle:"",
+    cp:"",
+    numExterior:0
+  })
 
 
-   const[usuarioempleado,setUsuarioempleado]=useState({
-                nombre:"",
-                apellidoP:"",
-                apellidoM:"",
-                email:"",
-                password:"",
-                CV:"Mi cv",
-                sexo:0,
-                estadoCivil:"",
-                CURP:"",
-                RFC:"",
-                visaVigente:"",
-                pasaporteVigente:"",
-                numExterior:direccion.numExterior
-    })
+  const[usuarioempleado,setUsuarioempleado]=useState({
+    nombre:"",
+    apellidoP:"",
+    apellidoM:"",
+    email:"",
+    password:"",
+    CV:"Mi cv",
+    sexo:0,
+    estadoCivil:"",
+    CURP:"",
+    RFC:"",
+    visaVigente:"",
+    pasaporteVigente:"",
+    numExterior:direccion.numExterior
+  })
 
-const[lenguajeprogramacion,setLenguajeprogramacion]=useState({
-                nombreLenguaje:"",
-                aniosDePractica:0,
-                CURP:usuarioempleado.CURP
-    })
+  const[lenguajeprogramacion,setLenguajeprogramacion]=useState({
+    nombreLenguaje:"",
+    aniosDePractica:0,
+    CURP:usuarioempleado.CURP
+  })
 
 const[infoacademica,setinfoacademica]=useState({
   tituloProfesion:"",

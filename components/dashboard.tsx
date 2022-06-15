@@ -1,20 +1,23 @@
 import UserForm from "./userForm";
 import axios from "axios";
+import Cookies from 'universal-cookie';
 import { Fragment, useState } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import {
   BellIcon,
+  CogIcon,
   CalendarIcon,
   ChartBarIcon,
   FolderIcon,
   HomeIcon,
   InboxIcon,
   SearchCircleIcon,
+  SearchIcon,
   MenuAlt2Icon,
+  UserIcon,
   UsersIcon,
   XIcon,
 } from "@heroicons/react/outline";
-import { SearchIcon } from "@heroicons/react/solid";
 
 
 
@@ -28,11 +31,18 @@ const curp=function getcurp(curp:any)
   return curp 
 }
 */
+const cookies=new Cookies();
+console.log("Cookies en dashboard:",cookies.get('CURP'));
+console.log("TYPEOF: ",typeof(cookies.get('CURP')));
+const hrefP=`/profile/${cookies.get('CURP')}`;
+console.log("hrefP: ",hrefP);
+
  const navigation = [
-  { name: "Busqueda de usuario", href: "/busquedaUsuario", icon: UsersIcon, current: false },
-  { name: "Busqueda de trabajo", href: "busquedaEmpleo", icon: FolderIcon, current: false },
-  { name: "Perfil de usuario", href: "/profile/SABC660121", icon: CalendarIcon, current: false },
-  { name: "Configuracion", href: "/configuracion", icon: InboxIcon, current: false },
+  
+  { name: "Busqueda de trabajo", href: "busquedaEmpleo", icon: SearchIcon, current: false },
+  { name: "Perfil de usuario", href: hrefP , icon: UserIcon, current: false },
+  { name: "Configuracion", href: "/configuracion", icon: CogIcon, current: false },
+  {name: "Wiki", href: "https://fate-amber-ed1.notion.site/Wiki-26fe5ed90eb44dd3b4b75d05a43dff82" , icon:MenuAlt2Icon, current:false, popOut:true}
 ];
 const userNavigation = [
   { name: "Your Profile", href: "#" },
@@ -121,6 +131,8 @@ function Dashboard(props: IDashboardProps) {
                         <a
                           key={item.name}
                           href={item.href}
+                          rel="noreferrer"
+                          target={item.popOut == true ? "_blank" : ""}
                           className={classNames(
                             item.current
                               ? "bg-gray-100 text-gray-900"
@@ -168,6 +180,8 @@ function Dashboard(props: IDashboardProps) {
                   <a
                     key={item.name}
                     href={item.href}
+                    rel="noreferrer"
+                    target={item.popOut == true ? "_blank" : ""}
                     className={classNames(
                       item.current
                         ? "bg-gray-100 text-gray-900"
@@ -224,33 +238,7 @@ function Dashboard(props: IDashboardProps) {
                       />
                     </Menu.Button>
                   </div>
-                  <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
-                  >
-                    <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      {userNavigation.map((item) => (
-                        <Menu.Item key={item.name}>
-                          {({ active }) => (
-                            <a
-                              href={item.href}
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
-                            >
-                              {item.name}
-                            </a>
-                          )}
-                        </Menu.Item>
-                      ))}
-                    </Menu.Items>
-                  </Transition>
+
                 </Menu>
               </div>
             </div>

@@ -4,11 +4,11 @@ import { signIn } from "next-auth/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Router, useRouter } from "next/router";
-
+import Cookies from 'universal-cookie';
 
 
 function LoginScreen() {
-  
+
 const router=useRouter()
 
 
@@ -34,16 +34,23 @@ const router=useRouter()
   const handleSubmit= async (e:any) =>{
             e.preventDefault();
             const result=await axios.post('http://localhost:3000/api/clientes/login',login).catch(e =>console.log(e));
+            const cookies = new Cookies();
+            
+            
             console.log("typeof!!!!",typeof result);
-            console.log(result);
+            
             //console.log("length",Object.entries(result.data.result).length);
 
             if(result!=undefined && result.data.result[0]!=undefined)
             {
+              console.log("dentro del If:")
+              console.log("Estooy imprimiendo el result:",result.data.result[0].CURP);
+              cookies.set("CURP",result.data.result[0].CURP,{path: "/"});
               //<Link href={`/profile/${result.data[0].CURP}`}key={result.data.result[0].CURP}></Link>
               //<Link href={`/profile/${result.data.result[0].CURP}`}></Link>
               router.push(`profile/${result.data.result[0].CURP}`)
             }
+            
   };
 
 
@@ -71,8 +78,7 @@ const router=useRouter()
               <p className="mt-2 text-center text-sm text-gray-600">
                 Or{" "}
 
-
-
+                
                 {/*<Link href="/api/auth/signin">*/}
                 <Link href="/dashboard">
                   <button
