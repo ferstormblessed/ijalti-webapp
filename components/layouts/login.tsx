@@ -4,6 +4,11 @@ import { signIn } from "next-auth/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Router, useRouter } from "next/router";
+<<<<<<< Updated upstream
+=======
+import { CookiesProvider } from 'react-cookie';
+import { useCookies } from 'react-cookie';
+>>>>>>> Stashed changes
 import Cookies from 'universal-cookie';
 
 

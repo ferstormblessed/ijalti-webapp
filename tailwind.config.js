@@ -11,6 +11,7 @@ module.exports = {
         buttonprimary: "#A2ADC3",
         buttonsecondary: "#E6E5ED",
         background: "#F9F8FE",
+        azulito: "#E8DFFE",
       },
     },
   },

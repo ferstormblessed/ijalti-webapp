@@ -33,11 +33,14 @@ function LoginEmpresaScreen() {
         <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-md w-full space-y-8">
             <div>
+              <div className="grid justify-items-center">
               <img
                 className="mx-auto h-auto w-auto"
                 src="IJALTI.png"
                 alt="Workflow"
               />
+              <span className="text-center w-full text-2xl text-primary font-bold ">Empresas</span>
+                </div>
               <h2 className="mt-6 text-center text-3xl font-extrabold text-primary">
                 Ingresa a tu cuenta
               </h2>
@@ -46,11 +49,11 @@ function LoginEmpresaScreen() {
 
 
 
-                <Link href="/api/auth/signin">
+                <Link href="/newEmpresa">
                   <button
-                    className="font-medium text-secondary hover:text-primary"
+                    className="font-medium text-black hover:text-primary"
                   >
-                    registrate
+                    registrate como empresa
                   </button>
                 </Link>
 
@@ -111,7 +114,7 @@ function LoginEmpresaScreen() {
                 <div className="text-sm">
                   <a
                     href="#"
-                    className="font-medium text-secondary hover:text-primary"
+                    className="font-medium text-black hover:text-primary"
                   >
                     ¿Olvidaste tu contraseña?
                   </a>
@@ -130,7 +133,7 @@ function LoginEmpresaScreen() {
                         aria-hidden="true"
                       />
                     </span>
-                    Iniciar sesión
+                    Iniciar sesión como empresa
                   </button>
                 </Link>
               </div>

@@ -1,13 +1,13 @@
 
 import BusquedaUsuario from "../../components/busquedaUsuario";
-import Dashboard from "../../components/dashboard";
+import DashboardEmpresa from "../../components/dashboardEmpresa";
 
 const BusquedadeUsuario = () => {
   return (
     <div>
-      <Dashboard>
+      <DashboardEmpresa>
         <BusquedaUsuario/>        
-      </Dashboard>
+      </DashboardEmpresa>
     </div>
   );
 };

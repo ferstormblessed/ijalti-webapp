@@ -1,10 +1,13 @@
 import axios from "axios";
 import Link from "next/link";
+import Cookies from 'universal-cookie';
 import Dashboard from "../../components/dashboard";
 
 function ProfileUser({usuarioPersonal,dateVisaPas}:any) {
 console.log(usuarioPersonal);
 console.log(dateVisaPas);
+const cookies=new Cookies();
+console.log("Cookies: ",cookies.get('CURP'))
     return(
       <Dashboard>
         

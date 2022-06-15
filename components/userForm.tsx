@@ -117,10 +117,14 @@ function UserForm() {
   }
   */
   return (
+<<<<<<< Updated upstream
     <form
       onSubmit={handleSubmit}
       className="space-y-8 divide-y divide-gray-200"
     >
+=======
+    <form onSubmit={handleSubmit} className="space-y-8 divide-y divide-gray-200">
+>>>>>>> Stashed changes
       {/* <script src="https://cdnjs.cloudflare.com/ajax/libs/javascript-canvas-to-blob/3.4.0/js/canvas-to-blob.min.js"></script> */}
       <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
         <div>
@@ -748,7 +752,13 @@ function UserForm() {
           </button>
         </div>
       </div>
+<<<<<<< Updated upstream
       <div></div>
+=======
+      <div>
+      </div>
+      <script src="../components/imagen.js"></script>
+>>>>>>> Stashed changes
     </form>
   );
 }

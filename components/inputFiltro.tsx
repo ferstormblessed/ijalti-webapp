@@ -9,47 +9,59 @@ import {clasePuesto} from "./clasePuesto";
 import JobOffers from "./jobOffers";
 
 const areasConocimiento = [
+<<<<<<< Updated upstream
   { id: 1, name: "Area de conocimiento" },
   { id: 2, name: "Design" },
   { id: 3, name: "Engineering" },
   { id: 4, name: "Marketing" },
   { id: 5, name: "Cyber Seguridad" },
+=======
+  { id: 1, name: "Design" },
+  { id: 2, name: "Engineering" },
+  { id: 3, name: "Marketing" },
+  { id: 4, name: "Cyber Seguridad" },
+>>>>>>> Stashed changes
 ];
 const modalidades = [
-  { id: 1, name: "Modalidad" },
-  { id: 2, name: "Remoto" },
-  { id: 3, name: "Presencial" },
+  { id: 1, name: "Remoto" },
+  { id: 2, name: "Presencial" },
 ];
 const puestos = [
+<<<<<<< Updated upstream
   { id: 1, name: "Puesto" },
   { id: 2, name: "Back End Developer" },
   { id: 3, name: "Front End Developer" },
   { id: 4, name: "User Interface Designer" },
   { id: 5, name: "Database Developer" },
   { id: 6, name: "Project Manager" }
+=======
+  { id: 1, name: "Back End Developer" },
+  { id: 2, name: "Front End Developer" },
+  { id: 3, name: "User Interface Designer" },
+  { id: 4, name: "Database Developer" },
+  { id: 5, name: "Project Manager" }
+>>>>>>> Stashed changes
 ];
 const jornadas = [
-  { id: 1, name: "Jornada" },
-  { id: 2, name: "Matutina" },
-  { id: 3, name: "Vespertina" },
+  { id: 1, name: "Matutina" },
+  { id: 2, name: "Vespertina" },
 ];
 const idiomas = [
-  { id: 1, name: "Idioma" },
-  { id: 2, name: "Español" },
-  { id: 3, name: "English" },
-  { id: 4, name: "Deutsch" },
-  { id: 5, name: "Italiano" },
-  { id: 6, name: "Français" },
+  { id: 1, name: "Español" },
+  { id: 2, name: "English" },
+  { id: 3, name: "Deutsch" },
+  { id: 4, name: "Italiano" },
+  { id: 5, name: "Français" },
 ];
 
 const Horarios = [
-  { id: 1, name: "Horario" },
-  { id: 2, name: "Fijo" },
-  { id: 3, name: "Flexible" },
+  { id: 1, name: "Fijo" },
+  { id: 2, name: "Flexible" },
 ];
 
 const positions = [
   {
+<<<<<<< Updated upstream
     id: 0,
     nombrePuesto: "",
     horario: "",
@@ -60,6 +72,20 @@ const positions = [
 ];
 
 let posts:clasePuesto[] = [];
+=======
+    id:0 ,
+    title: '',        // puesto
+    type: '',                       // horario
+    location: '',                 // modalidad
+    department: '',          // Area de conocimiento                  
+    jornada: '',                // jornada
+    idioma: ''                    // idioma
+  },
+]
+
+//J
+//const positionsClass=new clasePuesto(1, "ITC", "Matutino", "Remoto", "Tugfa", "100", "Puras mamadas")
+>>>>>>> Stashed changes
 
 function emptyPosts(){
   posts = [];
@@ -69,9 +95,26 @@ function classNames(...classes: any) {
   return positions.filter(Boolean).join(" ");
 }
 
+<<<<<<< Updated upstream
 function InputFiltro(postTrabajos:any) {
 
   const [postEmpleo, setPost] = useState([posts]);
+=======
+function refreshPage(){
+  window.location.reload();
+}
+
+function InputFiltro()
+{}
+
+
+
+ // const [prueba, setPrueba] = useState([]);
+
+  const positionsClass =new clasePuesto(1, "ITC", "Matutino", "Remoto", "Tugfa", "100", "Puras mamadas")
+  //const positionsClass = new clasePuesto();
+  
+>>>>>>> Stashed changes
   
   const router = useRouter();
 
@@ -93,6 +136,7 @@ function InputFiltro(postTrabajos:any) {
 
     console.log("Res: ",res);
     console.log("Handle submit");
+<<<<<<< Updated upstream
     console.log("Res.data", res.data);
 
     for (let i = 0; i < res.data.length; i++){
@@ -110,12 +154,24 @@ function InputFiltro(postTrabajos:any) {
     }
 
     console.log("positionsClass", posts);
-    //router.push("/");
-    //console.log(puesto);
+=======
     
-  };
+    positionsClass.setIDPuesto(res.data.idPuesto);
+    positionsClass.setNombrePuesto(res.data.nombrePuesto);
+    positionsClass.setTipoHorario(res.data.tipoHorario);
+    positionsClass.setModalidadTrabajo(res.data.maodalidadTrabajo);
+    positionsClass.setAreaConocimiento(res.data.areaConocimiento);
+    positionsClass.setJornadaTrabajo(res.data.jornadaDeTrabajo);
+    console.log("target.value: ", e.target.value);
+    //setPrueba([...prueba, e.target.value]);
 
+    console.log("positionsClass", positionsClass.getTipoHorario());
+    //console.log("positionsClass", positionsClass.getTipoHorario());
+>>>>>>> Stashed changes
+    //router.push("/");
+    //console.log(puesto);  };
 
+  
   return (
     <div className="grid lg:flex">
       <div className="lg:w-1/2 p-2 relative">
@@ -544,13 +600,17 @@ function InputFiltro(postTrabajos:any) {
               type="submit"
               onClick={emptyPosts}
               className="absolute bottom-2 right-2 inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-            Buscar
-          </button>
+              onClick={refreshPage}>
+            Buscar  
+          </button >
         </form>
       </div>
+<<<<<<< Updated upstream
 
 
+=======
+      
+>>>>>>> Stashed changes
       {/*Despliegue de ofertas*/}
       <div className="lg:w-1/2 p-2">
         <div id="reload" className="bg-white shadow overflow-hidden sm:rounded-md">
@@ -608,5 +668,6 @@ export const getServerSideProps = async(context: any) => {
   }
 }
 */
+
 
 export default InputFiltro

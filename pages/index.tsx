@@ -24,7 +24,7 @@ function Home({session}:any)
       <Link href="loginEmpresas">
         <div className="text-center">
         <button
-        className="justify-center py-2 px-1 border border-transparent text-sm font-medium rounded-md text-white bg-violet-700	 hover:bg-buttonsecondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary ]">
+        className="justify-center py-2 px-1 border border-transparent text-sm font-medium rounded-md text-purple-500 bg-azulito hover:text-gray-500	 hover:bg-buttonsecondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary ]">
         <div className="grid  justify-items-center">
           <OfficeBuildingIcon className="w-4 h-4"/>
         <span
