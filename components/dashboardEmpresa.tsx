@@ -20,9 +20,25 @@ interface IDashboardProps {
 }
 
 const navigation = [
-  { name: "Busqueda de usuario", href: "/busquedaUsuario", icon: UsersIcon, current: false },
-  { name: "Configuracion", href: "/dashboardEmpresa", icon: InboxIcon, current: false },
-  {name: "Wiki", href: "https://fate-amber-ed1.notion.site/Wiki-26fe5ed90eb44dd3b4b75d05a43dff82" , icon:MenuAlt2Icon, current:false, popOut:true}
+  {
+    name: "Busqueda de usuario",
+    href: "/busquedaUsuario",
+    icon: UsersIcon,
+    current: false,
+  },
+  {
+    name: "Configuracion",
+    href: "/dashboardEmpresa",
+    icon: InboxIcon,
+    current: false,
+  },
+  {
+    name: "Wiki",
+    href: "https://fate-amber-ed1.notion.site/Wiki-26fe5ed90eb44dd3b4b75d05a43dff82",
+    icon: MenuAlt2Icon,
+    current: false,
+    popOut: true,
+  },
 ];
 const userNavigation = [
   { name: "Your Profile", href: "#" },

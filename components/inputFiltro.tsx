@@ -2,92 +2,72 @@
 import axios from "axios";
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
-import { CheckIcon, SelectorIcon, LocationMarkerIcon, UsersIcon, ClockIcon } from "@heroicons/react/solid";
+import {
+  CheckIcon,
+  SelectorIcon,
+  LocationMarkerIcon,
+  UsersIcon,
+  ClockIcon,
+} from "@heroicons/react/solid";
 import { Router, useRouter } from "next/router";
 import Link from "next/link";
-import {clasePuesto} from "./clasePuesto";
+import { clasePuesto } from "./clasePuesto";
 import JobOffers from "./jobOffers";
 
 const areasConocimiento = [
-<<<<<<< Updated upstream
   { id: 1, name: "Area de conocimiento" },
   { id: 2, name: "Design" },
   { id: 3, name: "Engineering" },
   { id: 4, name: "Marketing" },
   { id: 5, name: "Cyber Seguridad" },
-=======
-  { id: 1, name: "Design" },
-  { id: 2, name: "Engineering" },
-  { id: 3, name: "Marketing" },
-  { id: 4, name: "Cyber Seguridad" },
->>>>>>> Stashed changes
 ];
 const modalidades = [
-  { id: 1, name: "Remoto" },
-  { id: 2, name: "Presencial" },
+  { id: 1, name: "Modalidad" },
+  { id: 2, name: "Remoto" },
+  { id: 3, name: "Presencial" },
 ];
 const puestos = [
-<<<<<<< Updated upstream
   { id: 1, name: "Puesto" },
   { id: 2, name: "Back End Developer" },
   { id: 3, name: "Front End Developer" },
   { id: 4, name: "User Interface Designer" },
   { id: 5, name: "Database Developer" },
-  { id: 6, name: "Project Manager" }
-=======
-  { id: 1, name: "Back End Developer" },
-  { id: 2, name: "Front End Developer" },
-  { id: 3, name: "User Interface Designer" },
-  { id: 4, name: "Database Developer" },
-  { id: 5, name: "Project Manager" }
->>>>>>> Stashed changes
+  { id: 6, name: "Project Manager" },
 ];
 const jornadas = [
-  { id: 1, name: "Matutina" },
-  { id: 2, name: "Vespertina" },
+  { id: 1, name: "Jornada" },
+  { id: 2, name: "Matutina" },
+  { id: 3, name: "Vespertina" },
 ];
 const idiomas = [
-  { id: 1, name: "Español" },
-  { id: 2, name: "English" },
-  { id: 3, name: "Deutsch" },
-  { id: 4, name: "Italiano" },
-  { id: 5, name: "Français" },
+  { id: 1, name: "Idioma" },
+  { id: 2, name: "Español" },
+  { id: 3, name: "English" },
+  { id: 4, name: "Deutsch" },
+  { id: 5, name: "Italiano" },
+  { id: 6, name: "Français" },
 ];
 
 const Horarios = [
-  { id: 1, name: "Fijo" },
-  { id: 2, name: "Flexible" },
+  { id: 1, name: "Horario" },
+  { id: 2, name: "Fijo" },
+  { id: 3, name: "Flexible" },
 ];
 
 const positions = [
   {
-<<<<<<< Updated upstream
     id: 0,
     nombrePuesto: "",
     horario: "",
     modalidade: "",
     areaConocimiento: "",
-    jornada: ""
-  }
+    jornada: "",
+  },
 ];
 
-let posts:clasePuesto[] = [];
-=======
-    id:0 ,
-    title: '',        // puesto
-    type: '',                       // horario
-    location: '',                 // modalidad
-    department: '',          // Area de conocimiento                  
-    jornada: '',                // jornada
-    idioma: ''                    // idioma
-  },
-]
+let posts: clasePuesto[] = [];
 
-//J
-//const positionsClass=new clasePuesto(1, "ITC", "Matutino", "Remoto", "Tugfa", "100", "Puras mamadas")
->>>>>>> Stashed changes
-
-function emptyPosts(){
+function emptyPosts() {
   posts = [];
 }
 
@@ -95,27 +75,9 @@ function classNames(...classes: any) {
   return positions.filter(Boolean).join(" ");
 }
 
-<<<<<<< Updated upstream
-function InputFiltro(postTrabajos:any) {
-
+function InputFiltro(postTrabajos: any) {
   const [postEmpleo, setPost] = useState([posts]);
-=======
-function refreshPage(){
-  window.location.reload();
-}
 
-function InputFiltro()
-{}
-
-
-
- // const [prueba, setPrueba] = useState([]);
-
-  const positionsClass =new clasePuesto(1, "ITC", "Matutino", "Remoto", "Tugfa", "100", "Puras mamadas")
-  //const positionsClass = new clasePuesto();
-  
->>>>>>> Stashed changes
-  
   const router = useRouter();
 
   const [puesto, setPuesto] = useState(puestos[0]);
@@ -123,23 +85,30 @@ function InputFiltro()
   const [jornada, setJornada] = useState(jornadas[0]);
   const [horario, setHorario] = useState(Horarios[0]);
   const [idioma, setIdioma] = useState(idiomas[0]);
-  const [areaConocimiento, setAreaConocimiento] = useState(areasConocimiento[0]);
-  
-  const filtros = [puesto.name, modalidad.name, jornada.name, horario.name, idioma.name, areaConocimiento.name];
+  const [areaConocimiento, setAreaConocimiento] = useState(
+    areasConocimiento[0]
+  );
 
+  const filtros = [
+    puesto.name,
+    modalidad.name,
+    jornada.name,
+    horario.name,
+    idioma.name,
+    areaConocimiento.name,
+  ];
 
-  const handleSubmit = async(e:any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     console.log("Antes del post: ");
-    
+
     const res = await axios.post("/api/clientes/buscarEmpleo", filtros);
 
-    console.log("Res: ",res);
+    console.log("Res: ", res);
     console.log("Handle submit");
-<<<<<<< Updated upstream
     console.log("Res.data", res.data);
 
-    for (let i = 0; i < res.data.length; i++){
+    for (let i = 0; i < res.data.length; i++) {
       let positionsClass = new clasePuesto();
 
       positionsClass.setIDPuesto(res.data[i].idPuesto);
@@ -154,29 +123,15 @@ function InputFiltro()
     }
 
     console.log("positionsClass", posts);
-=======
-    
-    positionsClass.setIDPuesto(res.data.idPuesto);
-    positionsClass.setNombrePuesto(res.data.nombrePuesto);
-    positionsClass.setTipoHorario(res.data.tipoHorario);
-    positionsClass.setModalidadTrabajo(res.data.maodalidadTrabajo);
-    positionsClass.setAreaConocimiento(res.data.areaConocimiento);
-    positionsClass.setJornadaTrabajo(res.data.jornadaDeTrabajo);
-    console.log("target.value: ", e.target.value);
-    //setPrueba([...prueba, e.target.value]);
-
-    console.log("positionsClass", positionsClass.getTipoHorario());
-    //console.log("positionsClass", positionsClass.getTipoHorario());
->>>>>>> Stashed changes
     //router.push("/");
-    //console.log(puesto);  };
+    //console.log(puesto);
+  };
 
-  
   return (
     <div className="grid lg:flex">
       <div className="lg:w-1/2 p-2 relative">
         <form onSubmit={handleSubmit}>
-          <Listbox value={puesto} onChange={setPuesto} >
+          <Listbox value={puesto} onChange={setPuesto}>
             {({ open }) => (
               <>
                 <Listbox.Label className="block text-sm font-medium text-gray-700">
@@ -206,7 +161,9 @@ function InputFiltro()
                           key={puesto.id}
                           className={({ active }) =>
                             classNames(
-                              active ? "text-white bg-indigo-600" : "text-gray-900",
+                              active
+                                ? "text-white bg-indigo-600"
+                                : "text-gray-900",
                               "cursor-default select-none relative py-2 pl-3 pr-9"
                             )
                           }
@@ -276,7 +233,9 @@ function InputFiltro()
                           key={modalidad.id}
                           className={({ active }) =>
                             classNames(
-                              active ? "text-white bg-indigo-600" : "text-gray-900",
+                              active
+                                ? "text-white bg-indigo-600"
+                                : "text-gray-900",
                               "cursor-default select-none relative py-2 pl-3 pr-9"
                             )
                           }
@@ -346,7 +305,9 @@ function InputFiltro()
                           key={horario.id}
                           className={({ active }) =>
                             classNames(
-                              active ? "text-white bg-indigo-600" : "text-gray-900",
+                              active
+                                ? "text-white bg-indigo-600"
+                                : "text-gray-900",
                               "cursor-default select-none relative py-2 pl-3 pr-9"
                             )
                           }
@@ -416,7 +377,9 @@ function InputFiltro()
                           key={jornada.id}
                           className={({ active }) =>
                             classNames(
-                              active ? "text-white bg-indigo-600" : "text-gray-900",
+                              active
+                                ? "text-white bg-indigo-600"
+                                : "text-gray-900",
                               "cursor-default select-none relative py-2 pl-3 pr-9"
                             )
                           }
@@ -464,7 +427,9 @@ function InputFiltro()
                 </Listbox.Label>
                 <div className="mt-1 relative">
                   <Listbox.Button className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                    <span className="block truncate">{areaConocimiento.name}</span>
+                    <span className="block truncate">
+                      {areaConocimiento.name}
+                    </span>
                     <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                       <SelectorIcon
                         className="h-5 w-5 text-gray-400"
@@ -486,7 +451,9 @@ function InputFiltro()
                           key={areaConocimiento.id}
                           className={({ active }) =>
                             classNames(
-                              active ? "text-white bg-indigo-600" : "text-gray-900",
+                              active
+                                ? "text-white bg-indigo-600"
+                                : "text-gray-900",
                               "cursor-default select-none relative py-2 pl-3 pr-9"
                             )
                           }
@@ -556,7 +523,9 @@ function InputFiltro()
                           key={idioma.id}
                           className={({ active }) =>
                             classNames(
-                              active ? "text-white bg-indigo-600" : "text-gray-900",
+                              active
+                                ? "text-white bg-indigo-600"
+                                : "text-gray-900",
                               "cursor-default select-none relative py-2 pl-3 pr-9"
                             )
                           }
@@ -597,30 +566,30 @@ function InputFiltro()
             )}
           </Listbox>
           <button
-              type="submit"
-              onClick={emptyPosts}
-              className="absolute bottom-2 right-2 inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              onClick={refreshPage}>
-            Buscar  
-          </button >
+            type="submit"
+            onClick={emptyPosts}
+            className="absolute bottom-2 right-2 inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Buscar
+          </button>
         </form>
       </div>
-<<<<<<< Updated upstream
 
-
-=======
-      
->>>>>>> Stashed changes
       {/*Despliegue de ofertas*/}
       <div className="lg:w-1/2 p-2">
-        <div id="reload" className="bg-white shadow overflow-hidden sm:rounded-md">
+        <div
+          id="reload"
+          className="bg-white shadow overflow-hidden sm:rounded-md"
+        >
           <ul role="list" className="divide-y divide-gray-200">
             {posts.map((position) => (
               <li key={position.getIDPuesto()}>
                 <a href="#" className="block hover:bg-gray-50">
                   <div className="px-4 py-4 sm:px-6">
                     <div className="flex items-center justify-between">
-                      <p className="text-sm font-medium text-indigo-600 truncate">{position.getNombrePuesto()}</p>
+                      <p className="text-sm font-medium text-indigo-600 truncate">
+                        {position.getNombrePuesto()}
+                      </p>
                       <div className="ml-2 flex-shrink-0 flex">
                         <p className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
                           {position.getTipoHorario()}
@@ -633,15 +602,24 @@ function InputFiltro()
                     <div className="mt-2 sm:flex sm:justify-between">
                       <div className="sm:flex">
                         <p className="flex items-center text-sm text-gray-500">
-                          <UsersIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
+                          <UsersIcon
+                            className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                            aria-hidden="true"
+                          />
                           {position.getAreaConocimiento()}
                         </p>
                         <p className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
-                          <LocationMarkerIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
+                          <LocationMarkerIcon
+                            className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                            aria-hidden="true"
+                          />
                           {position.getModalidadTrabajo()}
                         </p>
                         <p className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
-                          <ClockIcon className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
+                          <ClockIcon
+                            className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                            aria-hidden="true"
+                          />
                           {position.getJornadaTrabajo()}
                         </p>
                       </div>
@@ -669,5 +647,4 @@ export const getServerSideProps = async(context: any) => {
 }
 */
 
-
-export default InputFiltro
+export default InputFiltro;

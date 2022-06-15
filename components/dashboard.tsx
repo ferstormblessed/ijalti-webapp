@@ -131,10 +131,7 @@ function Dashboard(props: IDashboardProps) {
                         <a
                           key={item.name}
                           href={item.href}
-<<<<<<< Updated upstream
                           rel="noreferrer"
-=======
->>>>>>> Stashed changes
                           target={item.popOut == true ? "_blank" : ""}
                           className={classNames(
                             item.current
@@ -183,10 +180,7 @@ function Dashboard(props: IDashboardProps) {
                   <a
                     key={item.name}
                     href={item.href}
-<<<<<<< Updated upstream
                     rel="noreferrer"
-=======
->>>>>>> Stashed changes
                     target={item.popOut == true ? "_blank" : ""}
                     className={classNames(
                       item.current
