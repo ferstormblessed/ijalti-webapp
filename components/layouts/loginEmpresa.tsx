@@ -14,34 +14,33 @@ function LoginEmpresaScreen() {
   
   
   
-    const[loginEmpresa,setLoginEmpresa]=useState({
-      passworEmpresa:"",
-      email:""
+  const[loginEmpresa,setLoginEmpresa]=useState({
+    passworEmpresa:"",
+    email:""
   })
 
 
-const handleSubmit= async (e:any) =>{
-  e.preventDefault();
-  const result=await axios.post('http://localhost:3000/api/clientes/loginEmpresa',loginEmpresa).catch(e =>console.log(e));
-  const cookies = new Cookies();
-  
-  
-  console.log("typeof login empresa!!!!",typeof result);
-  console.log("result:",result);
-  
-  //console.log("length",Object.entries(result.data.result).length);
+  const handleSubmit= async (e:any) =>{
+    e.preventDefault();
+    const result=await axios.post('http://localhost:3000/api/clientes/loginEmpresa',loginEmpresa).catch(e =>console.log(e));
+    const cookies = new Cookies();
+    
+    
+    console.log("typeof login empresa!!!!",typeof result);
+    console.log("result:",result);
+    
+    //console.log("length",Object.entries(result.data.result).length);
 
-  if(result!=undefined && result.data.result[0]!=undefined)
-  {
-    console.log("dentro del If:")
-    console.log("Estooy imprimiendo el result:",result.data.result[0].idUsuarioEmpresa);
-    cookies.set("idUsuarioEmpresa",result.data.result[0].idUsuarioEmpresa,{path: "/"});
-    //<Link href={`/profile/${result.data[0].CURP}`}key={result.data.result[0].CURP}></Link>
-    //<Link href={`/profile/${result.data.result[0].CURP}`}></Link>
-    router.push(`/busquedaUsuario`)
-  }
-  
-};
+    if(result!=undefined)
+    {
+      console.log("dentro del If:")
+      console.log("Estooy imprimiendo el result:",result.data.resul.idUsuarioEmpresa);
+      cookies.set("idUsuarioEmpresa",result.data.resul.idUsuarioEmpresa,{path: "/"});
+
+      router.push(`/busquedaUsuario`)
+    }
+    
+  };
 
 
   /*Esta funcion va a recibir informacion del input que se está typeando

@@ -1,4 +1,9 @@
-import {pool} from "../../../config/db.jsx"
+import {config} from "../../../config/db.jsx"
+var sql = require("mssql");
+const pool = new sql.ConnectionPool(config);
+const poolConnect = pool.connect();
+
+
 export default async function handler(req,res){
     /*Consultamos la base de datos y devolvemos un objeto al ususario*/
 
@@ -59,12 +64,21 @@ const BuscarEmpleo = async(req, res) => {
         _areaConocimiento = " = \'" + _areaConocimiento + "\'";
     }
 
+    const pool2 = await poolConnect
+    const input = "SELECT * FROM puesto WHERE nombrePuesto " + _puesto + " AND modalidadTrabajo " +  _modalidad + " AND tipoHorario " + _horario + " AND jornadaDeTrabajo " + _jornada + " AND areaConocimiento " + _areaConocimiento;
+    
+    //console.log(input)
+    const result = await pool2.request()
+            .input('input_parameter', sql.VarChar, 'Nada')
+            .query(input)  
+
     console.log("Filtros:", _puesto, _modalidad, _horario, _jornada, _areaConocimiento);
     //const [result] = await pool.query('SELECT * FROM puesto WHERE nombrePuesto "'+_puesto+'" AND modalidadTrabajo = "'+_modalidad+'" AND tipoHorario = "'+_horario+'" AND jornadaDeTrabajo = "'+_jornada+'" AND areaConocimiento = "'+_areaConocimiento+'" ');
-    const queryText = 'SELECT * FROM puesto WHERE nombrePuesto ' + _puesto + ' AND modalidadTrabajo ' +  _modalidad +' AND tipoHorario ' + _horario + ' AND jornadaDeTrabajo ' + _jornada + ' AND areaConocimiento ' + _areaConocimiento;
-    const [result] = await pool.query(queryText);
+    //const queryText = 'SELECT * FROM puesto WHERE nombrePuesto ' + _puesto + ' AND modalidadTrabajo ' +  _modalidad +' AND tipoHorario ' + _horario + ' AND jornadaDeTrabajo ' + _jornada + ' AND areaConocimiento ' + _areaConocimiento;
+    //const [result] = await pool.query(queryText);
     console.log("Dentro de endpoint buscarEmpleo");
+    const resul = result.recordset;
+    console.log("result: ", resul);
 
-    console.log("result: ", result);
-    return res.status(200).json(result);
+    return res.status(200).json(resul);
 }

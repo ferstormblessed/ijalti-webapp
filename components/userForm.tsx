@@ -10,7 +10,7 @@ import {
 
 import { Router, useRouter } from "next/router";
 import Link from "next/link";
-
+import UploadingImage from "./uploadingImage";
 
 
 function UserForm() {
@@ -120,6 +120,9 @@ function UserForm() {
       
   }
   */
+  const [imageUri, setImageUri] = useState('');
+  //console.log(imageUri)
+
   return (
     <form
       onSubmit={handleSubmit}

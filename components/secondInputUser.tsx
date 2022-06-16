@@ -98,12 +98,16 @@ export default function SecondInputUser() {
     console.log("Handle submit");
     console.log("Res.data", res.data);
 
-    for (let i = 0; i < res.data.length; i++) {
+    console.log("CURP del data: \n", res.data.size)
+    
+    for (let i = 0; i < res.data.length-1; i++) {
       let usuario = new claseUsuario();
 
       usuario.setNombre(res.data[i].nombre);
       usuario.setCURP(res.data[i].CURP);
       usuario.setEmail(res.data[i].email);
+
+      
 
       posts.push(usuario);
       setPost([...postEmpleo, posts]);

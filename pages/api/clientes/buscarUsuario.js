@@ -1,4 +1,8 @@
-import {pool} from "../../../config/db.jsx"
+import {config} from "../../../config/db.jsx"
+var sql = require("mssql");
+const pool = new sql.ConnectionPool(config);
+const poolConnect = pool.connect();
+
 export default async function handler(req,res){
     /*Consultamos la base de datos y devolvemos un objeto al ususario*/
 
@@ -35,12 +39,19 @@ const BuscarUsuario = async(req, res) => {
     }
 
     console.log("Filtros:", _nombre, _CURP);
-    //const [result] = await pool.query('SELECT * FROM puesto WHERE nombrePuesto "'+_puesto+'" AND modalidadTrabajo = "'+_modalidad+'" AND tipoHorario = "'+_horario+'" AND jornadaDeTrabajo = "'+_jornada+'" AND areaConocimiento = "'+_areaConocimiento+'" ');
-    const queryText = 'SELECT * FROM usuarioempleado WHERE nombre ' + _nombre + ' AND CURP ' +  _CURP;
-    console.log(queryText);
-    const [result] = await pool.query(queryText);
-    console.log("Dentro de endpoint buscarUsuario");
 
-    console.log("result: ", result);
-    return res.status(200).json(result);
+
+    const pool2 = await poolConnect
+    const input = "Select * from [dbo].[UsuarioEmpleado] where nombre "   + _nombre   + " and CURP " +   _CURP 
+    
+    //console.log(input)
+    const result = await pool2.request()
+            .input('input_parameter', sql.VarChar, 'Nada')
+            .query(input)  
+    //const [result] = await pool.query('SELECT * FROM puesto WHERE nombrePuesto "'+_puesto+'" AND modalidadTrabajo = "'+_modalidad+'" AND tipoHorario = "'+_horario+'" AND jornadaDeTrabajo = "'+_jornada+'" AND areaConocimiento = "'+_areaConocimiento+'" ');
+    //const queryText = 'SELECT * FROM usuarioempleado WHERE nombre ' + _nombre + ' AND CURP ' +  _CURP;
+    console.log(input);
+    console.log("Dentro de endpoint buscarUsuario");
+    const resul = result.recordset;
+    return res.status(200).json(resul);
 }
