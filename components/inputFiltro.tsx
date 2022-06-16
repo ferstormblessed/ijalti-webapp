@@ -16,10 +16,10 @@ import JobOffers from "./jobOffers";
 
 const areasConocimiento = [
   { id: 1, name: "Area de conocimiento" },
-  { id: 2, name: "Design" },
-  { id: 3, name: "Engineering" },
+  { id: 2, name: "Diseño" },
+  { id: 3, name: "Ingeniería" },
   { id: 4, name: "Marketing" },
-  { id: 5, name: "Cyber Seguridad" },
+  { id: 5, name: "Cibersegurida" },
 ];
 const modalidades = [
   { id: 1, name: "Modalidad" },
@@ -42,10 +42,10 @@ const jornadas = [
 const idiomas = [
   { id: 1, name: "Idioma" },
   { id: 2, name: "Español" },
-  { id: 3, name: "English" },
-  { id: 4, name: "Deutsch" },
+  { id: 3, name: "Inglés" },
+  { id: 4, name: "Aléman" },
   { id: 5, name: "Italiano" },
-  { id: 6, name: "Français" },
+  { id: 6, name: "Francés" },
 ];
 
 const Horarios = [
