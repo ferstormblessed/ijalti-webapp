@@ -1,6 +1,7 @@
 import UserForm from "./userForm";
 import axios from "axios";
 import Cookies from 'universal-cookie';
+import { useEffect } from "react";
 import { Fragment, useState } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import {
@@ -19,11 +20,18 @@ import {
   XIcon,
 } from "@heroicons/react/outline";
 
+const navigation = [
+  { name: "Busqueda de trabajo", href: "/busquedaEmpleo", icon: SearchIcon, current: false },
+  { name: "Perfil de usuario", href:"" , icon: UserIcon, current: false },
+  { name: "Configuracion", href: "/configuracion", icon: CogIcon, current: false },
+  {name: "Wiki", href: "https://fate-amber-ed1.notion.site/Wiki-26fe5ed90eb44dd3b4b75d05a43dff82" , icon:MenuAlt2Icon, current:false, popOut:true}
+];
 
-
-interface IDashboardProps {
-  children?: React.ReactNode;
-}
+const userNavigation = [
+  { name: "Your Profile", href: "#" },
+  { name: "Settings", href: "#" },
+  { name: "Sign out", href: "/" },
+];
 
 /*
 const curp=function getcurp(curp:any)
@@ -31,26 +39,35 @@ const curp=function getcurp(curp:any)
   return curp 
 }
 */
-const cookies=new Cookies();
-console.log("Cookies en dashboard:",cookies.get('CURP'));
-console.log("TYPEOF: ",typeof(cookies.get('CURP')));
-const hrefP=`/profile/${cookies.get('CURP')}`;
-console.log("hrefP: ",hrefP);
 
- const navigation = [
-  
-  { name: "Busqueda de trabajo", href: "busquedaEmpleo", icon: SearchIcon, current: false },
-  { name: "Perfil de usuario", href: hrefP , icon: UserIcon, current: false },
-  { name: "Configuracion", href: "/configuracion", icon: CogIcon, current: false },
-  {name: "Wiki", href: "https://fate-amber-ed1.notion.site/Wiki-26fe5ed90eb44dd3b4b75d05a43dff82" , icon:MenuAlt2Icon, current:false, popOut:true}
-];
-const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "/" },
-];
+//console.log("Cookies en dashboard:",cookies.get('CURP'));
+//console.log("TYPEOF: ",typeof(cookies.get('CURP')));
+
+//console.log("hrefP: ",hrefP);
+interface IDashboardProps {
+  children?: React.ReactNode;
+}
 
 function Dashboard(props: IDashboardProps) {
+//const hrefp="/profile/"+URLCurp
+const[hrefCurp,setHrefCurp]=useState(
+  {
+    URL:""
+  }
+)
+
+
+useEffect(() =>{
+  const cookies=new Cookies();
+  const URLCurp=cookies.get('CURP')
+    setHrefCurp({
+    URL:"/profile/"+URLCurp})
+  }, []);
+ 
+    
+
+
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
   function classNames(...classes: any) {
     return classes.filter(Boolean).join(" ");
@@ -130,7 +147,7 @@ function Dashboard(props: IDashboardProps) {
                       {navigation.map((item) => (
                         <a
                           key={item.name}
-                          href={item.href}
+                          href={item.name=="Perfil de usuario"?hrefCurp.URL:item.href}
                           rel="noreferrer"
                           target={item.popOut == true ? "_blank" : ""}
                           className={classNames(
@@ -179,7 +196,7 @@ function Dashboard(props: IDashboardProps) {
                 {navigation.map((item) => (
                   <a
                     key={item.name}
-                    href={item.href}
+                    href={item.name=="Perfil de usuario"?hrefCurp.URL:item.href}
                     rel="noreferrer"
                     target={item.popOut == true ? "_blank" : ""}
                     className={classNames(
@@ -265,12 +282,11 @@ function Dashboard(props: IDashboardProps) {
 }
 /*
 export const getServerSideProps=async (context:any)=>{
-  console.log("context.query.id(Componente): ",context.query.profile);
-  const {data:curp} =await axios.post('http://localhost:3000/api/clientes/login')
-
+  const cookies=new Cookies();
+  const hrefP=`/profile/${cookies.get('CURP')}`;
   return{
     props:{
-      curp,//Esto es un arreglo de objetos , estos objetos son mis cliente
+    hrefP,//Esto es un arreglo de objetos , estos objetos son mis cliente
     }
   }
 }

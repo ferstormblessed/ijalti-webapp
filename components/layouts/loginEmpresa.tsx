@@ -15,7 +15,7 @@ function LoginEmpresaScreen() {
   
   
     const[loginEmpresa,setLoginEmpresa]=useState({
-      password:"",
+      passworEmpresa:"",
       email:""
   })
 
@@ -26,7 +26,8 @@ const handleSubmit= async (e:any) =>{
   const cookies = new Cookies();
   
   
-  console.log("typeof!!!!",typeof result);
+  console.log("typeof login empresa!!!!",typeof result);
+  console.log("result:",result);
   
   //console.log("length",Object.entries(result.data.result).length);
 
@@ -37,7 +38,7 @@ const handleSubmit= async (e:any) =>{
     cookies.set("idUsuarioEmpresa",result.data.result[0].idUsuarioEmpresa,{path: "/"});
     //<Link href={`/profile/${result.data[0].CURP}`}key={result.data.result[0].CURP}></Link>
     //<Link href={`/profile/${result.data.result[0].CURP}`}></Link>
-    router.push(`profile/${result.data.result[0].idUsuarioEmpresa}`)
+    router.push(`/busquedaUsuario`)
   }
   
 };
