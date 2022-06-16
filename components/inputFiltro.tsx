@@ -575,6 +575,7 @@ function InputFiltro(postTrabajos: any) {
         </form>
       </div>
 
+
       {/*Despliegue de ofertas*/}
       <div className="lg:w-1/2 p-2">
         <div
