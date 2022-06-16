@@ -15,7 +15,7 @@ export default async function handler(req,res){
 const VerificaUsuario=async(req,res)=>
 {
     console.log(typeof req);
-    
+    console.log("req.body:",req.body);
     const mail=req.body.email
     const pass=req.body.password
     console.log("req.body.mail:",mail);

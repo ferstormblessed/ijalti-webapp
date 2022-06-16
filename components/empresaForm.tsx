@@ -25,69 +25,28 @@ function EmpresaForm() {
       /*Este es el estado inicila , todo los valores se setean a cero
     y desde la funcion "handleChange se pasan los valores a este objeto"*/ 
 
-  const[direccion,setDireccion]=useState({
-    pais:"",
-    ciudad:"",
-    estado:"",
-    calle:"",
-    cp:"",
-    numExterior:0
-  })
-
-
-  const[usuarioempleado,setUsuarioempleado]=useState({
-    nombre:"",
-    apellidoP:"",
-    apellidoM:"",
+  const[usuarioempresa,setUsuarioempresa]=useState({
+    idUsuarioEmpresa:"",
     email:"",
-    password:"",
-    CV:"Mi cv",
-    sexo:0,
-    estadoCivil:"",
-    CURP:"",
-    RFC:"",
-    visaVigente:"",
-    pasaporteVigente:"",
-    numExterior:direccion.numExterior
+    razonSocial:"",
+    passworUserdEmpresa:"",
+    pais: "",
+    ciudad: "",
+    estado: "",
+    cp: ""
   })
-
-  const[lenguajeprogramacion,setLenguajeprogramacion]=useState({
-    nombreLenguaje:"",
-    aniosDePractica:0,
-    CURP:usuarioempleado.CURP
-  })
-
-const[infoacademica,setinfoacademica]=useState({
-  tituloProfesion:"",
-  areaEspecialidad:"",
-  Uniegreso:"",
-  CURP:usuarioempleado.CURP
-})
-
-
 
   const handleSubmit= async (e:any) =>{
 
             e.preventDefault();
-            const resDireccion= await axios.post("/api/clientes?tipo=direccion",direccion);
-            const res= await axios.post("/api/clientes?tipo=usuario",usuarioempleado);
-            const resLenguaje= await axios.post("/api/clientes?tipo=lenguaje",lenguajeprogramacion);
-            const resInfoAcademica= await axios.post("/api/clientes?tipo=info",infoacademica);
-            
-            const Curp2=res.data.CURP;
-            console.log(Curp2);
-            console.log(res);
+            const resusuarioempresa= await axios.post("/api/clientes?tipo=usuariEmpresa",usuarioempresa);
 
   };
 
   /*Esta funcion va a recibir informacion del input que se está typeando
     y desde ese inuput extraemos el e.target.name y el e.target.value*/
     const handleChange=({target:{name,value}}:{target:{name:any,value:any}})=>{
-        setDireccion({...direccion,[name]:value});
-        setUsuarioempleado({...usuarioempleado,[name]:value});
-        setLenguajeprogramacion({...lenguajeprogramacion,[name]:value});
-        setinfoacademica({...infoacademica,[name]:value});
-        
+        setUsuarioempresa({...usuarioempresa,[name]:value});
     }
 
     /*

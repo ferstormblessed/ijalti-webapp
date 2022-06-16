@@ -22,12 +22,12 @@ export default async function handler(req,res){
                 {
                     return await (registrarInfoAcademica(req,res))
                 }
-                /*
-                else if(req.query.tipo==="direccion")
+                
+                else if(req.query.tipo==="usuarioEmpresa")
                 {
-                    return await (registrarDireccion(req,res))
+                    return await (registrarUsuarioEmpresa(req,res))
                 }      
-                */
+                
             }
            
 
@@ -119,6 +119,22 @@ const registrarInfoAcademica=async(req,res)=>
                 CURP
             });//Esto inserta un dato dentro de la tabla
             return res.status(200).json({tituloProfesion,areaEspecialidad,Uniegreso,CURP});
+}
+
+const registrarUsuarioEmpresa=async(req,res)=>
+{
+    const {idUsuarioEmpresa,email,razonSocial,passworUserdEmpresa,pais,ciudad,estado,cp}=req.body
+            const [result]=await pool.query("INSERT INTO usuarioempresa SET ?",{
+                idUsuarioEmpresa,
+                email,
+                razonSocial,
+                passworUserdEmpresa,
+                pais,
+                ciudad,
+                estado,
+                cp
+            });//Esto inserta un dato dentro de la tabla
+            return res.status(200).json({idUsuarioEmpresa,email,razonSocial,passworUserdEmpresa,pais,ciudad,estado,cp});
 }
 
 

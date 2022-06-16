@@ -108,8 +108,8 @@ const handleSubmit= async (e:any) =>{
                     Password
                   </label>
                   <input
-                    id="password"
-                    name="password"
+                    id="passworEmpresa"
+                    name="passworEmpresa"
                     type="password"
                     autoComplete="current-password"
                     required

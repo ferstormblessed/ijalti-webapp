@@ -15,9 +15,9 @@ export default async function handler(req,res){
 const VerificaUsuario=async(req,res)=>
 {
     console.log(typeof req);
-    
+    console.log("req.body:",req.body);
     const mail=req.body.email
-    const pass=req.body.passworUserdEmpresa
+    const pass=req.body.passworEmpresa
     console.log("req.body.mail:",mail);
     console.log("req.body.password:",pass);
     const [result]=await pool.query('SELECT idUsuarioEmpresa FROM UsuarioEmpresa WHERE email="'+mail+'" and UsuarioEmpresa.passworUserdEmpresa="'+pass+'"');
