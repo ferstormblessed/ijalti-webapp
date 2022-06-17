@@ -1,11 +1,11 @@
 import axios from "axios";
 const user = {
-  name: 'Debbie Lewis',
-  handle: 'deblewis',
-  email: 'debbielewis@example.com',
+  name: "Debbie Lewis",
+  handle: "deblewis",
+  email: "debbielewis@example.com",
   imageUrl:
-    'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=320&h=320&q=80',
-}
+    "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=320&h=320&q=80",
+};
 import { useState } from "react";
 import {
   useSession,
@@ -13,8 +13,7 @@ import {
   signOut,
   getSession,
   SessionProvider,
-}
-from "next-auth/react";
+} from "next-auth/react";
 import { Router, useRouter } from "next/router";
 import Link from "next/link";
 import UploadingImage from "./uploadingImage";
@@ -83,9 +82,9 @@ function UserForm() {
     CURP: usuarioempleado.CURP,
   });
 
-  const [imageUri, setImageUri] = useState('');
+  const [imageUri, setImageUri] = useState("");
   //console.log(imageUri)
-  const [fileUri, setFileUri] = useState('');
+  const [fileUri, setFileUri] = useState("");
   //console.log(fileUri);
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -591,7 +590,7 @@ function UserForm() {
                           className="relative cursor-pointer rounded-md font-medium text-primary hover:text-secondary focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                         >
                           <span>Upload a file</span>
-                          <UploadingFile setFileUri={setFileUri}/>
+                          <UploadingFile setFileUri={setFileUri} />
                         </label>
                         <p className="pl-1 text-secondary">or drag and drop</p>
                       </div>
@@ -620,39 +619,20 @@ function UserForm() {
                 </p>
                 {/* cambio */}
                 <div className="hidden relative rounded-full lg:block grow-0  ">
-                 {imageUri && <img
-                    className="relative rounded-full w-40 h-40"
-                    src={imageUri}
-                    alt=""
-                  />}
-                  <label
-                    htmlFor="desktop-user-photo"
-                    className="absolute inset-0 w-40 h-40 rounded-full bg-black bg-opacity-75 flex items-center justify-center text-sm font-medium text-white opacity-0 hover:opacity-100 focus-within:opacity-100"
-                  >
-                    <UploadingImage setImageUri = {setImageUri}/>
-                    <span className="sr-only"> user photo</span>
-                    
-                  </label>
-                </div>
-
-                <div className="hidden relative rounded-full lg:block grow-0  ">
-                  <img
-                    className="relative rounded-full w-40 h-40"
-                    src={imageUri}
-                    alt=""
-                  />
-                  <label
-                    htmlFor="desktop-user-photo"
-                    className="absolute inset-0 w-40 h-40 rounded-full bg-black bg-opacity-75 flex items-center justify-center text-sm font-medium text-white opacity-0 hover:opacity-100 focus-within:opacity-100"
-                  >
-                    <UploadingImage setImageUri = {setImageUri}/>
-                    <span className="sr-only"> user photo</span>
-                    <input
-                      type="file"
-                      id="desktop-user-photo"
-                      name="user-photo"
-                      className="absolute grow-0  inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md"
+                  {imageUri && (
+                    <img
+                      className="relative rounded-full w-40 h-40"
+                      src={imageUri}
+                      alt=""
                     />
+                  )}
+                  <label
+                    htmlFor="desktop-user-photo"
+                    className="absolute inset-0 w-40 h-40 rounded-full bg-black bg-opacity-75 flex items-center justify-center text-sm font-medium text-white opacity-0 hover:opacity-100 focus-within:opacity-100"
+                  >
+                    <span>Chane</span>
+                    <span className="sr-only"> user photo</span>
+                    <UploadingImage setImageUri={setImageUri} />
                   </label>
                 </div>
               </div>
