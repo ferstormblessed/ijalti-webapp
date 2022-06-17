@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-export default function UploadingImage({setImageUri}){
+export default function UploadingImage({setImageUri}: any) {
 
     const [image, setImage] : any = useState("")
     const [loading, setLoading] : any = useState(false)
