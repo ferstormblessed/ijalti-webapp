@@ -1,13 +1,39 @@
+
 import axios from "axios";
 import Link from "next/link";
 import Cookies from "universal-cookie";
 import Dashboard from "../../components/dashboard";
 
+import { config } from "../../config/db.jsx";
+//var sql = require("mssql");
+
+//const pool = new sql.ConnectionPool(config);
+//const poolConnect = pool.connect();
+
+
 function ProfileUser({ usuarioPersonal, dateVisaPas }: any) {
+  
+
+  const cookies = new Cookies();
+  const cookiesImage = new Cookies();
+  const cookiesCV = new Cookies();
+
   console.log("Data de usuario", usuarioPersonal);
   console.log("Fecha: \n", dateVisaPas);
-  const cookies = new Cookies();
+
+  //const pool2 = poolConnect;
+  //const input = "UPDATE [dbo].[UsuarioEmpleado] Set imageData = "+"'"+cookiesImage.get("imageUri")+"'"+","+"CV="+"'"+cookiesCV.get("fileUri")+"'"+" WHERE CURP="+"'"+cookies.get("CURP")+"'";
+
+  //console.log("Input: ",input);
+  //const result = pool2
+    //.request()
+    //.input("input_parameter", sql.VarChar, "Nada")
+    //.query(input);
+
+
+
   console.log("Cookies: ", cookies.get("CURP"));
+  console.log("Cookies: ", cookiesImage.get("imageUri"));
   return (
     <Dashboard>
       <div className="container mx-auto my-5 p-5">
@@ -17,7 +43,7 @@ function ProfileUser({ usuarioPersonal, dateVisaPas }: any) {
               <div className="image overflow-hidden">
                 <img
                   className="h-auto w-full mx-auto"
-                  src={usuarioPersonal.imagenData}
+                  src={cookiesImage.get("imageUri")}
                   alt=""
                 />
               </div>

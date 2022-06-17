@@ -18,6 +18,7 @@ import { Router, useRouter } from "next/router";
 import Link from "next/link";
 import UploadingImage from "./uploadingImage";
 import UploadingFile from "./uploadingFile";
+import Cookies from 'universal-cookie';
 
 function UserForm() {
   const router = useRouter();
@@ -45,8 +46,11 @@ function UserForm() {
   numExterior:0
 })
 */
+  const cookiesImage = new Cookies();
+  const cookiesCV = new Cookies();
   const [imageUri, setImageUri] = useState("");
-  console.log("Aqui esta", imageUri);
+  cookiesImage.set("imageUri",imageUri,{path: "/"});
+  
   const [usuarioempleado, setUsuarioempleado] = useState({
     nombre: "",
     apellidoP: "",
@@ -82,6 +86,9 @@ function UserForm() {
     CURP: usuarioempleado.CURP,
   });
   const [fileUri, setFileUri] = useState("");
+  cookiesCV.set("fileUri",fileUri,{path: "/"});
+
+
   //console.log(fileUri);
   const handleSubmit = async (e: any) => {
     e.preventDefault();
