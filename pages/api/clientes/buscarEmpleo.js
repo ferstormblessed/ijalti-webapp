@@ -65,8 +65,8 @@ const BuscarEmpleo = async(req, res) => {
     }
 
     const pool2 = await poolConnect
-    const input = "SELECT * FROM puesto WHERE nombrePuesto " + _puesto + " AND modalidadTrabajo " +  _modalidad + " AND tipoHorario " + _horario + " AND jornadaDeTrabajo " + _jornada + " AND areaConocimiento " + _areaConocimiento;
-    
+    const input = "SELECT * FROM [dbo].[Puesto] WHERE nombrePuesto " + _puesto + " AND modalidadTrabajo " +  _modalidad + " AND tipoHorario " + _horario + " AND jornadaDeTrabajo " + _jornada + " AND areaConocimiento " + _areaConocimiento;
+    //const input = "Select * from [dbo].[UsuarioEmpleado]"
     //console.log(input)
     const result = await pool2.request()
             .input('input_parameter', sql.VarChar, 'Nada')
@@ -78,7 +78,7 @@ const BuscarEmpleo = async(req, res) => {
     //const [result] = await pool.query(queryText);
     console.log("Dentro de endpoint buscarEmpleo");
     const resul = result.recordset;
-    console.log("result: ", resul);
+    console.log(resul);
 
     return res.status(200).json(resul);
 }

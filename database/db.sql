@@ -84,8 +84,7 @@ CREATE TABLE Puesto(
     jornadaDeTrabajo VARCHAR(40),
     areaConocimiento VARCHAR(40),
     PRIMARY KEY (idPuesto),
-    FOREIGN KEY (idUsuarioEmpresaCreador) REFERENCES UsuarioEmpresa(idUsuarioEmpresa),
-    FOREIGN KEY (idEmpresa) REFERENCES Empresa(idEmpresa)
+    FOREIGN KEY (idUsuarioEmpresaCreador) REFERENCES UsuarioEmpresa(idUsuarioEmpresa)
 );
 
 CREATE TABLE Idioma(

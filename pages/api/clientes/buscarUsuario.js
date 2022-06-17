@@ -51,7 +51,7 @@ const BuscarUsuario = async(req, res) => {
     //const [result] = await pool.query('SELECT * FROM puesto WHERE nombrePuesto "'+_puesto+'" AND modalidadTrabajo = "'+_modalidad+'" AND tipoHorario = "'+_horario+'" AND jornadaDeTrabajo = "'+_jornada+'" AND areaConocimiento = "'+_areaConocimiento+'" ');
     //const queryText = 'SELECT * FROM usuarioempleado WHERE nombre ' + _nombre + ' AND CURP ' +  _CURP;
     console.log(input);
-    console.log("Dentro de endpoint buscarUsuario");
+    console.log("Dentro de endpoint buscarUsuario", result);
     const resul = result.recordset;
     return res.status(200).json(resul);
 }

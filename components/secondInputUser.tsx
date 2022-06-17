@@ -100,11 +100,12 @@ export default function SecondInputUser() {
 
     console.log("CURP del data: \n", res.data.size)
     
-    for (let i = 0; i < res.data.length-1; i++) {
+    for (let i = 0; i < res.data.length; i++) {
       let usuario = new claseUsuario();
 
       usuario.setNombre(res.data[i].nombre);
       usuario.setCURP(res.data[i].CURP);
+
       usuario.setEmail(res.data[i].email);
 
       
@@ -250,7 +251,7 @@ export default function SecondInputUser() {
                           </td>
 
                           <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                            <Link href="/profile">
+                            <Link href={"/profile/"+person.getCURP()}>
                               <a className="text-indigo-600 hover:text-indigo-900">
                                 Ir a perfil
                                 <span className="sr-only">, {person.getNombre()}</span>
