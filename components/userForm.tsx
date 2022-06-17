@@ -619,20 +619,25 @@ function UserForm() {
                 </p>
                 {/* cambio */}
                 <div className="hidden relative rounded-full lg:block grow-0  ">
-                  {imageUri && (
+                  {imageUri ? (
                     <img
                       className="relative rounded-full w-40 h-40"
                       src={imageUri}
                       alt=""
                     />
-                  )}
+                  ) : 
+                  <img
+                      className="relative rounded-full w-40 h-40"
+                      src={user.imageUrl}
+                      alt=""
+                    />}
                   <label
                     htmlFor="desktop-user-photo"
                     className="absolute inset-0 w-40 h-40 rounded-full bg-black bg-opacity-75 flex items-center justify-center text-sm font-medium text-white opacity-0 hover:opacity-100 focus-within:opacity-100"
                   >
-                    <span>Chane</span>
-                    <span className="sr-only"> user photo</span>
                     <UploadingImage setImageUri={setImageUri} />
+                    <span className="sr-only"> user photo</span>
+                    
                   </label>
                 </div>
               </div>
