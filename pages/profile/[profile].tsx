@@ -36,7 +36,7 @@ function ProfileUser({ usuarioPersonal, dateVisaPas }: any) {
   console.log("Cookies: ", cookiesImage.get("imageUri"));
   return (
     <Dashboard>
-      <div className="container mx-auto my-5 p-5">
+      <div className="container mx-auto my-5 p-5 h-[68vh]">
         <div className="md:flex no-wrap md:-mx-2 ">
           <div className="w-full md:w-3/12 md:mx-2">
             <div className="bg-white p-3 border-t-4 border-green-400">
@@ -215,8 +215,11 @@ function ProfileUser({ usuarioPersonal, dateVisaPas }: any) {
                   </div>
                   <ul className="list-inside space-y-2">
                     <li>
-                      <div className="text-teal-600">
-                        {usuarioPersonal.nombre} {usuarioPersonal.apellidoP} CV
+                      <div className="text-teal-600 grid ">
+                        <img
+                        src={cookiesCV.get("fileUri")}/>
+                        <span>{usuarioPersonal.nombre} {usuarioPersonal.apellidoP} CV </span>
+
                       </div>
                     </li>
                   </ul>
