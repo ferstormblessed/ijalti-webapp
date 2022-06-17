@@ -45,6 +45,7 @@ function UserForm() {
   numExterior:0
 })
 */
+const [imageUri, setImageUri] = useState("");
 
   const [usuarioempleado, setUsuarioempleado] = useState({
     nombre: "",
@@ -53,7 +54,7 @@ function UserForm() {
     email: "",
     password: "",
     CV: "Mi cv",
-    imageData: "Mi foto",
+    imageData: {imageUri},
     sexo: 0,
     estadoCivil: "",
     CURP: "",
@@ -82,8 +83,7 @@ function UserForm() {
     CURP: usuarioempleado.CURP,
   });
 
-  const [imageUri, setImageUri] = useState("");
-  //console.log(imageUri)
+  console.log(imageUri);
   const [fileUri, setFileUri] = useState("");
   //console.log(fileUri);
   const handleSubmit = async (e: any) => {
@@ -589,10 +589,8 @@ function UserForm() {
                           htmlFor="file-upload"
                           className="relative cursor-pointer rounded-md font-medium text-primary hover:text-secondary focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                         >
-                          
                           <UploadingFile setFileUri={setFileUri} />
                         </label>
-                        
                       </div>
                     </div>
                   </div>
@@ -621,19 +619,19 @@ function UserForm() {
                       src={imageUri}
                       alt=""
                     />
-                  ) : 
-                  <img
+                  ) : (
+                    <img
                       className="relative rounded-full w-40 h-40"
                       src={user.imageUrl}
                       alt=""
-                    />}
+                    />
+                  )}
                   <label
                     htmlFor="desktop-user-photo"
                     className="absolute inset-0 w-40 h-40 rounded-full bg-black bg-opacity-75 flex items-center justify-center text-sm font-medium text-white opacity-0 hover:opacity-100 focus-within:opacity-100"
                   >
                     <UploadingImage setImageUri={setImageUri} />
                     <span className="sr-only"> user photo</span>
-                    
                   </label>
                 </div>
               </div>
