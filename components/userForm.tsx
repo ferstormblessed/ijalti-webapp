@@ -1,4 +1,11 @@
 import axios from "axios";
+const user = {
+  name: 'Debbie Lewis',
+  handle: 'deblewis',
+  email: 'debbielewis@example.com',
+  imageUrl:
+    'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=320&h=320&q=80',
+}
 import { useState } from "react";
 import {
   useSession,
@@ -7,10 +14,8 @@ import {
   getSession,
   SessionProvider,
 } from "next-auth/react";
-
 import { Router, useRouter } from "next/router";
 import Link from "next/link";
-import UploadingImage from "./uploadingImage";
 
 
 function UserForm() {
@@ -120,9 +125,6 @@ function UserForm() {
       
   }
   */
-  const [imageUri, setImageUri] = useState('');
-  //console.log(imageUri)
-
   return (
     <form
       onSubmit={handleSubmit}
@@ -600,49 +602,71 @@ function UserForm() {
                 </div>
               </div>
             </div>
-            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start pt-5">
+            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start pt-5 min-w-0">
               <label
                 htmlFor="cover-photo"
                 className="block text-sm font-medium text-primary sm:mt-px sm:pt-2"
               >
                 Foto de perfil
               </label>
-              <div className="mt-1 sm:mt-0 sm:col-span-2">
-                <div className="max-w-lg flex justify-center bg-buttonsecondary px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                  <div className="space-y-1 text-center">
-                    <svg
-                      className="mx-auto h-12 w-12 text-gray-400"
-                      stroke="currentColor"
-                      fill="none"
-                      viewBox="0 0 48 48"
+              <div className="mt-6 lg:mt-0 lg:ml-6 grow-0">
+                <p
+                  className="text-sm font-medium text-gray-700"
+                  aria-hidden="true"
+                >
+                  Photo
+                </p>
+                <div className="mt-1 lg:hidden">
+                  <div className="flex items-center">
+                    <div
+                      className="flex-shrink-0 inline-block rounded-full overflow-hidden h-12 w-12"
                       aria-hidden="true"
                     >
-                      <path
-                        d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                        strokeWidth={2}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+                      <img
+                        className="rounded-full h-full w-full"
+                        src={user.imageUrl}
+                        alt=""
                       />
-                    </svg>
-                    <div className="flex text-sm text-gray-600">
-                      <label
-                        htmlFor="file-upload"
-                        className="relative cursor-pointer rounded-md font-medium text-primary hover:text-secondary focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
-                      >
-                        <span>Upload a file</span>
-                        <input
-                          id="imageData"
-                          name="imageData"
-                          type="file"
-                          className="sr-only"
-                        />
-                      </label>
-                      <p className="pl-1 text-secondary">or drag and drop</p>
                     </div>
-                    <p className="text-xs text-primary">
-                      PNG, JPG, GIF up to 10MB
-                    </p>
+                    <div className="ml-5 rounded-md shadow-sm ">
+                      <div className="group grow-0  relative border border-gray-300 rounded-md py-2 px-3 flex items-center justify-center hover:bg-gray-50 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-sky-500">
+                        <label
+                          htmlFor="mobile-user-photo"
+                          className="relative grow-0  text-sm leading-4 font-medium text-green-700 pointer-events-none"
+                        >
+                          <span>Change</span>
+                          <span className="sr-only"> user photo</span>
+                        </label>
+                        <input
+                          id="mobile-user-photo"
+                          name="user-photo"
+                          type="file"
+                          className="absolute grow-0  w-[]] h-full opacity-0 cursor-pointer border-gray-300 rounded-md"
+                        />
+                      </div>
+                    </div>
                   </div>
+                </div>
+
+                <div className="hidden relative rounded-full lg:block grow-0  ">
+                  <img
+                    className="relative rounded-full w-40 h-40"
+                    src={user.imageUrl}
+                    alt=""
+                  />
+                  <label
+                    htmlFor="desktop-user-photo"
+                    className="absolute inset-0 w-40 h-40 rounded-full bg-black bg-opacity-75 flex items-center justify-center text-sm font-medium text-white opacity-0 hover:opacity-100 focus-within:opacity-100"
+                  >
+                    <span>Change</span>
+                    <span className="sr-only"> user photo</span>
+                    <input
+                      type="file"
+                      id="desktop-user-photo"
+                      name="user-photo"
+                      className="absolute grow-0  inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md"
+                    />
+                  </label>
                 </div>
               </div>
             </div>
