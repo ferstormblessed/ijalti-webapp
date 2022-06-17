@@ -9,36 +9,36 @@ import Cookies from 'universal-cookie';
 
 function LoginEmpresaScreen() {
 
-const router=useRouter()
-
-
-
+  const router=useRouter()
+  
+  
+  
   const[loginEmpresa,setLoginEmpresa]=useState({
-    password:"",
+    passworEmpresa:"",
     email:""
-})
+  })
 
 
   const handleSubmit= async (e:any) =>{
-            e.preventDefault();
-            const result=await axios.post('http://localhost:3000/api/clientes/loginEmpresa',loginEmpresa).catch(e =>console.log(e));
-            const cookies = new Cookies();
-            
-            
-            console.log("typeof!!!!",typeof result);
-            
-            //console.log("length",Object.entries(result.data.result).length);
+    e.preventDefault();
+    const result=await axios.post('http://localhost:3000/api/clientes/loginEmpresa',loginEmpresa).catch(e =>console.log(e));
+    const cookies = new Cookies();
+    
+    
+    console.log("typeof login empresa!!!!",typeof result);
+    console.log("result:",result);
+    
+    //console.log("length",Object.entries(result.data.result).length);
 
-            if(result!=undefined && result.data.result[0]!=undefined)
-            {
-              console.log("dentro del If:")
-              console.log("Estooy imprimiendo el result:",result.data.result[0].idUsuarioEmpresa);
-              cookies.set("idUsuarioEmpresa",result.data.result[0].idUsuarioEmpresa,{path: "/"});
-              //<Link href={`/profile/${result.data[0].CURP}`}key={result.data.result[0].CURP}></Link>
-              //<Link href={`/profile/${result.data.result[0].CURP}`}></Link>
-              router.push(`profile/${result.data.result[0].idUsuarioEmpresa}`)
-            }
-            
+    if(result!=undefined)
+    {
+      console.log("dentro del If:")
+      console.log("Estooy imprimiendo el result:",result.data.resul.idUsuarioEmpresa);
+      cookies.set("idUsuarioEmpresa",result.data.resul.idUsuarioEmpresa,{path: "/"});
+
+      router.push(`/busquedaUsuario`)
+    }
+    
   };
 
 
@@ -46,7 +46,7 @@ const router=useRouter()
     y desde ese inuput extraemos el e.target.name y el e.target.value*/
     
     const handleChange=({target:{name,value}}:{target:{name:any,value:any}})=>{
-        setLoginEmpresa({...loginEmpresa,[name]:value});
+      setLoginEmpresa({...loginEmpresa,[name]:value});
     }
     
 
@@ -106,8 +106,8 @@ const router=useRouter()
                     Password
                   </label>
                   <input
-                    id="password"
-                    name="password"
+                    id="passworEmpresa"
+                    name="passworEmpresa"
                     type="password"
                     autoComplete="current-password"
                     required
@@ -144,7 +144,7 @@ const router=useRouter()
               </div>
 
               <div>
-             
+               
                   <button
                     type="submit"
                     className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-buttonprimary hover:bg-buttonsecondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary"
@@ -157,7 +157,7 @@ const router=useRouter()
                     </span>
                     Iniciar sesión como empresa
                   </button>
-              
+  
               </div>
             </form>
           </div>

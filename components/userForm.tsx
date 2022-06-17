@@ -634,6 +634,27 @@ function UserForm() {
                     <UploadingImage setImageUri = {setImageUri}/>
                   </label>
                 </div>
+
+                <div className="hidden relative rounded-full lg:block grow-0  ">
+                  <img
+                    className="relative rounded-full w-40 h-40"
+                    src={user.imageUrl}
+                    alt=""
+                  />
+                  <label
+                    htmlFor="desktop-user-photo"
+                    className="absolute inset-0 w-40 h-40 rounded-full bg-black bg-opacity-75 flex items-center justify-center text-sm font-medium text-white opacity-0 hover:opacity-100 focus-within:opacity-100"
+                  >
+                    <span>Change</span>
+                    <span className="sr-only"> user photo</span>
+                    <input
+                      type="file"
+                      id="desktop-user-photo"
+                      name="user-photo"
+                      className="absolute grow-0  inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md"
+                    />
+                  </label>
+                </div>
               </div>
             </div>
 

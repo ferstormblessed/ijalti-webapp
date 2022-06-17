@@ -48,7 +48,6 @@ CREATE TABLE InfoAcademica(
 );
 
 
-
 CREATE TABLE Empresa(
     idEmpresa INT AUTO_INCREMENT, /*autoinc*/
     nombreEmpresa VARCHAR(40),
@@ -60,16 +59,18 @@ CREATE TABLE Empresa(
 );
 
 
+
 CREATE TABLE UsuarioEmpresa(
     idUsuarioEmpresa VARCHAR(18),
     idEmpresa INT,
-    nombre VARCHAR(40),
-    apellidoP VARCHAR(40),
-    apellidoM VARCHAR(40),
     email VARCHAR(40),
+    razonSocial VARCHAR(45),
     passworUserdEmpresa VARCHAR(45),
-    PRIMARY KEY (idUsuarioEmpresa),
-    FOREIGN KEY (idEmpresa) REFERENCES Empresa(idEmpresa)
+    pais VARCHAR(20),
+    ciudad VARCHAR(20),
+    estado VARCHAR(40),
+    cp INT,
+    PRIMARY KEY (idUsuarioEmpresa)
 );
 
 CREATE TABLE Puesto(
@@ -83,8 +84,7 @@ CREATE TABLE Puesto(
     jornadaDeTrabajo VARCHAR(40),
     areaConocimiento VARCHAR(40),
     PRIMARY KEY (idPuesto),
-    FOREIGN KEY (idUsuarioEmpresaCreador) REFERENCES UsuarioEmpresa(idUsuarioEmpresa),
-    FOREIGN KEY (idEmpresa) REFERENCES Empresa(idEmpresa)
+    FOREIGN KEY (idUsuarioEmpresaCreador) REFERENCES UsuarioEmpresa(idUsuarioEmpresa)
 );
 
 CREATE TABLE Idioma(
@@ -106,3 +106,9 @@ CREATE TABLE Aplicacion(
     FOREIGN KEY (idUsuarioAplicante) REFERENCES UsuarioEmpleado(CURP),
     FOREIGN KEY (idPuestoAplicado) REFERENCES Puesto(idPuesto)
 );
+
+
+
+
+
+

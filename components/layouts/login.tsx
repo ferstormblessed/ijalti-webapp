@@ -9,57 +9,36 @@ import Cookies from 'universal-cookie';
 
 function LoginScreen() {
 
-const router=useRouter()
+  const router=useRouter()
+    const[login,setLogin]=useState({
+      password:"",
+      email:""
+  })
 
 
 
-  const[login,setLogin]=useState({
-    password:"",
-    email:""
-})
-
-
-/*
-    const isRecipientOnline = useFriendStatus(login);
-
-  useEffect(()=>
-  {
-    function handleCredentials()
-    {
-      setCredential()
-    }
-  })*
-*/
 
   const handleSubmit= async (e:any) =>{
-            e.preventDefault();
-            const result=await axios.post('http://localhost:3000/api/clientes/login',login).catch(e =>console.log(e));
-            const cookies = new Cookies();
-            
-            
-            console.log("typeof!!!!",typeof result);
-            
-            //console.log("length",Object.entries(result.data.result).length);
+      e.preventDefault();
+      const result=await axios.post('http://localhost:3000/api/clientes/login',login).catch(e =>console.log(e));
+      const cookies = new Cookies();
+      
+      
+      console.log("typeof!!!!",typeof result);
 
-            if(result!=undefined && result.data.result[0]!=undefined)
-            {
-              console.log("dentro del If:")
-              console.log("Estooy imprimiendo el result:",result.data.result[0].CURP);
-              cookies.set("CURP",result.data.result[0].CURP,{path: "/"});
-              //<Link href={`/profile/${result.data[0].CURP}`}key={result.data.result[0].CURP}></Link>
-              //<Link href={`/profile/${result.data.result[0].CURP}`}></Link>
-              router.push(`profile/${result.data.result[0].CURP}`)
-            }
+    if(result!=undefined)
+    {  
+      console.log("dentro del If:")
+      console.log("Estooy imprimiendo el result:",result.data.resul.CURP);
+      cookies.set("CURP",result.data.resul.CURP,{path: "/"});
+      router.push(`profile/${result.data.resul.CURP}`)
+    }
             
   };
-
-
-  /*Esta funcion va a recibir informacion del input que se está typeando
-    y desde ese inuput extraemos el e.target.name y el e.target.value*/
     
-    const handleChange=({target:{name,value}}:{target:{name:any,value:any}})=>{
-        setLogin({...login,[name]:value});
-    }
+  const handleChange=({target:{name,value}}:{target:{name:any,value:any}})=>{
+    setLogin({...login,[name]:value});
+  }
     
 
   return (

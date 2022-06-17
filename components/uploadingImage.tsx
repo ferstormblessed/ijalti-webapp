@@ -31,4 +31,3 @@ export default function UploadingImage({setImageUri}){
             />
     );
 }
-

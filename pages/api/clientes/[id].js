@@ -1,4 +1,7 @@
-import {pool} from '../../../config/db';//Aqui me traigo mi base de datos
+import {config} from "../../../config/db.jsx"
+var sql = require("mssql");
+const pool = new sql.ConnectionPool(config);
+const poolConnect = pool.connect();
 
 
 export default async function handler(req,res)
@@ -30,24 +33,39 @@ export default async function handler(req,res)
 
 const getDateVisaPas=async(req,res)=>
 {
+    const pool2 = await poolConnect
     const CURP=req.query.id
-    const[result]=await pool.query('select date_format(visaVigente, "%M %d %Y") as fechaUtilVisa,date_format(pasaporteVigente, "%M %d %Y") as fechaUtilPasaporte from usuarioempleado WHERE CURP="'+CURP+'"');
-    //const[result]=await pool.query('select visaVigente from usuarioempleado WHERE CURP="'+CURP+'"');
 
+    const {idUsuarioEmpresa,email,razonSocial,passworUserdEmpresa,pais,ciudad,estado,cp}=req.body
+    const input = "select format(visaVigente, 'D', 'en-gb') as fechaUtilVisa, format(pasaporteVigente, 'D', 'en-gb') as fechaUtilPasaporte from [dbo].[UsuarioEmpleado] where CURP = " + "'" + CURP + "'"
+    //console.log(input)
+    const result = await pool2.request()
+        .input('input_parameter', sql.VarChar, 'Nada')
+        .query(input)
     console.log("Visa Vigente: ",result);
-    return res.status(200).json(result[0]);
+    const resul = result.recordset[0];
+    return res.status(200).json(resul);
 }
 
 const getCurpUsuario=async(req,res)=>
 {
+    const pool2 = await poolConnect
     const CURP=req.query.id
+
+    const {idUsuarioEmpresa,email,razonSocial,passworUserdEmpresa,pais,ciudad,estado,cp}=req.body
+    const input = "SELECT *FROM ((usuarioempleado INNER JOIN infoacademica on usuarioempleado.CURP =" + "'" + CURP + "'" +") INNER JOIN lenguajeprogramacion on usuarioempleado.CURP= " + "'" + CURP + "'" + ")"
+    //console.log(input)
+    const result = await pool2.request()
+        .input('input_parameter', sql.VarChar, 'Nada')
+        .query(input)
     //const[result]=await pool.query('SELECT*FROM usuarioempleado WHERE CURP = "SABC660121"');
     //console.log(CURP);
     //const[result]=await pool.query('SELECT*FROM usuarioempleado WHERE CURP = "'+CURP+'"');
     //const[result]=await pool.query('SELECT *FROM usuarioempleado INNER JOIN infoacademica WHERE usuarioempleado.CURP="'+CURP+'"');
-    const[result]=await pool.query('SELECT *FROM ((usuarioempleado INNER JOIN infoacademica on usuarioempleado.CURP="'+CURP+'") INNER JOIN lenguajeprogramacion on usuarioempleado.CURP="'+CURP+'")');   
+    //const[result]=await pool.query('SELECT *FROM ((usuarioempleado INNER JOIN infoacademica on usuarioempleado.CURP="'+CURP+'") INNER JOIN lenguajeprogramacion on usuarioempleado.CURP="'+CURP+'")');   
+    const resul = result.recordset[0];
     console.log("Join: ",result);
-    return res.status(200).json(result[0]);
+    return res.status(200).json(resul);
 }
 
 

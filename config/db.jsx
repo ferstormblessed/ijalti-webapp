@@ -1,11 +1,14 @@
-import { createPool } from "mysql2/promise"; 
-
-const pool=createPool({
-    host:"localhost",
-    user:"root",
-    password:"Developer09+",
-    port:"3306",
-    database:"ijalti"
-})
-
-export{pool};
+export const config = {
+    authentication: {
+      options: {
+        userName: "IjaltiTec", // update me
+        password: "Ijalti3141616_]" // update me
+      },
+      type: "default"
+    },
+    server: "ijalti.database.windows.net", // update me
+    options: {
+      database: "ijalti", //update me
+      encrypt: true
+    }
+};

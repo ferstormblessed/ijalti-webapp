@@ -1,5 +1,8 @@
-import {pool} from "../../../config/db.jsx"
-import axios from "axios";
+import {config} from "../../../config/db.jsx"
+var sql = require("mssql");
+const pool = new sql.ConnectionPool(config);
+const poolConnect = pool.connect();
+
 export default async function handler(req,res){
     /*Consultamos la base de datos y devolvemos un objeto al ususario*/
 
@@ -15,13 +18,21 @@ export default async function handler(req,res){
 const VerificaUsuario=async(req,res)=>
 {
     console.log(typeof req);
-    
+    console.log("req.body:",req.body); 
     const mail=req.body.email
     const pass=req.body.password
     console.log("req.body.mail:",mail);
     console.log("req.body.password:",pass);
-    const [result]=await pool.query('SELECT CURP FROM usuarioempleado WHERE email="'+mail+'" and usuarioempleado.password="'+pass+'"');
-    console.log("result: ",result);
+
+    const pool2 = await poolConnect
+    const input = "Select CURP from [dbo].[UsuarioEmpleado] where email=" + "'" + mail + "'" + "and password = " + "'" + pass + "'"
+    
+    //console.log(input)
+    const result = await pool2.request()
+            .input('input_parameter', sql.VarChar, 'Nada')
+            .query(input)  
+    const resul = result.recordset[0];
+    console.log("resultado login: ",result.recordset[0]);
     //await axios.post('http://localhost:3000/api/clientes/getMailPassword',result);
-    return res.status(200).json({result});
+    return res.status(200).json({resul});
 }
