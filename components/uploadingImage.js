@@ -1,10 +1,10 @@
 import React, {useState} from "react";
 
-export default function UploadingImage({setImageUri}: any) {
+export default function UploadingImage({setImageUri}) {
 
     const [image, setImage] : any = useState("")
     const [loading, setLoading] : any = useState(false)
-    const [error, setError] : any = useState("")
+    
     const UploadImage = async (e:any) =>{
         const files : any = e.target.files;
         const data: any = new FormData();
