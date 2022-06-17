@@ -589,15 +589,11 @@ function UserForm() {
                           htmlFor="file-upload"
                           className="relative cursor-pointer rounded-md font-medium text-primary hover:text-secondary focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                         >
-                          <span>Upload a file</span>
+                          
                           <UploadingFile setFileUri={setFileUri} />
                         </label>
-                        <p className="pl-1 text-secondary">or drag and drop</p>
+                        
                       </div>
-                      <p className="text-xs text-primary">
-                        PNG, JPG, GIF up to 10MB
-                      </p>
-                      {fileUri && <a href={fileUri}>Open file</a>}
                     </div>
                   </div>
                 </div>
