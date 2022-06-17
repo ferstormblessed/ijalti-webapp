@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-export default function UploadingFile({setFileUri}){
+export default function UploadingFile({setFileUri}:any){
 
     const [file, setFile] : any = useState("")
     const [loading, setLoading] : any = useState(false)

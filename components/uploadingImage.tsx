@@ -1,18 +1,18 @@
 import React, {useState} from "react";
 
-export default function UploadingImage({setImageUri}) {
+export default function UploadingImage({setImageUri}: any) {
 
-    const [image, setImage]    = useState("")
-    const [loading, setLoading]    = useState(false)
-    
-    const UploadImage = async (e ) =>{
-        const files    = e.target.files;
-        const data  = new FormData();
+    const [image, setImage] : any = useState("")
+    const [loading, setLoading] : any = useState(false)
+
+    const UploadImage = async (e:any) =>{
+        const files : any = e.target.files;
+        const data: any = new FormData();
         
         data.append("file", files[0]);
         data.append("upload_preset", "dvcbdc2n");
         setLoading(true); //esto talvez se comente
-        const dataPhoto    = await fetch(
+        const dataPhoto : any = await fetch(
             "https://api.cloudinary.com/v1_1/jairobar/image/upload", {
                 method: "POST",
                 body: data,
