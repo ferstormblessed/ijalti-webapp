@@ -25,6 +25,7 @@ export default async function handler(req, res) {
     }
   }
 }
+
 //GET
 const getUsuarios = async (req, res) => {
   const pool2 = await poolConnect;
@@ -74,7 +75,6 @@ const registrarUsuario = async (req, res) => {
     email,
     password,
     CV,
-    imageData,
     sexo,
     estadoCivil,
     CURP,
@@ -89,9 +89,8 @@ const registrarUsuario = async (req, res) => {
     numExterior,
     about,
   } = req.body;
-
   const input =
-    "Insert into [dbo].[UsuarioEmpleado] (CURP, nombre, apellidoP, apellidoM, email, password, sexo, estadoCivil, RFC, visaVigente, pasaporteVigente, pais, ciudad, estado, calle, cp, numExterior, about, imageData) values (" +
+    "Insert into [dbo].[UsuarioEmpleado] (CURP, nombre, apellidoP, apellidoM, email, password, sexo, estadoCivil, RFC, visaVigente, pasaporteVigente, pais, ciudad, estado, calle, cp, numExterior, about) values (" +
     "'" +
     CURP +
     "'" +
@@ -159,10 +158,6 @@ const registrarUsuario = async (req, res) => {
     "'" +
     about +
     "'" +
-    ", " +
-    "'" +
-    imageData +
-    "'" +
     ") ";
 
   //console.log(input)
@@ -179,7 +174,6 @@ const registrarUsuario = async (req, res) => {
     email,
     password,
     CV,
-    imageData,
     sexo,
     estadoCivil,
     CURP,

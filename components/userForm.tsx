@@ -45,8 +45,8 @@ function UserForm() {
   numExterior:0
 })
 */
-const [imageUri, setImageUri] = useState("");
-
+  const [imageUri, setImageUri] = useState("");
+  console.log("Aqui esta", imageUri);
   const [usuarioempleado, setUsuarioempleado] = useState({
     nombre: "",
     apellidoP: "",
@@ -54,7 +54,6 @@ const [imageUri, setImageUri] = useState("");
     email: "",
     password: "",
     CV: "Mi cv",
-    imageData: {imageUri},
     sexo: 0,
     estadoCivil: "",
     CURP: "",
@@ -82,8 +81,6 @@ const [imageUri, setImageUri] = useState("");
     Uniegreso: "",
     CURP: usuarioempleado.CURP,
   });
-
-  console.log(imageUri);
   const [fileUri, setFileUri] = useState("");
   //console.log(fileUri);
   const handleSubmit = async (e: any) => {
