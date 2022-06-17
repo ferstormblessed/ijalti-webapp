@@ -72,7 +72,7 @@ function emptyPosts() {
 }
 
 function classNames(...classes: any) {
-  return positions.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(" ");
 }
 
 function InputFiltro(postTrabajos: any) {

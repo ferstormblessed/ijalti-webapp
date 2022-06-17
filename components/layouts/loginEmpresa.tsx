@@ -7,7 +7,6 @@ import { Router, useRouter } from "next/router";
 import Cookies from 'universal-cookie';
 
 
-
 function LoginEmpresaScreen() {
 
   const router=useRouter()
