@@ -619,13 +619,13 @@ function UserForm() {
                 <div className="hidden relative rounded-full lg:block grow-0  ">
                   {imageUri ? (
                     <img
-                      className="relative rounded-full w-40 h-40"
+                      className="relative rounded-full w-40 h-40 object-cover"
                       src={imageUri}
                       alt=""
                     />
                   ) : (
                     <img
-                      className="relative rounded-full w-40 h-40"
+                      className="relative rounded-full w-40 h-40 object-cover"
                       src={user.imageUrl}
                       alt=""
                     />
