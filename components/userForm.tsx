@@ -13,9 +13,13 @@ import {
   signOut,
   getSession,
   SessionProvider,
-} from "next-auth/react";
+}
+from "next-auth/react";
 import { Router, useRouter } from "next/router";
 import Link from "next/link";
+import UploadingImage from "./uploadingImage";
+import UploadingFile from "./uploadingFile";
+
 function UserForm() {
   const router = useRouter();
   const { data: session, status } = useSession();
@@ -79,6 +83,10 @@ function UserForm() {
     CURP: usuarioempleado.CURP,
   });
 
+  const [imageUri, setImageUri] = useState('');
+  //console.log(imageUri)
+  const [fileUri, setFileUri] = useState('');
+  //console.log(fileUri);
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     //const resDireccion= await axios.post("/api/clientes?tipo=direccion",direccion);
@@ -583,18 +591,14 @@ function UserForm() {
                           className="relative cursor-pointer rounded-md font-medium text-primary hover:text-secondary focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                         >
                           <span>Upload a file</span>
-                          <input
-                            id="file-upload"
-                            name="file-upload"
-                            type="file"
-                            className="sr-only"
-                          />
+                          <UploadingFile setFileUri={setFileUri}/>
                         </label>
                         <p className="pl-1 text-secondary">or drag and drop</p>
                       </div>
                       <p className="text-xs text-primary">
                         PNG, JPG, GIF up to 10MB
                       </p>
+                      {fileUri && <a href={fileUri}>Open file</a>}
                     </div>
                   </div>
                 </div>
@@ -614,56 +618,20 @@ function UserForm() {
                 >
                   Photo
                 </p>
-                <div className="mt-1 lg:hidden">
-                  <div className="flex items-center">
-                    <div
-                      className="flex-shrink-0 inline-block rounded-full overflow-hidden h-12 w-12"
-                      aria-hidden="true"
-                    >
-                      <img
-                        className="rounded-full h-full w-full"
-                        src={user.imageUrl}
-                        alt=""
-                      />
-                    </div>
-                    <div className="ml-5 rounded-md shadow-sm ">
-                      <div className="group grow-0  relative border border-gray-300 rounded-md py-2 px-3 flex items-center justify-center hover:bg-gray-50 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-sky-500">
-                        <label
-                          htmlFor="mobile-user-photo"
-                          className="relative grow-0  text-sm leading-4 font-medium text-green-700 pointer-events-none"
-                        >
-                          <span>Change</span>
-                          <span className="sr-only"> user photo</span>
-                        </label>
-                        <input
-                          id="mobile-user-photo"
-                          name="user-photo"
-                          type="file"
-                          className="absolute grow-0  w-[]] h-full opacity-0 cursor-pointer border-gray-300 rounded-md"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
+                {/* cambio */}
                 <div className="hidden relative rounded-full lg:block grow-0  ">
-                  <img
+                 {imageUri && <img
                     className="relative rounded-full w-40 h-40"
-                    src={user.imageUrl}
+                    src={imageUri}
                     alt=""
-                  />
+                  />}
                   <label
                     htmlFor="desktop-user-photo"
                     className="absolute inset-0 w-40 h-40 rounded-full bg-black bg-opacity-75 flex items-center justify-center text-sm font-medium text-white opacity-0 hover:opacity-100 focus-within:opacity-100"
                   >
                     <span>Change</span>
                     <span className="sr-only"> user photo</span>
-                    <input
-                      type="file"
-                      id="desktop-user-photo"
-                      name="user-photo"
-                      className="absolute grow-0  inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md"
-                    />
+                    <UploadingImage setImageUri = {setImageUri}/>
                   </label>
                 </div>
               </div>
