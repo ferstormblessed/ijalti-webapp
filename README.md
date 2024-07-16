@@ -1,4 +1,4 @@
-# IJALTI -- WebApp
+# IJALTI - WebApp
 
 ## Description
 This is an web app intended to be similar to linkedin, developed for the IJALTI Company.
